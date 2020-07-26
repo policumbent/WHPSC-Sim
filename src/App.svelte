@@ -34,11 +34,6 @@
 	{:else}
 		<Welcome on:message={startSimulation}/>
 	{/if}
-
-	<!--	<div>-->
-	<!--		<button on:click={simulator.start()}>Start</button>-->
-	<!--		<button on:click={simulator.reset()}>Reset</button>-->
-	<!--	</div>-->
 </main>
 
 <style>
@@ -53,9 +48,6 @@
 		overflow: hidden;
 	}
 
-
-
-
 	@media (min-width: 640px) {
 		main {
 			max-width: none;
@@ -63,10 +55,6 @@
 	}
 
 	#power_debug_div {
-		position: absolute;
-		bottom: 5em;
-		left: 4em;
-		right: 4em;
 		margin: 2em 4em;
 	}
 
@@ -106,7 +94,6 @@
 		display: flex;
 		justify-content: center;
 		/*todo: non sono buono con i css, va centrato*/
-
 	}
 
 	.top-right-fixed {

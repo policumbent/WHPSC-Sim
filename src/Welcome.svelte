@@ -11,14 +11,16 @@
             text: 'start'
         });
     }
+    
+    function openSettings() {
+        alert("Sono una persona pigra, le impostazioni al momento sono hard coded.")
+    }
+    
 </script>
 <section>
     <h1>Taurus Simulator</h1>
-    <span class="top-right-fixed"><Icon class="top-right-fixed" data={gear} scale="2"/></span>
-    <div id="buttons_div">
-        <button class="btn" on:click={startMessage}>Start</button>
-<!--        <button class="btn" on:click={simulator.reset()}>Reset</button>-->
-    </div>
+    <span on:click={openSettings} class="top-right-fixed"><Icon class="top-right-fixed" data={gear} scale="2"/></span>
+    <button class="btn" on:click={startMessage}>Start</button>
 </section>
 <style>
     h1 {
@@ -40,13 +42,9 @@
         top:0;
         right:0;
     }
-    #buttons_div {
-        position: absolute;
-        margin: 0 auto;
-        width: 90%;
-    }
 
     .btn {
+        text-align: center;
         background-color: #ff532e;
         color: #FFFFFF;
         border: #FFFFFF;

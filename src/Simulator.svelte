@@ -11,13 +11,19 @@
     let time: number = 0;
     let playbackRate: number = 0;
     const g: number = 9.81;
-    // t_s: elapsed time in the video (at original speed)
-    // let t_s = 0;
+
+    const trap_start: number = 8184;
+    const trap_end: number = 8384;
+    let trap_info;
+    // t_video: elapsed time in the video (at original speed)
     let t_video = 0;
     let coefficients, slope, fitFile;
     let video;
     let started = false;
     let interval;
+
+    let sum = 0;
+    let count_speed = 0;
 
 
     async function start() {
@@ -36,11 +42,11 @@
         playbackRate = 0;
         await video.pause();
         video.currentTime = 0;
+        t_video = 0;
         time = 0;
         distance = 0;
         speed = 0;
         started = false;
-        // await video.reset();
     }
 
     onMount(async () =>{
@@ -72,9 +78,18 @@
 
     function changeVideoSpeed(d0, t, vs) {
         let s=0
-        while (fitFile[s]['sec']<t_video) s++;
+        while (fitFile[s]['sec']<t_video && s<581) s++;
+        if(s===581){
+            playbackRate = 0;
+            clearInterval(interval);
+            return;
+        }
         let vr = fitFile[s]['kph'];
         playbackRate = vs/vr;
+        if(playbackRate!==0 && (playbackRate<0.0625 || playbackRate>16.0)){
+            alert("Sorry but the speed is too low or too high, the activity will be restarted.")
+            reset()
+        }
         t_video += playbackRate*t;
     }
 
@@ -101,9 +116,24 @@
         return Math.pow(2*(e_k0+e_kr0+e_w+e_u-a_a-a_r)
                 /(settings.totalWeight+settings.wheelsInertia/Math.pow(settings.wheelsRadius, 2)), 1/2);
     }
-    // $: console.log(`the height is ${height}`);
+    $: {
+        if(distance>(trap_start-1609) && distance<trap_start)
+            trap_info = `Distance to GO ${Math.round(trap_start-distance)}m`;
+        else if (distance>=trap_start && distance<=trap_end){
+            trap_info = `Distance to END ${Math.round(trap_end-distance)}m`;
+            sum += speed;
+            count_speed++;
+        }
+        else if (distance>trap_end)
+            trap_info = `⚡ ${Math.round(sum/count_speed)} km/h ⚡`;
+        else {
+            trap_info = "";
+            count_speed = 0;
+            sum = 0;
+        }
+    }
+
 </script>
-<!--<svelte:window bind:innerWidth={height/1.6666666}/>-->
 <section>
     <div class="relative">
         <video  bind:this={video}
@@ -115,7 +145,8 @@
         </video>
         <div class="overlay bottom_left">Speed: {Math.round(speed*10)/10 } km/h</div>
         <div class="overlay bottom_right">Power: {power} W</div>
-        <div class="overlay top_left">Time: {Math.round(time/60)>0 ? Math.round(time)+'\'': ''} {Math.round(time%60) + '"'}</div>
+        <div class="overlay center">{trap_info}</div>
+        <div class="overlay top_left">Time: {Math.round(time/60)>0 ? Math.round(time/60)+'\'': ''} {Math.round(time%60) + '"'}</div>
         <div class="overlay top_right">Distance: {Math.round(distance/10)/100} km</div>
     </div>
 </section>
@@ -133,6 +164,14 @@
         left: 20px;
         color: #000;
         text-align: left;
+    }
+    div.center {
+        top: 75px;
+        margin: 0 auto;
+        font-size: 25px;
+        width: 800px;
+        color: #000;
+        text-align: center;
     }
     div.bottom_left {
         bottom: 10px;
