@@ -1,18 +1,47 @@
 <script lang="ts">
-    import { onMount } from 'svelte';
+    import {onDestroy, onMount} from 'svelte';
     import {Settings} from "./Settings";
 
     export let settings: Settings;
-    export let height: number;
+    export let height: number = 480;
+    export let power: number = 0;
+
     let speed: number = 0;
-    let power: number = 0;
     let distance: number = 0;
     let time: number = 0;
+    let playbackRate: number = 0;
     const g: number = 9.81;
     // t_s: elapsed time in the video (at original speed)
     // let t_s = 0;
     let t_video = 0;
     let coefficients, slope, fitFile;
+    let video;
+    let started = false;
+    let interval;
+
+
+    async function start() {
+        if(started)
+            return;
+        playbackRate = 0;
+        await video.play()
+        started = true;
+        interval = setInterval(intervalFunction, 1000);
+    }
+
+    export async function reset() {
+        if(!started)
+            return;
+        clearInterval(interval);
+        playbackRate = 0;
+        await video.pause();
+        video.currentTime = 0;
+        time = 0;
+        distance = 0;
+        speed = 0;
+        started = false;
+        // await video.reset();
+    }
 
     onMount(async () =>{
         let res = await fetch('data/coefficients.json');
@@ -22,23 +51,18 @@
         slope = await slopeFile.split("\r\n");
         res = await fetch('data/19-09-19-am-gallo_t2.json');
         fitFile = await res.json();
+        await start();
     })
 
-    function startSimulation() {
-        // todo: pensare a come gestire il tag video
-        // video.playbackRate = 0;
-        // video.play().then(r => setInterval(intervalFunction, 1000));
-        // todo: pensare a come gestire il bottone
-        // document.getElementById("start_button").innerText = "Aggiorna";
-    }
+    onDestroy(() => {
+        clearInterval(interval);
+    });
 
     function intervalFunction() {
         if(power>5000 || power<0) {
             alert("Not valid number!!")
             speed=0;
             clearInterval(interval)
-            // todo: pensare a come gestire il bottone
-            // document.getElementById("start_button").hidden = false
         }
         changeVideoSpeed(distance, 1, speed)
         speed=3.6*nextValue(speed/3.6, power , 1, slopeCalculator(speed/3.6, 1, distance));
@@ -50,10 +74,8 @@
         let s=0
         while (fitFile[s]['sec']<t_video) s++;
         let vr = fitFile[s]['kph'];
-        let y = vs/vr;
-        t_video += y*t;
-        // todo: aggiungere il cambio velocità al video
-        // video.playbackRate = y
+        playbackRate = vs/vr;
+        t_video += playbackRate*t;
     }
 
     function slopeCalculator(v0, t, d0) {
@@ -70,7 +92,7 @@
         let cr = coefficients[i]['cr']
         let cx = coefficients[i]['cx']
         let e_k0 = 0.5 * settings.totalWeight * Math.pow(v0, 2);
-        let e_kr0 = 0.5 * settings.wheelsInertia * Math.pow(v0, 2)/Math.pow(wheelsRadius, 2);
+        let e_kr0 = 0.5 * settings.wheelsInertia * Math.pow(v0, 2)/Math.pow(settings.wheelsRadius, 2);
         let e_w = settings.efficiency * t * power;
         let ascent = -slope/100 * v0 * t;
         let e_u = settings.wheelsInertia * g * ascent;
@@ -79,19 +101,24 @@
         return Math.pow(2*(e_k0+e_kr0+e_w+e_u-a_a-a_r)
                 /(settings.totalWeight+settings.wheelsInertia/Math.pow(settings.wheelsRadius, 2)), 1/2);
     }
+    // $: console.log(`the height is ${height}`);
 </script>
-
-<div class="relative">
-    <video width={1.666666666*height} height={height} muted>
-        <source src="data/bm-13-09-19_2.mp4" type="video/mp4">
-        Your browser does not support the video tag.
-    </video>
-    <div class="overlay bottom_left">Speed: {Math.round(speed*100)/100 } km/h</div>
-    <div class="overlay bottom_right">Power: {power} W</div>
-    <div class="overlay top_left">Time: {time} s</div>
-    <div class="overlay top_right">Distance: {Math.round(distance)} km</div>
-</div>
-
+<!--<svelte:window bind:innerWidth={height/1.6666666}/>-->
+<section>
+    <div class="relative">
+        <video  bind:this={video}
+                bind:playbackRate={playbackRate}
+                width={1.666666666*height}
+                height={height} muted>
+            <source src="data/bm-13-09-19_2.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+        <div class="overlay bottom_left">Speed: {Math.round(speed*10)/10 } km/h</div>
+        <div class="overlay bottom_right">Power: {power} W</div>
+        <div class="overlay top_left">Time: {Math.round(time/60)>0 ? Math.round(time)+'\'': ''} {Math.round(time%60) + '"'}</div>
+        <div class="overlay top_right">Distance: {Math.round(distance/10)/100} km</div>
+    </div>
+</section>
 <style>
     div.overlay {
         position: absolute;
@@ -129,11 +156,15 @@
 
     div.relative {
         position: relative;
+        margin-top: 4em;
+        margin-left: auto;
+        margin-right: auto;
         width: 800px;
         height: 480px;
-        border: 3px solid #73AD21;
+        border: 3px solid #0084f6;
     }
     video {
         z-index: 1;
     }
+
 </style>
