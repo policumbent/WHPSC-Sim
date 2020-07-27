@@ -1,5 +1,6 @@
 const { app, BrowserWindow, Menu } = require('electron');
 //require('electron-reload')(__dirname);
+// let Ant = require('ant-plus');
 
 const createWindow = () => {
     // const { width, height } = screen.getPrimaryDisplay().workAreaSize;
@@ -23,9 +24,7 @@ const createWindow = () => {
 };
 
 let window = null;
-
 app.whenReady().then(createWindow);
-
 app.on('window-all-closed', () => {
     // Su macOS è comune che l'applicazione e la barra menù
     // restano attive finché l'utente non esce espressamente tramite i tasti Cmd + Q
