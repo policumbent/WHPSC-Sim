@@ -146,7 +146,7 @@
         <div class="overlay bottom_left">Speed: {Math.round(speed*10)/10 } km/h</div>
         <div class="overlay bottom_right">Power: {power} W</div>
         <div class="overlay center">{trap_info}</div>
-        <div class="overlay top_left">Time: {Math.round(time/60)>0 ? Math.round(time/60)+'\'': ''} {Math.round(time%60) + '"'}</div>
+        <div class="overlay top_left">Time: {Math.trunc(time/60)>0 ? Math.trunc(time/60)+'\'': ''} {Math.round(time%60) + '"'}</div>
         <div class="overlay top_right">Distance: {Math.round(distance/10)/100} km</div>
     </div>
 </section>

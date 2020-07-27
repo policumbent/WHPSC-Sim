@@ -4,9 +4,8 @@
 	import Welcome from "./Welcome.svelte";
 	import Icon from 'svelte-awesome';
 	import { close } from 'svelte-awesome/icons';
+	import {getSettings} from './store'
 
-
-	let setting = new Settings(30, 50, 0.06, 1.450, 0.95, 0.50, 1.01)
 	let power = 0;
 	let simulator;
 	let simulation_started = false;
@@ -25,11 +24,13 @@
 
 <main>
 	{#if simulation_started}
-		<Simulator class="center" bind:this={simulator} power={!isNaN(power) ? power : 0} settings={setting} />
-		<div id="power_debug_div">
-			<label id="power_debug_label" for="power_debug">Power Debug Slider: </label>
-			<input class="slider" id="power_debug" type="range" min="0" max="1000" bind:value={power}>
-		</div>
+		<Simulator class="center" bind:this={simulator} power={!isNaN(power) ? power : 0} settings={getSettings()} />
+		{#if getSettings().debugMode}
+			<div id="power_debug_div">
+				<label id="power_debug_label" for="power_debug">Power Debug Slider: </label>
+				<input class="slider" id="power_debug" type="range" min="0" max="1000" bind:value={power}>
+			</div>
+		{/if}
 		<span class="top-right-fixed" on:click={exitSimulation}><Icon class="top-right-fixed" data={close} scale="2"/></span>
 	{:else}
 		<Welcome on:message={startSimulation}/>
