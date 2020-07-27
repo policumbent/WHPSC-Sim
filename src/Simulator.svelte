@@ -140,7 +140,7 @@
                 bind:playbackRate={playbackRate}
                 width={1.666666666*height}
                 height={height} muted>
-            <source src="data/bm-13-09-19_2.mp4" type="video/mp4">
+            <source src="data/bm-13-09-19_no_scritte.mp4" type="video/mp4">
             Your browser does not support the video tag.
         </video>
         <div class="overlay bottom_left">Speed: {Math.round(speed*10)/10 } km/h</div>
