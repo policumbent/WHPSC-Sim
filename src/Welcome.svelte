@@ -8,7 +8,6 @@
 
     const dispatch = createEventDispatcher();
     let sidebar_show = false;
-    export let settings: Settings;
 
     function startMessage() {
         dispatch('message', {

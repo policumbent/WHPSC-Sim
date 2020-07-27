@@ -24,7 +24,7 @@
 
 <main>
 	{#if simulation_started}
-		<Simulator class="center" bind:this={simulator} power={!isNaN(power) ? power : 0} settings={getSettings()} />
+		<Simulator  bind:this={simulator} power={!isNaN(power) ? power : 0} settings={getSettings()} />
 		{#if getSettings().debugMode}
 			<div id="power_debug_div">
 				<label id="power_debug_label" for="power_debug">Power Debug Slider: </label>
@@ -90,12 +90,12 @@
 		cursor: pointer;
 	}
 
-	.center {
-		position: absolute;
-		display: flex;
-		justify-content: center;
-		/*todo: non sono buono con i css, va centrato*/
-	}
+	/*.center {*/
+	/*	position: absolute;*/
+	/*	display: flex;*/
+	/*	justify-content: center;*/
+	/*	!*todo: non sono buono con i css, va centrato*!*/
+	/*}*/
 
 	.top-right-fixed {
 		margin-top: 5px;
