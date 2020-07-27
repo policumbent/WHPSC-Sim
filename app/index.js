@@ -1,5 +1,5 @@
 const { app, BrowserWindow, Menu } = require('electron');
-require('electron-reload')(__dirname);
+//require('electron-reload')(__dirname);
 
 const createWindow = () => {
     // const { width, height } = screen.getPrimaryDisplay().workAreaSize;
@@ -12,10 +12,10 @@ const createWindow = () => {
         }
     });
 
-    window.loadFile('public/index.html');
+    window.loadFile('app/public/index.html');
 
     //Quit app when closed
-    window.on('closed', ()=>app.quit())
+    window.on('closed', ()=>app.quit());
 
     //build menu from the template
     const mainMenu = Menu.buildFromTemplate(mainMenuTemplate);
@@ -24,7 +24,7 @@ const createWindow = () => {
 
 let window = null;
 
-app.whenReady().then(createWindow)
+app.whenReady().then(createWindow);
 
 app.on('window-all-closed', () => {
     // Su macOS è comune che l'applicazione e la barra menù
@@ -32,7 +32,7 @@ app.on('window-all-closed', () => {
     if (process.platform !== 'darwin') {
         app.quit()
     }
-})
+});
 
 app.on('activate', () => {
     // Su macOS è comune ri-creare la finestra dell'app quando
@@ -40,7 +40,7 @@ app.on('activate', () => {
     if (BrowserWindow.getAllWindows().length === 0) {
         createWindow()
     }
-})
+});
 
 // create menu
 const mainMenuTemplate = [
@@ -62,7 +62,7 @@ const mainMenuTemplate = [
             }
         ]
     }
-]
+];
 
 if(process.env.NODE_ENV !== 'production'){
     mainMenuTemplate.push({

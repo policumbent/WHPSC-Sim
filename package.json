@@ -4,24 +4,60 @@
   "version": "1.0.0",
   "description": "Taurus Bike Simulator",
   "author": "Stefano Loscalzo",
+  "main": "./app/index.js",
   "scripts": {
     "build": "rollup -c",
     "dev": "rollup -c -w",
-    "start": "electron .",
+    "start": "electron ./app",
     "validate": "svelte-check",
     "builde": "electron-packager . app --platform linux --arch x64 --out dist/",
-    "deb64": "electron-installer-debian --src dist/app-linux-x64/ --dest dist/installers/ --arch amd64"
+    "deb64": "electron-installer-debian --src dist/app-linux-x64/ --dest dist/installers/ --arch amd64",
+    "pack": "build --dir",
+    "dist": "build",
+    "publish": "electron-builder"
+  },
+  "build": {
+    "appId": "taurus-simulator",
+    "productName": "Taurus Bike Simulator",
+    "directories": {
+      "output": "release/"
+    },
+    "files": [
+      "app",
+      "node_modules"
+    ],
+    "dmg": {
+      "contents": [
+        {
+          "x": 110,
+          "y": 150
+        },
+        {
+          "x": 240,
+          "y": 150,
+          "type": "link",
+          "path": "/Applications"
+        }
+      ]
+    },
+    "linux": {
+      "target": [
+        "AppImage",
+        "deb"
+      ]
+    },
+    "win": {
+      "target": "squirrel"
+    }
   },
   "devDependencies": {
     "@rollup/plugin-commonjs": "^12.0.0",
     "@rollup/plugin-node-resolve": "^8.0.0",
     "@rollup/plugin-typescript": "^4.0.0",
     "@tsconfig/svelte": "^1.0.0",
-    "electron-installer-debian": "^3.1.0",
-    "electron-installer-flatpak": "^0.8.0",
-    "electron-packager": "^15.0.0",
-    "electron-reload": "^1.5.0",
-    "electron-winstaller": "^4.0.1",
+    "electron": "^9.1.1",
+    "electron-builder": "^22.7.0",
+    "electron-builder-squirrel-windows": "^22.8.0",
     "rollup": "^2.3.4",
     "rollup-plugin-livereload": "^1.0.0",
     "rollup-plugin-svelte": "^5.0.3",
@@ -33,7 +69,6 @@
     "typescript": "^3.9.3"
   },
   "dependencies": {
-    "electron": "^9.1.1",
     "sirv-cli": "^1.0.0",
     "svelte-awesome": "^2.3.0"
   }
