@@ -24,6 +24,7 @@ const createWindow = () => {
 };
 
 let window = null;
+app.allowRendererProcessReuse = false;
 app.whenReady().then(createWindow);
 app.on('window-all-closed', () => {
     // Su macOS è comune che l'applicazione e la barra menù

@@ -1,6 +1,13 @@
 <script lang="ts">
     import {onDestroy, onMount} from 'svelte';
     import {Settings} from "./Settings";
+    let dgram = require('dgram');
+    let s = dgram.createSocket('udp4');
+    s.on('message', function(msg, rinfo) {
+        console.log('I got this message: ' + msg.toString());
+        power = parseInt(msg.toString());
+    });
+    s.bind(1336);
 
     export let settings: Settings;
     export let height: number = 480;

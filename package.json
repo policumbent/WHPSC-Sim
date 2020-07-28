@@ -55,7 +55,7 @@
     "@rollup/plugin-node-resolve": "^8.0.0",
     "@rollup/plugin-typescript": "^4.0.0",
     "@tsconfig/svelte": "^1.0.0",
-    "electron": "^9.1.1",
+    "electron": "6.1.12",
     "electron-builder": "^22.7.0",
     "electron-builder-squirrel-windows": "^22.8.0",
     "rollup": "^2.3.4",
