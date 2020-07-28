@@ -1,14 +1,6 @@
 <script lang="ts">
     import {onDestroy, onMount} from 'svelte';
     import {Settings} from "./Settings";
-    let dgram = require('dgram');
-    let s = dgram.createSocket('udp4');
-    s.on('message', function(msg, rinfo) {
-        console.log('I got this message: ' + msg.toString());
-        power = parseInt(msg.toString());
-    });
-    s.bind(1336);
-
     export let settings: Settings;
     export let height: number = 480;
     export let power: number = 0;
@@ -28,7 +20,7 @@
     let video;
     let started = false;
     let interval;
-
+    let ended = false;
     let sum = 0;
     let count_speed = 0;
 
@@ -61,10 +53,11 @@
         coefficients = await res.json();
         res = await fetch('data/slope.txt');
         const slopeFile = await res.text();
-        slope = await slopeFile.split("\r\n");
+        slope = await slopeFile.split("\n");
         res = await fetch('data/19-09-19-am-gallo_t2.json');
         fitFile = await res.json();
         await start();
+        ended = false;
     })
 
     onDestroy(() => {
@@ -78,7 +71,8 @@
             clearInterval(interval)
         }
         changeVideoSpeed(distance, 1, speed)
-        speed=3.6*nextValue(speed/3.6, power , 1, slopeCalculator(speed/3.6, 1, distance));
+        const slope = slopeCalculator(speed, 1, distance);
+        speed=nextValue(speed, power , 1, slope);
         time++;
         distance+=speed/3.6
     }
@@ -88,6 +82,7 @@
         while (fitFile[s]['sec']<t_video && s<581) s++;
         if(s===581){
             playbackRate = 0;
+            ended = true;
             clearInterval(interval);
             return;
         }
@@ -101,26 +96,29 @@
     }
 
     function slopeCalculator(v0, t, d0) {
-        let d1 = Math.round(v0*t + d0)
+        v0 = v0/3.6;
+        // calcolo la pendenza media nella discorsa percorsa nel tempo t
+        let d1 = Math.round(v0*t + d0);
         d0 = Math.round(d0);
-        let d = 0;
+        let s = 0;
         for(let i=d0; i<d1; i++)
-            d += i < slope.length ? parseFloat(slope[i]) : 0
-        return d1!==d0 ? -d/(d1-d0) : 0
+            s += i < slope.length-1 ? parseFloat(slope[i]) : 0
+        return d1!==d0 ? -s/(d1-d0) : 0
     }
 
     function nextValue(v0, power, t, slope) {
+        v0 = v0/3.6;
         let i = v0>40 ? 400 : Math.round(v0*10);
-        let cr = coefficients[i]['cr']
-        let cx = coefficients[i]['cx']
+        let cr = coefficients[i]['cr'];
+        let cx = coefficients[i]['cx'];
         let e_k0 = 0.5 * settings.totalWeight * Math.pow(v0, 2);
         let e_kr0 = 0.5 * settings.wheelsInertia * Math.pow(v0, 2)/Math.pow(settings.wheelsRadius, 2);
         let e_w = settings.efficiency * t * power;
-        let ascent = -slope/100 * v0 * t;
-        let e_u = settings.wheelsInertia * g * ascent;
+        let ascent = -slope * v0 * t;
+        let e_u = settings.totalWeight * g * ascent;
         let a_r = cr * settings.totalWeight * g * t * v0;
         let a_a = 0.5 * settings.rho * cx * settings.area * Math.pow(v0, 3) * t;
-        return Math.pow(2*(e_k0+e_kr0+e_w+e_u-a_a-a_r)
+        return 3.6*Math.pow(2*(e_k0+e_kr0+e_w+e_u-a_a-a_r)
                 /(settings.totalWeight+settings.wheelsInertia/Math.pow(settings.wheelsRadius, 2)), 1/2);
     }
     $: {
@@ -142,7 +140,8 @@
 
 </script>
 <section>
-    <div class="relative">
+    {#if !ended}
+    <div class="relative border">
         <video  bind:this={video}
                 bind:playbackRate={playbackRate}
                 width={1.666666666*height}
@@ -156,6 +155,11 @@
         <div class="overlay top_left">Time: {Math.trunc(time/60)>0 ? Math.trunc(time/60)+'\'': ''} {Math.round(time%60) + '"'}</div>
         <div class="overlay top_right">Distance: {Math.round(distance/10)/100} km</div>
     </div>
+        {:else}
+    <div class="relative">
+        <h2>⚡ 102 km/h ⚡</h2>
+    </div>
+    {/if}
 </section>
 <style>
     div.overlay {
@@ -207,7 +211,14 @@
         margin-right: auto;
         width: 800px;
         height: 480px;
+    }
+    div.border {
         border: 3px solid #0084f6;
+    }
+    h2 {
+        padding-top: 190px;
+        vertical-align: middle;
+        font-size: 4em;
     }
     video {
         z-index: 1;

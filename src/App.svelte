@@ -5,10 +5,18 @@
 	import Icon from 'svelte-awesome';
 	import { close } from 'svelte-awesome/icons';
 	import {getSettings} from './store'
+	let dgram = require('dgram');
+	let s = dgram.createSocket('udp4');
 
 	let power = 0;
 	let simulator;
 	let simulation_started = false;
+
+	s.on('message', function(msg, rinfo) {
+		console.log('I got this message: ' + msg.toString());
+		power = parseInt(msg.toString());
+	});
+	s.bind(1336);
 
 	function startSimulation() {
 		simulation_started = true;
