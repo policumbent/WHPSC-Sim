@@ -34,17 +34,17 @@
             <label for="bike_weight">Bike weight: {bikeWeight}kg</label>
             <input class="slider" id="bike_weight" type="range" min="1" max="200" bind:value={bikeWeight}>
             <label for="rider_weight">Rider weight: {riderWeight}kg</label>
-            <input class="slider" id="rider_weight" type="range" min="40" max="100" bind:value={riderWeight}>
+            <input class="slider" id="rider_weight" type="range" step="0.5" min="40" max="100" bind:value={riderWeight}>
             <label for="wheels_inertia">Wheels Inertia: {wheelsInertia}</label>
             <input class="slider" id="wheels_inertia" type="range" step="0.001" min="0.001" max="0.1" bind:value={wheelsInertia}>
             <label for="efficiency">Efficiency: {efficiency}</label>
             <input class="slider" id="efficiency" type="range" step="0.01" min="0.8" max="1" bind:value={efficiency}>
             <label for="wheels_radius">Wheels Radius: {wheelsRadius}m</label>
-            <input class="slider" id="wheels_radius" type="range" step="0.01" min="1" max="3" bind:value={wheelsRadius}>
+            <input class="slider" id="wheels_radius" type="range" step="0.00001" min="0.1" max="0.4" bind:value={wheelsRadius}>
             <label for="area">Area: {area}m²</label>
             <input class="slider" id="area" type="range" step="0.00001" min="0" max="2" bind:value={area}>
             <label for="air_density">Air Density: {rho}</label>
-            <input class="slider" id="air_density" type="range" step="0.01" min="0.5" max="1.5" bind:value={rho}>
+            <input class="slider" id="air_density" type="range" step="0.0001" min="0.8" max="1.2" bind:value={rho}>
             <label class="checkbox" for="debug">Debug:  </label>
             <input class="checkbox" id="debug" type="checkbox" bind:checked={debugMode}>
         </div>

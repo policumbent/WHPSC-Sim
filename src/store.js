@@ -1,6 +1,6 @@
 import {Settings} from "./Settings";
 
-const newSettings = new Settings(30,50,0.06,1.450,0.95,0.50,1.01, true);
+const newSettings = new Settings(30,50,0.06,0.254,0.95,0.50,1.01, true);
 
 export let getSettings = () =>{
 
