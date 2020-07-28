@@ -7,9 +7,9 @@ let sensor = new Ant.BicyclePowerSensor(stick);
 let s = dgram.createSocket('udp4');
 
 sensor.on('powerData', function (data) {
-    console.log("Calculated Power", data.CalculatedPower);
-    console.log("Power", data.Power);
-    console.log("Powe  r istant", data.InstantaneousPower);
+    // console.log("Calculated Power", data.CalculatedPower);
+    // console.log("Power", data.Power);
+    // console.log("Powe  r istant", data.InstantaneousPower);
     s.send(''+data.Power, 1336, 'localhost');
 });
 

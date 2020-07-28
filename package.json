@@ -1,7 +1,7 @@
 {
   "name": "taurus-simulator",
   "productName": "Taurus Simulator",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Taurus Bike Simulator",
   "author": "Stefano Loscalzo <stefano.loscalzo@gmail.com>",
   "main": "./app/index.js",
@@ -23,6 +23,7 @@
       "output": "release/"
     },
     "files": [
+      "build/icon.*",
       "app",
       "node_modules"
     ],
@@ -47,7 +48,8 @@
       ]
     },
     "win": {
-      "target": "squirrel"
+      "target": "squirrel",
+      "icon": "build/icon.ico"
     }
   },
   "devDependencies": {
