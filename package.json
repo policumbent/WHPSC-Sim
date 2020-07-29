@@ -68,11 +68,10 @@
     "svelte-check": "^0.1.0",
     "svelte-preprocess": "^4.0.0",
     "tslib": "^2.0.0",
-    "typescript": "^3.9.3"
+    "typescript": "^3.9.3",
+    "svelte-awesome": "^2.3.0"
   },
   "dependencies": {
-    "ant-plus": "^0.1.24",
-    "sirv-cli": "^1.0.0",
-    "svelte-awesome": "^2.3.0"
+    "ant-plus": "^0.1.24"
   }
 }
