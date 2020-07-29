@@ -157,7 +157,7 @@
     </div>
         {:else}
     <div class="relative">
-        <h2>⚡ 102 km/h ⚡</h2>
+        <h2>{trap_info}</h2>
     </div>
     {/if}
 </section>
