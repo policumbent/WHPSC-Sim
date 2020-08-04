@@ -8,7 +8,8 @@
   "scripts": {
     "build": "rollup -c",
     "dev": "rollup -c -w",
-    "start": "rollup -c && electron ./",
+    "start": "rollup -c",
+    "starte": "rollup -c && electron ./",
     "validate": "svelte-check",
     "builde": "electron-packager . app --platform linux --arch x64 --out dist/",
     "deb64": "electron-installer-debian --src dist/app-linux-x64/ --dest dist/installers/ --arch amd64",

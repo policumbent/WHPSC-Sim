@@ -5,43 +5,55 @@
 	import Icon from 'svelte-awesome';
 	import { close } from 'svelte-awesome/icons';
 	import {getSettings} from './store'
-	let dgram = require('dgram');
-	let s = dgram.createSocket('udp4');
+	// let dgram = require('dgram');
+	// let s = dgram.createSocket('udp4');
+	let electron = require('electron');
+	let electron_window = electron.remote.getCurrentWindow();
 
 	let power = 0;
 	let simulator;
 	let simulation_started = false;
 
-	s.on('message', function(msg, rinfo) {
-		console.log('I got this message: ' + msg.toString());
-		power = parseInt(msg.toString());
-	});
-	s.bind(1336);
+	// s.on('message', function(msg, rinfo) {
+	// 	console.log('I got this message: ' + msg.toString());
+	// 	power = parseInt(msg.toString());
+	// });
+	// s.bind(1336);
 
 	function startSimulation() {
 		simulation_started = true;
-		window.document.body.classList.toggle('dark-mode')
+		window.document.body.classList.toggle('dark-mode');
+		electron_window.setFullScreen(true);
+		console.log(getWidth());
+		console.log(electron_window.getSize());
 	}
 
 	function exitSimulation() {
 		simulation_started = false;
-		window.document.body.classList.toggle('dark-mode')
+		window.document.body.classList.toggle('dark-mode');
+		electron_window.setFullScreen(false);
+	}
+
+	function getWidth() {
+		if(electron_window.getSize()[0]/1.666666 > electron_window.getSize()[1])
+			return electron_window.getSize()[1]*1.666666;
+		return electron_window.getSize()[0];
 	}
 
 </script>
 
 <main>
 	{#if simulation_started}
-		<Simulator  bind:this={simulator} power={!isNaN(power) ? power : 0} settings={getSettings()} />
-		{#if getSettings().debugMode}
-			<div id="power_debug_div">
-				<label id="power_debug_label" for="power_debug">Power Debug Slider: </label>
-				<input class="slider" id="power_debug" type="range" min="0" max="1000" bind:value={power}>
-			</div>
-		{/if}
-		<span class="top-right-fixed" on:click={exitSimulation}><Icon class="top-right-fixed" data={close} scale="2"/></span>
+		<span class="top-right-fixed" on:click={exitSimulation}><Icon class="top-right-fixed" data={close} scale="3"/></span>
+		<Simulator  bind:this={simulator} width={getWidth()} power={!isNaN(power) ? power : 0} settings={getSettings()} />
 	{:else}
 		<Welcome on:message={startSimulation}/>
+		{#if getSettings().debugMode}
+			<div id="power_debug_div">
+				<label id="power_debug_label" for="power_debug">Power Debug Slider: {power}W</label>
+				<input class="slider" id="power_debug" type="range" min="0" max="2000" bind:value={power}>
+			</div>
+		{/if}
 	{/if}
 </main>
 
@@ -106,8 +118,8 @@
 	/*}*/
 
 	.top-right-fixed {
-		margin-top: 5px;
-		margin-right: 5px;
+		margin-top: 8px;
+		margin-right: 8px;
 		position:absolute;
 		top:0;
 		right:0;

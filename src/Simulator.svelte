@@ -2,7 +2,7 @@
     import {onDestroy, onMount} from 'svelte';
     import {Settings} from "./Settings";
     export let settings: Settings;
-    export let height: number = 480;
+    export let width: number = 480;
     export let power: number = 0;
 
     let speed: number = 0;
@@ -58,6 +58,8 @@
         fitFile = await res.json();
         await start();
         ended = false;
+        console.log(document.getElementsByClassName('relative').length)
+        document.getElementsByClassName('relative').item(0).setAttribute("style","width:" + width + "px" );
     })
 
     onDestroy(() => {
@@ -130,7 +132,7 @@
             count_speed++;
         }
         else if (distance>trap_end)
-            trap_info = `⚡ ${Math.round(sum/count_speed)} km/h ⚡`;
+            trap_info = `⚡ ${Math.round(sum*100/count_speed)/100} km/h ⚡`;
         else {
             trap_info = "";
             count_speed = 0;
@@ -141,11 +143,11 @@
 </script>
 <section>
     {#if !ended}
-    <div class="relative border">
+    <div class="relative">
         <video  bind:this={video}
                 bind:playbackRate={playbackRate}
-                width={1.666666666*height}
-                height={height} muted>
+                width={width}
+                height={width/1.666666666} muted>
             <source src="data/bm-13-09-19_no_scritte.mp4" type="video/mp4">
             Your browser does not support the video tag.
         </video>
@@ -164,9 +166,9 @@
 <style>
     div.overlay {
         position: absolute;
-        font-size: 35px;
+        font-size: 4vw;
         background-color: rgba(221, 221, 221, 0.0);
-        width: 300px;
+        width: 40vw;
         padding: 10px 0;
         z-index: 2147483647;
     }
@@ -177,10 +179,10 @@
         text-align: left;
     }
     div.center {
-        top: 75px;
+        top: 11vh;
         margin: 0 auto;
-        font-size: 25px;
-        width: 800px;
+        font-size: 3vw;
+        width: 100%;
         color: #000;
         text-align: center;
     }
@@ -206,11 +208,11 @@
 
     div.relative {
         position: relative;
-        margin-top: 4em;
+        /*margin-top: 4em;*/
         margin-left: auto;
         margin-right: auto;
-        width: 800px;
-        height: 480px;
+        /*width: 800px;*/
+        /*height: 480px;*/
     }
     div.border {
         border: 3px solid #0084f6;
