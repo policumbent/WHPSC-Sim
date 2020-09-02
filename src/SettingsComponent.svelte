@@ -3,6 +3,7 @@
     import {Settings} from "./Settings";
     import {onMount} from "svelte";
     import {saveSettings, getSettings} from "./store"
+    import {btSearch} from "./bt/Meter.js"
     import { get } from "svelte/store"
     export let show = false;
     let settings_value: Settings;
@@ -49,6 +50,9 @@
             <input class="checkbox" id="debug" type="checkbox" bind:checked={debugMode}>
         </div>
         <button on:click={save}>Save</button>
+        <div>
+            <button on:click={btSearch}>Search Bluetooth Power Meter</button>
+        </div>
     </nav>
 {/if}
 

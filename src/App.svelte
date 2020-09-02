@@ -51,7 +51,7 @@
 		{#if getSettings().debugMode}
 			<div id="power_debug_div">
 				<label id="power_debug_label" for="power_debug">Power Debug Slider: {power}W</label>
-				<input class="slider" id="power_debug" type="range" min="0" max="2000" bind:value={power}>
+				<input class="slider" id="power_debug" type="range" min="0" max="1000" bind:value={power}>
 			</div>
 		{/if}
 	{/if}
