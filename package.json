@@ -4,75 +4,29 @@
   "version": "1.0.1",
   "description": "Taurus Bike Simulator",
   "author": "Stefano Loscalzo <stefano.loscalzo@gmail.com>",
-  "main": "./app/index.js",
   "scripts": {
     "build": "rollup -c",
     "dev": "rollup -c -w",
-    "start": "rollup -c",
-    "starte": "rollup -c && electron ./",
-    "validate": "svelte-check",
-    "builde": "electron-packager . app --platform linux --arch x64 --out dist/",
-    "deb64": "electron-installer-debian --src dist/app-linux-x64/ --dest dist/installers/ --arch amd64",
-    "pack": "build --dir",
-    "dist": "build",
-    "publish": "electron-builder"
-  },
-  "build": {
-    "appId": "taurus-simulator",
-    "productName": "Taurus Bike Simulator",
-    "directories": {
-      "output": "release/"
-    },
-    "files": [
-      "build/icon.*",
-      "app",
-      "node_modules"
-    ],
-    "dmg": {
-      "contents": [
-        {
-          "x": 110,
-          "y": 150
-        },
-        {
-          "x": 240,
-          "y": 150,
-          "type": "link",
-          "path": "/Applications"
-        }
-      ]
-    },
-    "linux": {
-      "target": [
-        "AppImage",
-        "deb"
-      ]
-    },
-    "win": {
-      "target": "squirrel",
-      "icon": "build/icon.ico"
-    }
+    "start": "sirv public",
+    "validate": "svelte-check"
   },
   "devDependencies": {
     "@rollup/plugin-commonjs": "^12.0.0",
     "@rollup/plugin-node-resolve": "^8.0.0",
     "@rollup/plugin-typescript": "^4.0.0",
     "@tsconfig/svelte": "^1.0.0",
-    "electron": "6.1.12",
-    "electron-builder": "^22.7.0",
-    "electron-builder-squirrel-windows": "^22.8.0",
     "rollup": "^2.3.4",
     "rollup-plugin-livereload": "^1.0.0",
     "rollup-plugin-svelte": "^5.0.3",
-    "rollup-plugin-terser": "^5.1.2",
+    "rollup-plugin-terser": "^7.0.1",
     "svelte": "^3.0.0",
+    "svelte-awesome": "^2.3.0",
     "svelte-check": "^0.1.0",
     "svelte-preprocess": "^4.0.0",
     "tslib": "^2.0.0",
-    "typescript": "^3.9.3",
-    "svelte-awesome": "^2.3.0"
+    "typescript": "^3.9.3"
   },
   "dependencies": {
-    "ant-plus": "^0.1.24"
+    "sirv-cli": "^1.0.0"
   }
 }

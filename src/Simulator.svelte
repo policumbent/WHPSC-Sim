@@ -1,9 +1,13 @@
 <script lang="ts">
     import {onDestroy, onMount} from 'svelte';
     import {Settings} from "./Settings";
+    import { createEventDispatcher } from 'svelte';
+
     export let settings: Settings;
     export let width: number = 480;
     export let power: number = 0;
+
+    const dispatch = createEventDispatcher();
 
     let speed: number = 0;
     let distance: number = 0;
@@ -84,6 +88,8 @@
         while (fitFile[s]['sec']<t_video && s<581) s++;
         if(s===581){
             playbackRate = 0;
+            // send message with result to outer component
+            dispatch('message', {text: Math.round(sum * 100 / count_speed) / 100});
             ended = true;
             clearInterval(interval);
             return;
@@ -132,8 +138,9 @@
             sum += speed;
             count_speed++;
         }
-        else if (distance>trap_end)
-            trap_info = `⚡ ${Math.round(sum*100/count_speed)/100} km/h ⚡`;
+        else if (distance>trap_end) {
+            trap_info = `⚡ ${Math.round(sum * 100 / count_speed) / 100} km/h ⚡`;
+        }
         else {
             trap_info = "";
             count_speed = 0;

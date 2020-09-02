@@ -1,51 +1,62 @@
 <script lang="ts">
 	import Simulator from "./Simulator.svelte";
 	import {Settings} from "./Settings";
+	import {hrValue} from "./store.js"
 	import Welcome from "./Welcome.svelte";
 	import Icon from 'svelte-awesome';
 	import { close } from 'svelte-awesome/icons';
 	import {getSettings} from './store'
-	// let dgram = require('dgram');
-	// let s = dgram.createSocket('udp4');
-	let electron = require('electron');
-	let electron_window = electron.remote.getCurrentWindow();
-
 	let power = 0;
 	let simulator;
 	let simulation_started = false;
 
-	// s.on('message', function(msg, rinfo) {
-	// 	console.log('I got this message: ' + msg.toString());
-	// 	power = parseInt(msg.toString());
-	// });
-	// s.bind(1336);
+	// todo: fare la unsubscribe quando onDestroy
+	// todo: uso la fc al posto della potenza per il primo test
+	const hrUnsubscribe = hrValue.subscribe(value => power=value);
+
+	// right click disabled
+	document.addEventListener('contextmenu', event => event.preventDefault());
+	document.addEventListener('fullscreenchange', event => document.fullscreenElement===null?exitSimulation():event);
 
 	function startSimulation() {
-		simulation_started = true;
-		window.document.body.classList.toggle('dark-mode');
-		electron_window.setFullScreen(true);
-		console.log(getWidth());
-		console.log(electron_window.getSize());
+		document.documentElement.requestFullscreen()
+				.then(() => {
+					simulation_started = true;
+					window.document.body.classList.toggle('dark-mode');
+					console.log(getWidth());
+				})
+				.catch(err => console.log(err));
 	}
 
 	function exitSimulation() {
 		simulation_started = false;
 		window.document.body.classList.toggle('dark-mode');
-		electron_window.setFullScreen(false);
+	}
+	function exitFullscreen() {
+		document.exitFullscreen();
 	}
 
 	function getWidth() {
-		if(electron_window.getSize()[0]/1.666666 > electron_window.getSize()[1])
-			return electron_window.getSize()[1]*1.666666;
-		return electron_window.getSize()[0];
+		if(window.screen.width/1.666666 > window.screen.height)
+			return window.screen.height*1.666666;
+		return window.screen.width;
+	}
+
+	function handleResult(event) {
+		console.log(event.detail.text);
 	}
 
 </script>
 
 <main>
 	{#if simulation_started}
-		<span class="top-right-fixed" on:click={exitSimulation}><Icon class="top-right-fixed" data={close} scale="3"/></span>
-		<Simulator  bind:this={simulator} width={getWidth()} power={!isNaN(power) ? power : 0} settings={getSettings()} />
+		<span class="top-right-fixed" on:click={exitFullscreen}><Icon class="top-right-fixed" data={close} scale="3"/></span>
+		<Simulator
+				bind:this={simulator}
+				width={getWidth()}
+				power={!isNaN(power) ? power : 0}
+				on:message={handleResult}
+				settings={getSettings()} />
 	{:else}
 		<Welcome on:message={startSimulation}/>
 		{#if getSettings().debugMode}
@@ -133,4 +144,5 @@
 		background-color: #1d3040;
 		color: #bfc2c7;
 	}
+
 </style>
