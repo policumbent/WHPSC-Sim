@@ -6,9 +6,11 @@ export class Settings {
     private readonly _efficiency: number;
     private readonly _area: number;
     private readonly _rho: number;
+    private readonly _cx: number;
     private readonly _debugMode: boolean;
 
-    constructor(bikeWeight: number, riderWeight: number, wheelsInertia: number, wheelsRadius: number, efficiency: number, area: number, rho: number, debugMode: boolean) {
+    constructor(bikeWeight: number, riderWeight: number, wheelsInertia: number, wheelsRadius: number,
+                efficiency: number, area: number, rho: number, cx:number, debugMode: boolean) {
         this._bikeWeight = bikeWeight;
         this._riderWeight = riderWeight;
         this._wheelsInertia = wheelsInertia;
@@ -16,6 +18,7 @@ export class Settings {
         this._efficiency = efficiency;
         this._area = area;
         this._rho = rho;
+        this._cx = cx;
         this._debugMode = debugMode;
     }
 
@@ -47,12 +50,15 @@ export class Settings {
         return this._area;
     }
 
-
     get rho(): number {
         return this._rho;
     }
 
     get debugMode(): boolean {
         return this._debugMode;
+    }
+
+    get cx(): number {
+        return this._cx;
     }
 }

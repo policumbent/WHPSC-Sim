@@ -23,10 +23,14 @@
     "svelte-awesome": "^2.3.0",
     "svelte-check": "^0.1.0",
     "svelte-preprocess": "^4.0.0",
+    "svelte-simple-modal": "^0.6.0",
+    "sveltejs-forms": "^2.1.1",
     "tslib": "^2.0.0",
-    "typescript": "^3.9.3"
+    "typescript": "^3.9.3",
+    "yup": "^0.29.3"
   },
   "dependencies": {
+    "node-fetch": "^2.6.0",
     "sirv-cli": "^1.0.0"
   }
 }

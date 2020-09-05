@@ -2,7 +2,7 @@ import {Settings} from "./Settings";
 import { writable } from 'svelte/store';
 
 export const hrValue = writable(0);
-const newSettings = new Settings(30,50,0.06,0.254,0.95,0.50,1.01, true);
+const newSettings = new Settings(30,50,0.06,0.254,0.95,0.50,1.01, 0.35,true);
 
 export let getSettings = () =>{
 
@@ -16,8 +16,9 @@ export let getSettings = () =>{
             storageValue['_efficiency'],
             storageValue['_area'],
             storageValue['_rho'],
+            storageValue['_cx'],
             storageValue['_debugMode']
-            );
+        );
     }
 
     const storageValue = localStorage.getItem("settings");

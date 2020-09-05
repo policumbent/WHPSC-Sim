@@ -1,22 +1,28 @@
 <script lang="ts">
 	import Simulator from "./Simulator.svelte";
+	import ResultModal from './ResultContent.svelte';
 	import {Settings} from "./Settings";
 	import {hrValue} from "./store.js"
 	import Welcome from "./Welcome.svelte";
 	import Icon from 'svelte-awesome';
-	import { close } from 'svelte-awesome/icons';
+	import {close} from 'svelte-awesome/icons';
 	import {getSettings} from './store'
+	import Modal from 'svelte-simple-modal';
+	import ResultContainer from "./ResultContainer.svelte";
+	import { getContext } from 'svelte';
+
 	let power = 0;
 	let simulator;
 	let simulation_started = false;
+	let openModal;
 
 	// todo: fare la unsubscribe quando onDestroy
 	// todo: uso la fc al posto della potenza per il primo test
-	const hrUnsubscribe = hrValue.subscribe(value => power=value);
+	const hrUnsubscribe = hrValue.subscribe(value => power = value);
 
 	// right click disabled
 	document.addEventListener('contextmenu', event => event.preventDefault());
-	document.addEventListener('fullscreenchange', event => document.fullscreenElement===null?exitSimulation():event);
+	document.addEventListener('fullscreenchange', event => document.fullscreenElement === null ? exitSimulation() : event);
 
 	function startSimulation() {
 		document.documentElement.requestFullscreen()
@@ -32,18 +38,22 @@
 		simulation_started = false;
 		window.document.body.classList.toggle('dark-mode');
 	}
+
 	function exitFullscreen() {
 		document.exitFullscreen();
 	}
 
 	function getWidth() {
-		if(window.screen.width/1.666666 > window.screen.height)
-			return window.screen.height*1.666666;
+		if (window.screen.width / 1.666666 > window.screen.height)
+			return window.screen.height * 1.666666;
 		return window.screen.width;
 	}
 
 	function handleResult(event) {
 		console.log(event.detail.text);
+		exitFullscreen();
+		console.log(event.detail.text)
+		openModal(event.detail.text);
 	}
 
 </script>
@@ -65,7 +75,11 @@
 				<input class="slider" id="power_debug" type="range" min="0" max="1000" bind:value={power}>
 			</div>
 		{/if}
+<!--	<button on:click={handleResult}>Test add result to server</button>-->
 	{/if}
+	<Modal>
+		<ResultContainer bind:openModal={openModal}/>
+	</Modal>
 </main>
 
 <style>

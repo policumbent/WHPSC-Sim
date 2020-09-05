@@ -53,7 +53,7 @@
     }
 
     onMount(async () =>{
-        let res = await fetch('data/coefficients.json');
+        let res = await fetch('data/coefficients2.json');
         coefficients = await res.json();
         res = await fetch('data/slope.txt');
         const slopeFile = await res.text();
@@ -118,7 +118,7 @@
         v0 = v0/3.6;
         const i = v0>40 ? 400 : Math.round(v0*10);
         const cr = coefficients[i]['cr'];
-        const cx = coefficients[i]['cx'];
+        const cx = coefficients[i]['cx']*settings.cx;
         const e_k0 = 0.5 * settings.totalWeight * Math.pow(v0, 2);
         const e_kr0 = 0.5 * settings.wheelsInertia * Math.pow(v0, 2)/Math.pow(settings.wheelsRadius, 2);
         const e_w = settings.efficiency * t * power;

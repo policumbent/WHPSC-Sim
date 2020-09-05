@@ -7,7 +7,7 @@
     export let show = false;
     let settings_value: Settings;
 
-    let bikeWeight, riderWeight, wheelsInertia, wheelsRadius, efficiency, area, rho, debugMode;
+    let bikeWeight, riderWeight, wheelsInertia, wheelsRadius, efficiency, area, rho, debugMode, cx;
 
     onMount( () => {
         settings_value = getSettings();
@@ -18,11 +18,12 @@
         efficiency = settings_value.efficiency;
         area = settings_value.area;
         rho = settings_value.rho;
+        cx = settings_value.cx;
         debugMode = settings_value.debugMode;
     });
 
     function save() {
-        saveSettings(new Settings(bikeWeight, riderWeight, wheelsInertia, wheelsRadius, efficiency, area, rho, debugMode));
+        saveSettings(new Settings(bikeWeight, riderWeight, wheelsInertia, wheelsRadius, efficiency, area, rho, cx, debugMode));
         show = false;
     }
 
@@ -45,6 +46,8 @@
             <input class="slider" id="area" type="range" step="0.00001" min="0" max="2" bind:value={area}>
             <label for="air_density">Air Density: {rho}</label>
             <input class="slider" id="air_density" type="range" step="0.0001" min="0.8" max="1.2" bind:value={rho}>
+            <label for="cx">Cx @120km/h: {cx}</label>
+            <input class="slider" id="cx" type="range" step="0.0001" min="0.02" max="1.2" bind:value={cx}>
             <label class="checkbox" for="debug">Debug:  </label>
             <input class="checkbox" id="debug" type="checkbox" bind:checked={debugMode}>
         </div>
