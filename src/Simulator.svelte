@@ -53,7 +53,7 @@
     }
 
     onMount(async () =>{
-        let res = await fetch('data/coefficients2.json');
+        let res = await fetch('data/coefficients4.json');
         coefficients = await res.json();
         res = await fetch('data/slope.txt');
         const slopeFile = await res.text();
@@ -138,9 +138,10 @@
             sum += speed;
             count_speed++;
         }
-        else if (distance>trap_end) {
-            trap_info = `⚡ ${Math.round(sum * 100 / count_speed) / 100} km/h ⚡`;
-        }
+        // without it we can increase suspense, evaluate if write it or not
+        // else if (distance>trap_end) {
+        //     trap_info = `⚡ ${Math.round(sum * 100 / count_speed) / 100} km/h ⚡`;
+        // }
         else {
             trap_info = "";
             count_speed = 0;

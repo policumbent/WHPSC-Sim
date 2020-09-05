@@ -6,7 +6,7 @@
     // import {Result} from "./Result";
     // import yup from 'yup@0.27';
     const dispatch = createEventDispatcher();
-
+    const uploadUrl = 'https://www.policumbent.it/whpsc_sim_backend/upload_result.php';
     export let message;
     let count = 0;
     let errorMex = "";
@@ -14,7 +14,7 @@
     let result: ResultModel;
     function handleSubmit() {
         console.log(result);
-        fetch('https://www.policumbent.it/whpsc_sim_backend/upload_result.php',
+        fetch(uploadUrl,
                 {method: 'POST', body: JSON.stringify(result)})
                 .then(resp => {
                     if(resp.status===200)
@@ -25,11 +25,11 @@
     onMount(() => result=new ResultModel(parseFloat(message)))
 </script>
 {#if count===0}
-    <h1>🎉 Congratulation 🍾</h1>
+    <h1>🎉 Congratulations 🍾</h1>
     <p>Your speed is</p>
     <p><span class="speed">{message} km/h</span><p>
     <p><span class="mph">({Math.round(message*0.621371*100)/100}mph)</span></p>
-    <button class="btn" on:click={next}>Save your attempt</button>
+    <button class="btn" on:click={next}>Save your result</button>
 {:else if count===1}
     <h1>Save your result</h1>
     <p>We need some information to add your attempt to our results list.</p>
@@ -52,7 +52,6 @@
 {:else}
     <h1>One more step</h1>
     <p>Check your mail and confirm your attempt. You will become visible on result as soon you confirm it.</p>
-<!--    <button on:click={closeModal} class="btn">Close</button>-->
 {/if}
 <style>
     h1 {

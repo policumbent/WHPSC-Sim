@@ -75,7 +75,6 @@
 				<input class="slider" id="power_debug" type="range" min="0" max="1000" bind:value={power}>
 			</div>
 		{/if}
-<!--	<button on:click={handleResult}>Test add result to server</button>-->
 	{/if}
 	<Modal>
 		<ResultContainer bind:openModal={openModal}/>
