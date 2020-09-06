@@ -9,12 +9,15 @@
 	import {getSettings} from './store'
 	import Modal from 'svelte-simple-modal';
 	import ResultContainer from "./ResultContainer.svelte";
-	import { getContext } from 'svelte';
+	import {getContext} from 'svelte';
+	import BikePicker from "./BikePicker.svelte";
+	import {Bike} from "./Bike";
 
 	let power = 0;
 	let simulator;
 	let simulation_started = false;
 	let openModal;
+	let bike: Bike;
 
 	// todo: fare la unsubscribe quando onDestroy
 	// todo: uso la fc al posto della potenza per il primo test
@@ -24,7 +27,8 @@
 	document.addEventListener('contextmenu', event => event.preventDefault());
 	document.addEventListener('fullscreenchange', event => document.fullscreenElement === null ? exitSimulation() : event);
 
-	function startSimulation() {
+	function startSimulation(event) {
+		bike = event.detail.text;
 		document.documentElement.requestFullscreen()
 				.then(() => {
 					simulation_started = true;
@@ -51,9 +55,12 @@
 
 	function handleResult(event) {
 		console.log(event.detail.text);
-		exitFullscreen();
-		console.log(event.detail.text)
-		openModal(event.detail.text);
+		if (event.detail.text !== undefined)
+			exitFullscreen();
+		console.log(event.detail.text);
+		const speed = event.detail.text !== undefined ? event.detail.text : 141.0;
+		console.log(speed);
+		openModal(speed);
 	}
 
 </script>
@@ -66,7 +73,7 @@
 				width={getWidth()}
 				power={!isNaN(power) ? power : 0}
 				on:message={handleResult}
-				settings={getSettings()} />
+				settings={bike.settings} />
 	{:else}
 		<Welcome on:message={startSimulation}/>
 		{#if getSettings().debugMode}
@@ -74,6 +81,7 @@
 				<label id="power_debug_label" for="power_debug">Power Debug Slider: {power}W</label>
 				<input class="slider" id="power_debug" type="range" min="0" max="1000" bind:value={power}>
 			</div>
+			<button on:click={handleResult}>Test results</button>
 		{/if}
 	{/if}
 	<Modal>

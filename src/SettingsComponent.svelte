@@ -28,7 +28,6 @@
     }
 
 </script>
-
 {#if show}
     <nav transition:fly={{x: 250, opacity: 1}}>
         <div class="sliders_div">

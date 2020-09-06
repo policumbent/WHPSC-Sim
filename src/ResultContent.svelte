@@ -24,35 +24,37 @@
     }
     onMount(() => result=new ResultModel(parseFloat(message)))
 </script>
-{#if count===0}
-    <h1>🎉 Congratulations 🍾</h1>
-    <p>Your speed is</p>
-    <p><span class="speed">{message} km/h</span><p>
-    <p><span class="mph">({Math.round(message*0.621371*100)/100}mph)</span></p>
-    <button class="btn" on:click={next}>Save your result</button>
-{:else if count===1}
-    <h1>Save your result</h1>
-    <p>We need some information to add your attempt to our results list.</p>
-    <form on:submit|preventDefault="{handleSubmit}">
-        <div class="formData">
-            <label for="firstName">First name</label>
-            <input required id="firstName" bind:value={result.firstName} type="text"/>
-        </div>
-        <div class="formData">
-            <label for="lastName">Last name</label>
-            <input required id="lastName" bind:value={result.lastName} type="text"/>
-        </div>
-        <div class="formData">
-            <label for="email">Email</label>
-            <input required id="email" bind:value={result.email} type="email"/>
-        </div>
-        <p value="{errorMex}"></p>
-        <input class="btn right" type="submit" value="Send"/>
-    </form>
-{:else}
-    <h1>One more step</h1>
-    <p>Check your mail and confirm your attempt. You will become visible on result as soon you confirm it.</p>
-{/if}
+<section>
+    {#if count===0}
+        <h1>🎉 Congratulations 🍾</h1>
+        <p>Your speed is</p>
+        <p><span class="speed">{message} km/h</span><p>
+        <p><span class="mph">({Math.round(message*0.621371*100)/100}mph)</span></p>
+        <button class="btn" on:click={next}>Save your result</button>
+    {:else if count===1}
+        <h1>Save your result</h1>
+        <p>We need some information to add your attempt to our results list.</p>
+        <form on:submit|preventDefault="{handleSubmit}">
+            <div class="formData">
+                <label for="firstName">First name</label>
+                <input required id="firstName" bind:value={result.firstName} type="text"/>
+            </div>
+            <div class="formData">
+                <label for="lastName">Last name</label>
+                <input required id="lastName" bind:value={result.lastName} type="text"/>
+            </div>
+            <div class="formData">
+                <label for="email">Email</label>
+                <input required id="email" bind:value={result.email} type="email"/>
+            </div>
+            <p value="{errorMex}"></p>
+            <input class="btn right" type="submit" value="Send"/>
+        </form>
+    {:else}
+        <h1>One more step</h1>
+        <p>Check your mail and confirm your attempt. You will become visible on result as soon you confirm it.</p>
+    {/if}
+</section>
 <style>
     h1 {
         font-size: 3em;

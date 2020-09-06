@@ -6,13 +6,19 @@
     import SettingsComponent from "./SettingsComponent.svelte";
     import {Settings} from "./Settings";
     import {btSearch} from "./bt/BleData.ts"
+    import BikePicker from "./BikePicker.svelte";
 
     const dispatch = createEventDispatcher();
     let sidebar_show = false;
-
-    function startMessage() {
+    let chooseBike = false;
+    function pickBike() {
+        chooseBike = true;
+    }
+    function bikeChosen(event) {
+        chooseBike = false;
+        console.log(event.detail.text);
         dispatch('message', {
-            text: 'start'
+            text: event.detail.text
         });
     }
 
@@ -22,8 +28,11 @@
 <section>
     <h1>WHPSC Simulator</h1>
     <span on:click={() => sidebar_show = !sidebar_show} class="top-right-fixed click_t"><Icon class="top-right-fixed" data={gear} scale="2"/></span>
-    <button class="btn" on:click={startMessage}>Start</button>
+    <button class="btn" on:click={pickBike}>Start</button>
     <button class="btn" on:click={btSearch}>Search powermeter</button>
+    {#if chooseBike}
+        <BikePicker on:message={bikeChosen}/>
+    {/if}
 </section>
 <style>
     /*todo: same size buttons*/
