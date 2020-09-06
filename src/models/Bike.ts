@@ -1,12 +1,12 @@
-import type {Settings} from "./Settings";
+import type {BikeSettings} from "./BikeSettings";
 
 export class Bike {
     bikeName: string;
     imgSrc: string;
     description: string;
-    settings: Settings;
+    settings: BikeSettings;
 
-    constructor(bikeName: string, imgSrc: string, description: string, settings: Settings) {
+    constructor(bikeName: string, imgSrc: string, description: string, settings: BikeSettings) {
         this.bikeName = bikeName;
         this.imgSrc = imgSrc;
         this.description = description;

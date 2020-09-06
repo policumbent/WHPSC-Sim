@@ -1,15 +1,17 @@
 <script lang="ts">
     import BikeComponent from "./BikeComponent.svelte";
-    import {Bike} from "./Bike";
+    import {Bike} from "./models/Bike";
     import {createEventDispatcher, onMount} from "svelte";
-    import {Settings} from "./Settings";
-    const dispatch = createEventDispatcher();
-    const s = new Settings(30,50,0.06,0.254,0.95,0.50,1.01, 0.45,true);
+    import {BikeSettings} from "./models/BikeSettings";
+    import {getSettings} from './store'
 
+    const dispatch = createEventDispatcher();
+    const s = new BikeSettings(30,0.06,0.254,0.95,0.50,1.01, 0.45);
+    const customBike: Bike = new Bike('Custom', 'img/gear.svg', 'Your custom settings', getSettings())
     let bikes: Bike[] = [
         new Bike('Taurus', 'img/taurus.svg', 'A very fast bike', s),
         new Bike('Pulsar', 'img/pulsar.svg', 'A fast bike', s),
-        new Bike('Taurus', 'img/pulse.svg', 'A very slow bike', s),
+        new Bike('Pulse', 'img/pulse.svg', 'A big bike', s),
         new Bike('Strike', 'img/strike.svg', 'A very trike', s),
         new Bike('Coral', 'img/bici.svg', 'A recumbent bike', s),
         new Bike('Bike', 'img/normal.svg', 'A normal bike', s),
@@ -36,18 +38,35 @@
         console.log(bike);
         dispatch('message', {text: bike})
     }
-    onMount(async () => bikes = shuffle(bikes))
+    onMount(async () => {
+        bikes = shuffle(bikes);
+        bikes.push(customBike);
+    })
 </script>
 
-<div class="back">
+<div on:click={() => bikeChosen(null)} class="back">
     <div class="content">
         {#each bikes as bike}
             <BikeComponent on:click={() => bikeChosen(bike)} bike={bike}/>
         {/each}
     </div>
+<!--    <label class="">Pick your bike</label>-->
 </div>
 
 <style>
+    label {
+        position:absolute;
+        top: 10%;
+        left: 50%;
+        -webkit-transform: translateX(-50%);
+        transform: translateX(-50%);
+        color: white;
+        text-align: center;
+        text-transform: uppercase;
+        font-weight: 100;
+        font-size: 3em;
+    }
+
     .content {
         position: absolute;
         background-color: #FFFFFF;

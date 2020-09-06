@@ -1,7 +1,7 @@
 <script lang="ts">
 
     import { Form, Input } from 'sveltejs-forms';
-    import {ResultModel} from "./Result";
+    import {ResultModel} from "./models/Result";
     import {createEventDispatcher, onMount} from "svelte";
     // import {Result} from "./Result";
     // import yup from 'yup@0.27';

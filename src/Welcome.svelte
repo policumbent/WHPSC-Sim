@@ -4,8 +4,8 @@
 
     import {createEventDispatcher} from 'svelte';
     import SettingsComponent from "./SettingsComponent.svelte";
-    import {Settings} from "./Settings";
-    import {btSearch} from "./bt/BleData.ts"
+    import {BikeSettings} from "./models/BikeSettings";
+    import {btSearch} from "./models/bt/BleData.ts"
     import BikePicker from "./BikePicker.svelte";
 
     const dispatch = createEventDispatcher();
@@ -16,6 +16,8 @@
     }
     function bikeChosen(event) {
         chooseBike = false;
+        if(event.detail.text == null)
+            return;
         console.log(event.detail.text);
         dispatch('message', {
             text: event.detail.text

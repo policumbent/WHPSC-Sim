@@ -1,9 +1,11 @@
 <script lang="ts">
     import {onDestroy, onMount} from 'svelte';
-    import {Settings} from "./Settings";
+    import {BikeSettings} from "./models/BikeSettings";
     import { createEventDispatcher } from 'svelte';
+    import {UserSettings} from "./models/UserSettings";
 
-    export let settings: Settings;
+    export let bikeSettings: BikeSettings;
+    export let userSettings: UserSettings;
     export let width: number = 480;
     export let power: number = 0;
 
@@ -118,16 +120,17 @@
         v0 = v0/3.6;
         const i = v0>40 ? 400 : Math.round(v0*10);
         const cr = coefficients[i]['cr'];
-        const cx = coefficients[i]['cx']*settings.cx;
-        const e_k0 = 0.5 * settings.totalWeight * Math.pow(v0, 2);
-        const e_kr0 = 0.5 * settings.wheelsInertia * Math.pow(v0, 2)/Math.pow(settings.wheelsRadius, 2);
-        const e_w = settings.efficiency * t * power;
+        const cx = coefficients[i]['cx']*bikeSettings.cx;
+        const e_k0 = 0.5 * (bikeSettings.bikeWeight+userSettings.riderWeight) * Math.pow(v0, 2);
+        const e_kr0 = 0.5 * bikeSettings.wheelsInertia * Math.pow(v0, 2)/Math.pow(bikeSettings.wheelsRadius, 2);
+        const e_w = bikeSettings.efficiency * t * power;
         const ascent = -slope * v0 * t;
-        const e_u = settings.totalWeight * g * ascent;
-        const a_r = cr * settings.totalWeight * g * t * v0;
-        const a_a = 0.5 * settings.rho * cx * settings.area * Math.pow(v0, 3) * t;
+        const e_u = (bikeSettings.bikeWeight+userSettings.riderWeight) * g * ascent;
+        const a_r = cr * (bikeSettings.bikeWeight+userSettings.riderWeight) * g * t * v0;
+        const a_a = 0.5 * bikeSettings.rho * cx * bikeSettings.area * Math.pow(v0, 3) * t;
         return 3.6*Math.pow(2*(e_k0+e_kr0+e_w+e_u-a_a-a_r)
-                /(settings.totalWeight+settings.wheelsInertia/Math.pow(settings.wheelsRadius, 2)), 1/2);
+                /((bikeSettings.bikeWeight+userSettings.riderWeight)
+                        +bikeSettings.wheelsInertia/Math.pow(bikeSettings.wheelsRadius, 2)), 1/2);
     }
     // azioni che compio quando gli stati vengono aggiornati
     $: {

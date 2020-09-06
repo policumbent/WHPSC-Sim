@@ -1,5 +1,5 @@
 import {BleMeter} from "./BleMeter";
-import {hrValue} from "../store.js"
+import {hrValue} from "../../store.js"
 
 export class BleHRMeter extends BleMeter {
     characteristicId: number;

@@ -1,17 +1,17 @@
 <script lang="ts">
 	import Simulator from "./Simulator.svelte";
 	import ResultModal from './ResultContent.svelte';
-	import {Settings} from "./Settings";
+	import {BikeSettings} from "./models/BikeSettings";
 	import {hrValue} from "./store.js"
 	import Welcome from "./Welcome.svelte";
 	import Icon from 'svelte-awesome';
 	import {close} from 'svelte-awesome/icons';
-	import {getSettings} from './store'
 	import Modal from 'svelte-simple-modal';
 	import ResultContainer from "./ResultContainer.svelte";
 	import {getContext} from 'svelte';
 	import BikePicker from "./BikePicker.svelte";
-	import {Bike} from "./Bike";
+	import {Bike} from "./models/Bike";
+	import {getDebug, getUserSettings} from "./store";
 
 	let power = 0;
 	let simulator;
@@ -73,10 +73,12 @@
 				width={getWidth()}
 				power={!isNaN(power) ? power : 0}
 				on:message={handleResult}
-				settings={bike.settings} />
+				bikeSettings={bike.settings}
+				userSettings={getUserSettings()}
+		/>
 	{:else}
 		<Welcome on:message={startSimulation}/>
-		{#if getSettings().debugMode}
+		{#if getDebug()}
 			<div id="power_debug_div">
 				<label id="power_debug_label" for="power_debug">Power Debug Slider: {power}W</label>
 				<input class="slider" id="power_debug" type="range" min="0" max="1000" bind:value={power}>

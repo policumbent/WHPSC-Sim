@@ -1,16 +1,19 @@
-import {Settings} from "./Settings";
+import {BikeSettings} from "./models/BikeSettings";
 import { writable } from 'svelte/store';
+import {UserSettings} from "./models/UserSettings";
 
 export const hrValue = writable(0);
-const newSettings = new Settings(30,50,0.06,0.254,0.95,0.50,1.01, 0.45,true);
-
+const newSettings = new BikeSettings(30,0.06,0.254,0.95,0.50,1.01, 0.45);
+const newUserSettings = new UserSettings(70);
+export const getDebug = () => {
+    const storageValue = localStorage.getItem("debug");
+    return storageValue===null ? false: storageValue;
+}
 export let getSettings = () =>{
-
     function toSettingsType(storageValue) {
-        // todo: trovare un metodo più belllo
-        return new Settings(
+        // todo: trovare un metodo più bello
+        return new BikeSettings(
             storageValue['_bikeWeight'],
-            storageValue['_riderWeight'],
             storageValue['_wheelsInertia'],
             storageValue['_wheelsRadius'],
             storageValue['_efficiency'],
@@ -20,8 +23,21 @@ export let getSettings = () =>{
             storageValue['_debugMode']
         );
     }
-
-    const storageValue = localStorage.getItem("settings");
+    const storageValue = localStorage.getItem("bike_settings");
     return storageValue===null ? newSettings: toSettingsType(JSON.parse(storageValue));
 };
-export let saveSettings = value => localStorage.setItem("settings", JSON.stringify(value));
+
+export let getUserSettings = () =>{
+    function toSettingsType(storageValue) {
+        // todo: trovare un metodo più bello
+        return new UserSettings(
+            storageValue['_userWeight'],
+        );
+    }
+    const storageValue = localStorage.getItem("user_settings");
+    return storageValue===null ? newUserSettings: toSettingsType(JSON.parse(storageValue));
+};
+
+export let saveBikeSettings = value => localStorage.setItem("bike_settings", JSON.stringify(value));
+export let saveUserSettings = value => localStorage.setItem("user_settings", JSON.stringify(value));
+export let saveDebug = value => localStorage.setItem("debug", value);

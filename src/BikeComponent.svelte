@@ -1,5 +1,5 @@
 <script lang="ts">
-    import {Bike} from "./Bike";
+    import {Bike} from "./models/Bike";
     export let bike: Bike;
 </script>
 <div on:click class="container">
@@ -27,6 +27,8 @@
         padding: 1em;
         border: #333333 solid 3px;
         border-radius: 20%;
+        margin-left: 2px;
+        margin-right: 2px;
     }
     .container:hover {
         color: #0084f6;
