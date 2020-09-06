@@ -15,7 +15,7 @@
         new Bike('Strike', 'img/strike.svg', 'A very trike', s),
         new Bike('Coral', 'img/bici.svg', 'A recumbent bike', s),
         new Bike('Bike', 'img/normal.svg', 'A normal bike', s),
-        new Bike('Mtb', 'img/mtb.svg', 'A slow bike', s)
+        new Bike('Mtb', 'img/mtb.svg', 'A slow (but fun) bike', s)
     ]
 
     function shuffle(array) {

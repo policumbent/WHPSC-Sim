@@ -3,8 +3,7 @@
     import { Form, Input } from 'sveltejs-forms';
     import {ResultModel} from "./models/Result";
     import {createEventDispatcher, onMount} from "svelte";
-    // import {Result} from "./Result";
-    // import yup from 'yup@0.27';
+
     const dispatch = createEventDispatcher();
     const uploadUrl = 'https://www.policumbent.it/whpsc_sim_backend/upload_result.php';
     export let message;

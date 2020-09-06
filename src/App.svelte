@@ -2,7 +2,7 @@
 	import Simulator from "./Simulator.svelte";
 	import ResultModal from './ResultContent.svelte';
 	import {BikeSettings} from "./models/BikeSettings";
-	import {hrValue} from "./store.js"
+	import {hrValue, powerValue} from "./store.js"
 	import Welcome from "./Welcome.svelte";
 	import Icon from 'svelte-awesome';
 	import {close} from 'svelte-awesome/icons';
@@ -21,7 +21,8 @@
 
 	// todo: fare la unsubscribe quando onDestroy
 	// todo: uso la fc al posto della potenza per il primo test
-	const hrUnsubscribe = hrValue.subscribe(value => power = value);
+	// const hrUnsubscribe = hrValue.subscribe(value => power = value);
+	const powerUnsubscribe = powerValue.subscribe(value => power = value);
 
 	// right click disabled
 	document.addEventListener('contextmenu', event => event.preventDefault());
@@ -83,7 +84,7 @@
 				<label id="power_debug_label" for="power_debug">Power Debug Slider: {power}W</label>
 				<input class="slider" id="power_debug" type="range" min="0" max="1000" bind:value={power}>
 			</div>
-			<button on:click={handleResult}>Test results</button>
+			<button on:click={handleResult}>Test save result dialog</button>
 		{/if}
 	{/if}
 	<Modal>

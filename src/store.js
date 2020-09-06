@@ -1,13 +1,15 @@
 import {BikeSettings} from "./models/BikeSettings";
 import { writable } from 'svelte/store';
 import {UserSettings} from "./models/UserSettings";
+import {bool} from "yup";
 
 export const hrValue = writable(0);
+export const powerValue = writable(0);
 const newSettings = new BikeSettings(30,0.06,0.254,0.95,0.50,1.01, 0.45);
 const newUserSettings = new UserSettings(70);
 export const getDebug = () => {
     const storageValue = localStorage.getItem("debug");
-    return storageValue===null ? false: storageValue;
+    return storageValue==='true';
 }
 export let getSettings = () =>{
     function toSettingsType(storageValue) {
@@ -31,7 +33,7 @@ export let getUserSettings = () =>{
     function toSettingsType(storageValue) {
         // todo: trovare un metodo più bello
         return new UserSettings(
-            storageValue['_userWeight'],
+            storageValue['_riderWeight'],
         );
     }
     const storageValue = localStorage.getItem("user_settings");

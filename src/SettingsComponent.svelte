@@ -31,7 +31,12 @@
         saveBikeSettings(new BikeSettings(bikeWeight, wheelsInertia, wheelsRadius, efficiency, area, rho, cx));
         saveDebug(debugMode);
         saveUserSettings(new UserSettings(riderWeight));
+
         show = false;
+        if (debugMode!==debug_setting_value){
+            // it isn't a beautiful, but it works and is only for debug
+            window.location.reload();
+        }
     }
 
 </script>

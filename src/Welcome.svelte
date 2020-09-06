@@ -5,25 +5,34 @@
     import {createEventDispatcher} from 'svelte';
     import SettingsComponent from "./SettingsComponent.svelte";
     import {BikeSettings} from "./models/BikeSettings";
-    import {btSearch} from "./models/bt/BleData.ts"
+    import {btSearch} from "./BleData.js"
     import BikePicker from "./BikePicker.svelte";
+    import Modal from 'svelte-simple-modal';
+    import ResultsListContainer from "./ResultsListContainer.svelte";
 
     const dispatch = createEventDispatcher();
     let sidebar_show = false;
     let chooseBike = false;
+    let openResults;
+
     function pickBike() {
         chooseBike = true;
     }
+
+    function showResults() {
+        // alert('Sorry. Not ready yet.');
+        openResults();
+    }
+
     function bikeChosen(event) {
         chooseBike = false;
-        if(event.detail.text == null)
+        if (event.detail.text == null)
             return;
         console.log(event.detail.text);
         dispatch('message', {
             text: event.detail.text
         });
     }
-
 </script>
 <SettingsComponent bind:show={sidebar_show}/>
 
@@ -35,6 +44,10 @@
     {#if chooseBike}
         <BikePicker on:message={bikeChosen}/>
     {/if}
+    <button class="btn results" on:click={showResults}>Results</button>
+    <Modal>
+        <ResultsListContainer bind:openModal={openResults}/>
+    </Modal>
 </section>
 <style>
     /*todo: same size buttons*/
@@ -73,5 +86,9 @@
 
     section {
         text-align: center;
+    }
+
+    .results {
+        display: block;
     }
 </style>
