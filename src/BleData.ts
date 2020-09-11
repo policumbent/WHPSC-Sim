@@ -1,6 +1,8 @@
 import {BleHRMeter} from "./models/bt/BleHRMeter";
 import type {BleMeter} from "./models/bt/BleMeter";
 import {BlePowerMeter} from "./models/bt/BlePowerMeter";
+// import {BlePowerCadenceMeter} from "./models/bt/BlePowerCadenceMeter";
+import {CyclingPowerMeasurementParser} from "./models/bt/CyclingPowerMeasurementParser";
 
 export function btSearch(){
     startSearch()
@@ -19,12 +21,12 @@ async function startSearch() {
     let options = {
         // todo: filter only powermeters
         filters: [
-            // // https://www.bluetooth.com/specifications/gatt/viewer?attributeXmlFile=org.bluetooth.service.heart_rate.xml
-            // {services: [0x180D]},
+            // https://www.bluetooth.com/specifications/gatt/viewer?attributeXmlFile=org.bluetooth.service.heart_rate.xml
+            {services: [0x180D]},
             // https://www.bluetooth.com/specifications/gatt/viewer?attributeXmlFile=org.bluetooth.service.cycling_power.xml
             {services: [0x1818]}]
-            // // https://www.bluetooth.com/specifications/gatt/viewer?attributeXmlFile=org.bluetooth.service.cycling_speed_and_cadence.xml
-            // {services: [0x1816]}]
+        // // https://www.bluetooth.com/specifications/gatt/viewer?attributeXmlFile=org.bluetooth.service.cycling_speed_and_cadence.xml
+        // {services: [0x1816]}]
     }
 
     console.log('Requesting Bluetooth Device...');
@@ -48,21 +50,24 @@ async function startSearch() {
 
     if (service) {
         let characteristic = await service.getCharacteristic(0x2A63);
-        // let parser = new CyclingPowerMeasurementParser();
-        // let value = await readCharacteristicValue(characteristic);
-        // let data = parser.getData(value);
-        // // is Crank Revolution Data Present ?
-        // if ('cumulative_crank_revolutions' in data) {
-        //     meter = new BlePowerCadenceMeter(device, server, service, characteristic);
-        //     powerMeters.push([meter.id, meter]);
-        //     meter.listen();
-        //     console.log(meter);
-        //
-        // } else {
-        meter = new BlePowerMeter(device, server, service, characteristic);
-        console.log(meter);
-        powerMeter = meter;
-        // }
+    //     let parser = new CyclingPowerMeasurementParser();
+    //     // @ts-ignore
+    //     let value = await readCharacteristicValue(characteristic);
+    //     let data = parser.getData(value);
+    //     // is Crank Revolution Data Present ?
+    //     if ('cumulative_crank_revolutions' in data) {
+    //         meter = new BlePowerCadenceMeter(device, server, service, characteristic);
+    //         powerMeter = meter;
+    //         meter.listen();
+    //         console.log(meter);
+    //
+    //     } else {
+            meter = new BlePowerMeter(device, server, service, characteristic);
+            console.log(meter);
+            powerMeter = meter;
+            meter.listen();
+    //
+    //     }
     }
 
     // org.bluetooth.service.heart_rate

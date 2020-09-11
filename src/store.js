@@ -1,7 +1,6 @@
 import {BikeSettings} from "./models/BikeSettings";
 import { writable } from 'svelte/store';
 import {UserSettings} from "./models/UserSettings";
-import {bool} from "yup";
 
 export const hrValue = writable(0);
 export const powerValue = writable(0);

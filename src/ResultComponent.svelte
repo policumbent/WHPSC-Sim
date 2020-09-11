@@ -3,26 +3,76 @@
 
     export let result: ResultModel;
 </script>
-
 <div>
-    <div class="container">
-        <span class="left"><em class="big">{Math.round(result.speed)}</em>.{Math.round((result.speed-Math.round(result.speed))*100)} km/h</span>
+    <div class="container" on:click style="height: {!result.expanded? '100px': '200px'}">
+        <div class="left30">
+            <span class="left middle_top"><em class="big">{Math.round(result.speed)}</em>.{Math.round((result.speed-Math.round(result.speed))*100)} km/h</span>
+            <span class="left middle_bottom">{result.bikeName}</span>
+        </div>
         <span class="top right">{result.firstName} {result.lastName}</span>
+        {#if result.expanded}
+            <table>
+                <tr>
+                    <th>Bike Weight</th>
+                    <th>Wheels Inertia</th>
+                    <th>Wheels Radius</th>
+                    <th>Efficiency</th>
+                    <th>Area</th>
+                    <th>Rho</th>
+                    <th>Cx</th>
+                </tr>
+                <tr>
+                    <td>{result.bikeSettings.bikeWeight}kg</td>
+                    <td>{result.bikeSettings.wheelsInertia}</td>
+                    <td>{result.bikeSettings.wheelsRadius}cm</td>
+                    <td>{result.bikeSettings.efficiency}</td>
+                    <td>{result.bikeSettings.area}m²</td>
+                    <td>{result.bikeSettings.rho}</td>
+                    <td>{result.bikeSettings.cx}</td>
+                </tr>
+
+            </table>
+        {/if}
         <span class="right bottom">{result.time} {result.date}</span>
     </div>
 </div>
 
 <style>
-    .left {
+    table {
         position: absolute;
-        top: 50%;
-        -webkit-transform: translateY(-50%);
-        transform: translateY(-50%);
-        left: 0.5em;
+        top: 45%;
+        margin-left: 10px;
+        margin-right: 10px;
+        color: white;
+        font-weight: lighter;
+    }
+    th {
+        font-weight: normal;
+    }
+    .left30{
+        position: relative;
+        width: 45%;
+        height: 100%;
+        text-align: center;
+    }
+    .middle_top {
+        position: absolute;
+        top: 5%;
+        -webkit-transform: translateY(-5%);
+        transform: translateY(-5%);
         font-weight: bold;
-        /*padding: 1em 1em;*/
-        /*margin-left: 1em;*/
         color: gold;
+        left: 0.5em;
+    }
+    .middle_bottom {
+        position: absolute;
+        /*margin-left: -2.5em;*/
+        left: 30%;
+        -webkit-transform: translateX(-30%);
+        transform: translateX(-30%);
+        bottom: 0;
+        text-transform: uppercase;
+        color: white;
     }
     .big {
         font-size: 4em;
@@ -35,7 +85,7 @@
         text-transform: uppercase;
         /*font-weight: 300;*/
         letter-spacing: 2px;
-        width: 45%;
+        width: 55%;
     }
     .top {
         top: 0.5em;
@@ -52,8 +102,7 @@
         border: 1px solid black;
         background: #1d3040;
         margin: 10px 2%;
-        height: 4em;
-        padding: 1em;
+        padding: 0.5em;
         border-radius: 15px;
         box-shadow: 0 4px 8px 0 rgba(0,0,0,0.3);
         transition: 0.3s;

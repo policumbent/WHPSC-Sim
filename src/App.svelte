@@ -2,6 +2,7 @@
 	import Simulator from "./Simulator.svelte";
 	import ResultModal from './ResultContent.svelte';
 	import {BikeSettings} from "./models/BikeSettings";
+	import {UserSettings} from "./models/UserSettings";
 	import {hrValue, powerValue} from "./store.js"
 	import Welcome from "./Welcome.svelte";
 	import Icon from 'svelte-awesome';
@@ -30,6 +31,7 @@
 
 	function startSimulation(event) {
 		bike = event.detail.text;
+		console.log('START', bike);
 		document.documentElement.requestFullscreen()
 				.then(() => {
 					simulation_started = true;
@@ -55,13 +57,14 @@
 	}
 
 	function handleResult(event) {
+		console.log('HANDLE', bike.settings);
 		console.log(event.detail.text);
 		if (event.detail.text !== undefined)
 			exitFullscreen();
 		console.log(event.detail.text);
 		const speed = event.detail.text !== undefined ? event.detail.text : 141.0;
 		console.log(speed);
-		openModal(speed);
+		openModal(speed, bike.bikeName, bike.settings);
 	}
 
 </script>

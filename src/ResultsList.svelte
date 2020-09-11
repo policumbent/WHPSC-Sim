@@ -2,22 +2,22 @@
     import ResultComponent from "./ResultComponent.svelte";
     import {onMount} from "svelte";
     import {ResultModel} from "./models/Result"
+    import {BikeSettings} from "./models/BikeSettings";
+    const s = new BikeSettings(50, 0.44, 1450, 0.99, 1, 1, 1);
     let results: ResultModel[] = [
-        // new ResultModel(100.11, 'ciao', 'pippo', '', '2020-09-04 15:03:46'),
-        // new ResultModel(200.33, 'Stefano', 'Loscalzo', '', '2020-09-04 15:03:46'),
-        // new ResultModel(200, 'Nomelunghissimo', 'ecognomepure', '', '2020-09-04 15:03:46'),
-        // new ResultModel(200, 'ciao', 'pippo', '', '2020-09-04 15:03:46'),
-        // new ResultModel(200, 'ciao', 'pippo', '', '2020-09-04 15:03:46'),
-        // new ResultModel(200, 'ciao', 'pippo', '', '2020-09-04 15:03:46'),
-        // new ResultModel(200, 'ciao', 'pippo', '', '2020-09-04 15:03:46'),
-        // new ResultModel(200, 'ciao', 'pippo', '', '2020-09-04 15:03:46'),
-        // new ResultModel(200, 'ciao', 'pippo', '', '2020-09-04 15:03:46'),
-        // new ResultModel(200, 'ciao', 'pippo', '', '2020-09-04 15:03:46'),
-        // new ResultModel(200, 'ciao', 'pippo', '', '2020-09-04 15:03:46'),
-        // new ResultModel(200, 'ciao', 'pippo', '', '2020-09-04 15:03:46'),
-        // new ResultModel(200, 'ciao', 'pippo', '', '2020-09-04 15:03:46'),
+        new ResultModel(100, s, 'Bici1', 'Test', 'Test', undefined, '2020-09-06 20:27:04', true),
+        new ResultModel(100, s, 'Mtb', 'Test', 'Test', undefined, '2020-09-06 20:27:04'),
+        new ResultModel(100, s, 'ParolaLunga', 'Test', 'Test', undefined, '2020-09-06 20:27:04'),
+        new ResultModel(100, s, 'Pulsar', 'Parola lunghissimissima', 'Test lungoooooooooooo', undefined, '2020-09-06 20:27:04'),
+        new ResultModel(100, s, 'Varna', 'Test', 'Test', undefined, '2020-09-06 20:27:04')
     ];
     const url = "https://www.policumbent.it/whpsc_sim_backend/results.php";
+    const expand = (result: ResultModel) => {
+        const expanded = result.expanded;
+        results.forEach(r => r.expanded = false);
+        result.expanded = !expanded;
+        results = [...results];
+    }
 
     onMount( () => {
         const myHeaders = new Headers();
@@ -26,29 +26,28 @@
                 .then(
                         data => {
                             let v: ResultModel[] = [];
-                            data.forEach(e => v.push(
-                                    new ResultModel(e.speed, e.firstName, e.lastName, '', e.timestamp)
-                            ));
-                            console.log(v);
+                            data.forEach(e => {
+                                const s = new BikeSettings(
+                                        e.bikeSettings.bikeWeight, e.bikeSettings.wheelsInertia,
+                                        e.bikeSettings.wheelsRadius, e.bikeSettings.efficiency,
+                                        e.bikeSettings.area, e.bikeSettings.rho, e.bikeSettings.cx);
+                                v.push(new ResultModel(e.speed, s, e.bikeName, e.firstName, e.lastName, '', e.timestamp));
+                            });
+                            // console.log(v);
                             results = v.sort((e1, e2) => e2.datetime-e1.datetime);
                             return v
                         }
                 )
-                // .then(data => console.log(data));
+                .then(data => {data[0].expanded=true; return data;})
+                .then(data => console.log(data));
     })
-    function add() {
-        results = [
-            new ResultModel(100.11, 'ciao', 'pippo', '', '2020-09-04 15:03:46')
-        ];
-        console.log(results);
-    }
 </script>
 
 <div class="container">
     <h1>Results</h1>
     <div class="scroller">
         {#each results as result}
-            <ResultComponent result={result}/>
+            <ResultComponent on:click="{() => expand(result)}" result={result}/>
         {/each}
     </div>
 </div>

@@ -3,10 +3,13 @@
     import { Form, Input } from 'sveltejs-forms';
     import {ResultModel} from "./models/Result";
     import {createEventDispatcher, onMount} from "svelte";
+    import {BikeSettings} from "./models/BikeSettings";
 
     const dispatch = createEventDispatcher();
     const uploadUrl = 'https://www.policumbent.it/whpsc_sim_backend/upload_result.php';
-    export let message;
+    export let speed;
+    export let bikeName;
+    export let config: BikeSettings;
     let count = 0;
     let errorMex = "";
     const next = () => {count++};
@@ -21,14 +24,14 @@
                     console.log(resp);
                 }).catch(error => errorMex=error);
     }
-    onMount(() => result=new ResultModel(parseFloat(message)))
+    onMount(() => result=new ResultModel(parseFloat(speed), config, bikeName))
 </script>
 <section>
     {#if count===0}
         <h1>🎉 Congratulations 🍾</h1>
         <p>Your speed is</p>
-        <p><span class="speed">{message} km/h</span><p>
-        <p><span class="mph">({Math.round(message*0.621371*100)/100}mph)</span></p>
+        <p><span class="speed">{speed} km/h</span><p>
+        <p><span class="mph">({Math.round(speed*0.621371*100)/100}mph)</span></p>
         <button class="btn" on:click={next}>Save your result</button>
     {:else if count===1}
         <h1>Save your result</h1>

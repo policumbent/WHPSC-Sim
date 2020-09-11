@@ -1,4 +1,4 @@
-class BleCharacteristicParser {
+export class BleCharacteristicParser {
     fields;
     mask_size: number;
 

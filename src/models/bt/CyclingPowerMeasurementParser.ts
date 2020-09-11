@@ -1,4 +1,6 @@
-class CyclingPowerMeasurementParser extends BleCharacteristicParser {
+import {BleCharacteristicParser} from "./BleCharacteristicParser";
+
+export class CyclingPowerMeasurementParser extends BleCharacteristicParser {
 
     constructor () {
         super();

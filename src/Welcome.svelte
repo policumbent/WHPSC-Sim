@@ -5,7 +5,7 @@
     import {createEventDispatcher} from 'svelte';
     import SettingsComponent from "./SettingsComponent.svelte";
     import {BikeSettings} from "./models/BikeSettings";
-    import {btSearch} from "./BleData.js"
+    import {btSearch} from "./BleData.ts"
     import BikePicker from "./BikePicker.svelte";
     import Modal from 'svelte-simple-modal';
     import ResultsListContainer from "./ResultsListContainer.svelte";

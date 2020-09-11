@@ -1,6 +1,7 @@
 import {BleMeter} from "./BleMeter";
 import {powerValue} from "../../store.js"
 import {hrValue} from "../../store";
+import {CyclingPowerMeasurementParser} from "./CyclingPowerMeasurementParser"
 
 
 export class BlePowerMeter extends BleMeter {

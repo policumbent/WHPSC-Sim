@@ -247,7 +247,7 @@
 //     }
 //
 //     listen() {
-//         if(!this.listening) {
+//         if(!this.listening) {BleCharacteristicParser
 //             this.characteristic.addEventListener('characteristicvaluechanged', event => {
 //                 let data = this.parser.getData(event.target.value);
 //                 let power = data['instantaneous_power'];
