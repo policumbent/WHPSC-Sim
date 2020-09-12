@@ -1,11 +1,11 @@
-export class UserSettings {
-    private readonly _riderWeight: number;
+export default class UserSettings {
+  private readonly _riderWeight: number;
 
-    constructor(riderWeight: number) {
-        this._riderWeight = riderWeight;
-    }
+  constructor(riderWeight: number) {
+    this._riderWeight = riderWeight;
+  }
 
-    get riderWeight(): number {
-        return this._riderWeight;
-    }
+  get riderWeight(): number {
+    return this._riderWeight;
+  }
 }
