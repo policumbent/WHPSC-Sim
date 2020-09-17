@@ -5,7 +5,7 @@
     import {BikeSettings} from "./models/BikeSettings";
     const s = new BikeSettings(50, 0.44, 1450, 0.99, 1, 1, 1);
     let results: ResultModel[] = [
-        new ResultModel(100, s, 'Bici1', 'Test', 'Test', undefined, '2020-09-06 20:27:04', true),
+        new ResultModel(100, s, 'Taurus', 'Stefano Luigi', 'Loscalzo', undefined, '2020-09-06 20:27:04', true),
         new ResultModel(100, s, 'Mtb', 'Test', 'Test', undefined, '2020-09-06 20:27:04'),
         new ResultModel(100, s, 'ParolaLunga', 'Test', 'Test', undefined, '2020-09-06 20:27:04'),
         new ResultModel(100, s, 'Pulsar', 'Parola lunghissimissima', 'Test lungoooooooooooo', undefined, '2020-09-06 20:27:04'),
@@ -61,9 +61,10 @@
         scroll-behavior: smooth;
         overflow-x: hidden;
         overflow-y: auto;
-        margin: 0 10% 3em;
         height: 50vh;
+        /*margin: 0 10% 3em;*/
     }
+
 
     ::-webkit-scrollbar-track
     {
