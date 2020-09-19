@@ -140,18 +140,19 @@
             trap_info = `Distance to END ${Math.round(trap_end-distance)}m`;
             sum += speed;
             count_speed++;
+            console.log(sum, '', count_speed);
         }
         // without it we can increase suspense, evaluate if write it or not
-        // else if (distance>trap_end) {
-        //     trap_info = `⚡ ${Math.round(sum * 100 / count_speed) / 100} km/h ⚡`;
-        // }
+        else if (distance>trap_end) {
+            // trap_info = `⚡ ${Math.round(sum * 100 / count_speed) / 100} km/h ⚡`;
+            trap_info = `Slow down before catching! 😁🎳`;
+        }
         else {
             trap_info = "";
             count_speed = 0;
             sum = 0;
         }
     }
-
 </script>
 <section>
     {#if !ended}
