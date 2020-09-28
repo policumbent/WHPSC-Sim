@@ -20,8 +20,8 @@
 	let openModal;
 	let bike: Bike;
 
-	// todo: fare la unsubscribe quando onDestroy
-	// todo: uso la fc al posto della potenza per il primo test
+	// todo: do unsubscribe onDestroy
+	// uso la fc al posto della potenza per il primo test
 	// const hrUnsubscribe = hrValue.subscribe(value => power = value);
 	const powerUnsubscribe = powerValue.subscribe(value => power = value);
 

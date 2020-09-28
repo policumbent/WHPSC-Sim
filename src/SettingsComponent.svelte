@@ -10,7 +10,7 @@
     let users_settings_value: UserSettings;
     let debug_setting_value = false;
 
-    let bikeWeight, riderWeight, wheelsInertia, wheelsRadius, efficiency, area, rho, debugMode, cx;
+    let bikeWeight, riderWeight, wheelsInertia, wheelsRadius, efficiency, area, rho, debugMode, cx, riderHeight;
 
     onMount( () => {
         bike_settings_value = getSettings();
@@ -18,19 +18,20 @@
         debug_setting_value = getDebug();
         bikeWeight = bike_settings_value.bikeWeight;
         riderWeight = users_settings_value.riderWeight;
+        riderHeight = users_settings_value.riderHeight;
         wheelsInertia = bike_settings_value.wheelsInertia;
         wheelsRadius = bike_settings_value.wheelsRadius;
         efficiency = bike_settings_value.efficiency;
         area = bike_settings_value.area;
-        rho = bike_settings_value.rho;
+        rho = users_settings_value.rho;
         cx = bike_settings_value.cx;
         debugMode = debug_setting_value;
     });
 
     function save() {
-        saveBikeSettings(new BikeSettings(bikeWeight, wheelsInertia, wheelsRadius, efficiency, area, rho, cx));
+        saveBikeSettings(new BikeSettings(bikeWeight, wheelsInertia, wheelsRadius, efficiency, area, cx));
         saveDebug(debugMode);
-        saveUserSettings(new UserSettings(riderWeight));
+        saveUserSettings(new UserSettings(riderWeight, riderHeight, rho));
 
         show = false;
         if (debugMode!==debug_setting_value){
@@ -46,6 +47,10 @@
             <label class="group_label">Your settings:</label>
             <label for="rider_weight">Rider weight: {riderWeight}kg</label>
             <input class="slider" id="rider_weight" type="range" step="0.5" min="40" max="100" bind:value={riderWeight}>
+            <label for="rider_height">Rider height: {riderHeight}cm</label>
+            <input class="slider" id="rider_height" type="range" step="1" min="100" max="250" bind:value={riderHeight}>
+            <label for="air_density">Air Density: {rho}</label>
+            <input class="slider" id="air_density" type="range" step="0.0001" min="0.8" max="1.2" bind:value={rho}>
         </div>
         <hr class="solid">
         <div class="sliders_div">
@@ -60,8 +65,6 @@
             <input class="slider" id="wheels_radius" type="range" step="0.00001" min="0.1" max="0.4" bind:value={wheelsRadius}>
             <label for="area">Area: {area}m²</label>
             <input class="slider" id="area" type="range" step="0.00001" min="0" max="2" bind:value={area}>
-            <label for="air_density">Air Density: {rho}</label>
-            <input class="slider" id="air_density" type="range" step="0.0001" min="0.8" max="1.2" bind:value={rho}>
             <label for="cx">Cx @120km/h: {cx}</label>
             <input class="slider" id="cx" type="range" step="0.0001" min="0.02" max="1.2" bind:value={cx}>
         </div>

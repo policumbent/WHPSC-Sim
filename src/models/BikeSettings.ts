@@ -4,17 +4,15 @@ export class BikeSettings {
     private readonly _wheelsRadius: number;
     private readonly _efficiency: number;
     private readonly _area: number;
-    private readonly _rho: number;
     private readonly _cx: number;
 
     constructor(bikeWeight: number, wheelsInertia: number, wheelsRadius: number,
-                efficiency: number, area: number, rho: number, cx:number) {
+                efficiency: number, area: number, cx:number) {
         this._bikeWeight = bikeWeight;
         this._wheelsInertia = wheelsInertia;
         this._wheelsRadius = wheelsRadius;
         this._efficiency = efficiency;
         this._area = area;
-        this._rho = rho;
         this._cx = cx;
     }
 
@@ -36,10 +34,6 @@ export class BikeSettings {
 
     get area(): number {
         return this._area;
-    }
-
-    get rho(): number {
-        return this._rho;
     }
 
     get cx(): number {

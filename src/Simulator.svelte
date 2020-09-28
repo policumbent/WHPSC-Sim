@@ -127,7 +127,7 @@
         const ascent = -slope * v0 * t;
         const e_u = (bikeSettings.bikeWeight+userSettings.riderWeight) * g * ascent;
         const a_r = cr * (bikeSettings.bikeWeight+userSettings.riderWeight) * g * t * v0;
-        const a_a = 0.5 * bikeSettings.rho * cx * bikeSettings.area * Math.pow(v0, 3) * t;
+        const a_a = 0.5 * userSettings.rho * cx * bikeSettings.area * Math.pow(v0, 3) * t;
         return 3.6*Math.pow(2*(e_k0+e_kr0+e_w+e_u-a_a-a_r)
                 /((bikeSettings.bikeWeight+userSettings.riderWeight)
                         +bikeSettings.wheelsInertia/Math.pow(bikeSettings.wheelsRadius, 2)), 1/2);
