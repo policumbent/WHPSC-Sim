@@ -1,5 +1,5 @@
 <script lang="ts">
-  import type { Bike } from "../models/Bike";
+  import type { Bike } from "../models/Settings";
   export let bike: Bike;
 </script>
 

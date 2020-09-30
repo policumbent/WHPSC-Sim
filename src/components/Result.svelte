@@ -8,8 +8,9 @@
   table {
     position: absolute;
     top: 45%;
-    margin-left: 10px;
-    margin-right: 10px;
+    width: 90%;
+    margin-left: 5%;
+    margin-right: 5%;
     color: white;
     font-weight: lighter;
   }
@@ -55,7 +56,9 @@
     width: 55%;
   }
   .top {
-    top: 0.5em;
+    top: 15%;
+    -webkit-transform: translateY(-15%);
+    transform: translateY(-15%);
     font-size: 1.1em;
   }
   .bottom {
@@ -65,6 +68,7 @@
     font-weight: 300;
   }
   .container {
+    cursor: pointer;
     position: relative;
     border: 1px solid black;
     background: #1d3040;
@@ -106,7 +110,7 @@
           <td>{result.bikeSettings.wheelsRadius}cm</td>
           <td>{result.bikeSettings.efficiency}</td>
           <td>{result.bikeSettings.area}m²</td>
-          <td>{result.bikeSettings.rho}</td>
+          <td>{result.userSettings.rho}</td>
           <td>{result.bikeSettings.cx}</td>
         </tr>
 

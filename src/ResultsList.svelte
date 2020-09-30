@@ -1,58 +1,9 @@
 <script lang="ts">
   import { onMount } from "svelte";
   import ResultModel from "./models/Result";
-  import { BikeSettings } from "./models/Bike";
+  import { BikeSettings, UserSettings } from "./models/Settings";
   import ResultComponent from "./components/Result.svelte";
 
-  const s = new BikeSettings(50, 0.44, 1450, 0.99, 1, 1, 1);
-  let results: ResultModel[] = [
-    new ResultModel(
-      100,
-      s,
-      "Bici1",
-      "Test",
-      "Test",
-      undefined,
-      "2020-09-06 20:27:04",
-      true
-    ),
-    new ResultModel(
-      100,
-      s,
-      "Mtb",
-      "Test",
-      "Test",
-      undefined,
-      "2020-09-06 20:27:04"
-    ),
-    new ResultModel(
-      100,
-      s,
-      "ParolaLunga",
-      "Test",
-      "Test",
-      undefined,
-      "2020-09-06 20:27:04"
-    ),
-    new ResultModel(
-      100,
-      s,
-      "Pulsar",
-      "Parola lunghissimissima",
-      "Test lungoooooooooooo",
-      undefined,
-      "2020-09-06 20:27:04"
-    ),
-    new ResultModel(
-      100,
-      s,
-      "Varna",
-      "Test",
-      "Test",
-      undefined,
-      "2020-09-06 20:27:04"
-    ),
-  ];
   const url = "https://www.policumbent.it/whpsc_sim_backend/results.php";
   const expand = (result: ResultModel) => {
     const expanded = result.expanded;
@@ -60,25 +11,15 @@
     result.expanded = !expanded;
     results = [...results];
   };
-    import ResultComponent from "./ResultComponent.svelte";
-    import {onMount} from "svelte";
-    import {ResultModel} from "./models/Result"
-    import {BikeSettings} from "./models/BikeSettings";
-    const s = new BikeSettings(50, 0.44, 1450, 0.99, 1, 1);
+  const s = new BikeSettings(50, 0.44, 1450, 0.99, 1, 1, undefined);
+  const u = new UserSettings(undefined, undefined, 1.01);
     let results: ResultModel[] = [
-        new ResultModel(100, s, 'Taurus', 'Stefano Luigi', 'Loscalzo', undefined, '2020-09-06 20:27:04', true),
-        new ResultModel(100, s, 'Mtb', 'Test', 'Test', undefined, '2020-09-06 20:27:04'),
-        new ResultModel(100, s, 'ParolaLunga', 'Test', 'Test', undefined, '2020-09-06 20:27:04'),
-        new ResultModel(100, s, 'Pulsar', 'Parola lunghissimissima', 'Test lungoooooooooooo', undefined, '2020-09-06 20:27:04'),
-        new ResultModel(100, s, 'Varna', 'Test', 'Test', undefined, '2020-09-06 20:27:04')
+        new ResultModel(100, s, u, 'Taurus', 'Stefano Luigi', 'Loscalzo', undefined, '2020-09-06 20:27:04', true),
+        new ResultModel(100, s, u, 'Mtb', 'Test', 'Test', undefined, '2020-09-06 20:27:04'),
+        new ResultModel(100, s, u,'ParolaLunga', 'Test', 'Test', undefined, '2020-09-06 20:27:04'),
+        new ResultModel(100, s, u, 'Pulsar', 'Parola lunghissimissima', 'Test lungoooooooooooo', undefined, '2020-09-06 20:27:04'),
+        new ResultModel(100, s, u, 'Varna', 'Test', 'Test', undefined, '2020-09-06 20:27:04')
     ];
-    const url = "https://www.policumbent.it/whpsc_sim_backend/results.php";
-    const expand = (result: ResultModel) => {
-        const expanded = result.expanded;
-        results.forEach(r => r.expanded = false);
-        result.expanded = !expanded;
-        results = [...results];
-    }
 
   onMount(() => {
     const myHeaders = new Headers();
@@ -87,6 +28,7 @@
       .then((data) => {
         let v: ResultModel[] = [];
         data.forEach((e) => {
+          // todo: fix server
           const s = new BikeSettings(
             e.bikeSettings.bikeWeight,
             e.bikeSettings.wheelsInertia,
@@ -95,20 +37,13 @@
             e.bikeSettings.area,
             e.bikeSettings.cx
           );
+          const u = new UserSettings(undefined, undefined, e.bikeSettings.rho);
           v.push(
-            new ResultModel(
-              e.speed,
-              s,
-              e.bikeName,
-              e.firstName,
-              e.lastName,
-              "",
-              e.timestamp
-            )
+            new ResultModel(e.speed, s, u, e.bikeName, e.firstName, e.lastName, "", e.timestamp)
           );
         });
         // console.log(v);
-        results = v.sort((e1: any, e2: any) => e2.datetime - e1.datetime);
+        results = v.sort((e1: ResultModel, e2: ResultModel) => e2.datetime.getTime() - e1.datetime.getTime());
         return v;
       })
       .then((data) => {
@@ -134,6 +69,7 @@
 
   ::-webkit-scrollbar-track {
     -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+    box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
     background-color: #f5f5f5;
   }
 

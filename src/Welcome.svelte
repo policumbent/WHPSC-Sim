@@ -3,9 +3,8 @@
   import { gear } from "svelte-awesome/icons";
   import Modal from "svelte-simple-modal";
   import { createEventDispatcher } from "svelte";
-
-  import { BikeSettings } from "./models/Bike";
-  import { btSearch } from "./BleData";
+  import { getDebug } from "./store"
+  import { startSearch } from "./BleData";
   import BikePicker from "./BikePicker.svelte";
   import Settings from "./components/Settings.svelte";
   import ResultsListContainer from "./ResultsListContainer.svelte";
@@ -14,7 +13,7 @@
   let sidebar_show = false;
   let chooseBike = false;
   let showModal = false;
-
+  let powerMeterPaired = false;
   function pickBike() {
     chooseBike = true;
   }
@@ -32,6 +31,19 @@
       text: event.detail.text,
     });
   }
+
+  function btSearch(){
+    startSearch()
+            .then(data => powerMeterPaired = data)
+            .catch(error => {
+              alert('This functionality is available only in Google Chrome 83+. ' +
+                      'If you are already using it on Linux the "chrome://flags/#enable-experimental-web-platform-features" flag must be enabled.' +
+                      'For further information read this page https://github.com/WebBluetoothCG/web-bluetooth/blob/gh-pages/implementation-status.md')
+              console.log(error);
+              powerMeterPaired = false;
+            })
+  }
+
 </script>
 
 <style>
@@ -43,11 +55,11 @@
     font-size: 4em;
     font-weight: 100;
   }
-  .fill_all {
+  /* .fill_all {
     height: 100%;
     width: 100%;
     overflow: hidden;
-  }
+  } */
   .top-right-fixed {
     margin-top: 5px;
     margin-right: 5px;
@@ -55,7 +67,10 @@
     top: 0;
     right: 0;
   }
-
+  button:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+  }
   .btn {
     /*display: block;*/
     text-align: center;
@@ -68,6 +83,7 @@
     padding: 0.5em 1em;
     margin: 1em auto;
   }
+
 
   section {
     text-align: center;
@@ -87,7 +103,7 @@
     class="top-right-fixed click_t">
     <Icon class="top-right-fixed" data={gear} scale="2" />
   </span>
-  <button class="btn" on:click={pickBike}>Start</button>
+  <button class="btn" disabled="{!powerMeterPaired && !getDebug()}" on:click={pickBike}>Start</button>
   <button class="btn" on:click={btSearch}>Search powermeter</button>
   {#if chooseBike}
     <BikePicker on:message={bikeChosen} />

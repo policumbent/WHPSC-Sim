@@ -3,10 +3,9 @@
   import { getSettings } from "./store";
 
   import BikeComponent from "./components/Bike.svelte";
-  import { Bike, BikeSettings } from "./models/Bike";
+  import { Bike, BikeSettings } from "./models/Settings";
 
   const dispatch = createEventDispatcher();
-  const s = new BikeSettings(30, 0.06, 0.254, 0.95, 0.5, 1.01, 0.45);
   const customBike: Bike = new Bike(
     "Custom",
     "img/gear.svg",
@@ -14,13 +13,12 @@
     getSettings()
   );
   let bikes: Bike[] = [
-    new Bike("Taurus", "img/taurus.svg", "A very fast bike", s),
-    new Bike("Pulsar", "img/pulsar.svg", "A fast bike", s),
-    new Bike("Pulse", "img/pulse.svg", "A big bike", s),
-    new Bike("Strike", "img/strike.svg", "A very trike", s),
-    new Bike("Coral", "img/bici.svg", "A recumbent bike", s),
-    new Bike("Bike", "img/normal.svg", "A normal bike", s),
-    new Bike("Mtb", "img/mtb.svg", "A slow (but fun) bike", s),
+    new Bike("Taurus", "img/taurus.svg", "A very fast streamliner",
+            new BikeSettings(30, 0.05, 1.450, 0.96, 0.29, 0.04, 'coefficients4.json')),
+    new Bike("Coral", "img/recumbent.svg", "A recumbent bike",
+            new BikeSettings(14, 0.05, 1.450, 0.97, 0.32, 0.8, 'coefficients_normal_bike.json')),
+    new Bike("Road Bike", "img/normal.svg", "A road bike",
+            new BikeSettings(7.5, 0.05, 2.105, 0.98, 0.45, 1, 'coefficients_normal_bike.json'))
   ];
 
   function shuffle(array) {
@@ -52,6 +50,7 @@
 </script>
 
 <style>
+/* 
   label {
     position: absolute;
     top: 10%;
@@ -63,7 +62,7 @@
     text-transform: uppercase;
     font-weight: 100;
     font-size: 3em;
-  }
+  } */
 
   .content {
     position: absolute;
@@ -94,10 +93,10 @@
   }
 
   /* The Close Button */
-  .close {
+  /* .close {
     color: #aaa;
     float: right;
-    /*margin-top: 10px;*/
+    /*margin-top: 10px;
     margin-right: 10px;
     font-size: 3em;
     font-weight: bold;
@@ -108,10 +107,11 @@
     color: black;
     text-decoration: none;
     cursor: pointer;
-  }
+  } */
 
   ::-webkit-scrollbar-track {
     -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+    box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
     background-color: #f5f5f5;
   }
 

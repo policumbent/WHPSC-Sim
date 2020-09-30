@@ -2,8 +2,7 @@
   import { onDestroy, onMount } from "svelte";
   import { createEventDispatcher } from "svelte";
 
-  import type { BikeSettings } from "./models/Bike";
-  import type UserSettings from "./models/UserSettings";
+  import type { BikeSettings, UserSettings } from "./models/Settings";
 
   export let bikeSettings: BikeSettings;
   export let userSettings: UserSettings;
@@ -20,7 +19,7 @@
 
   const trap_start: number = 8184;
   const trap_end: number = 8384;
-  let trap_info;
+  let trap_info: string;
   // t_video: elapsed time in the video (at original speed)
   let t_video = 0;
   let coefficients, slope, fitFile;
@@ -53,7 +52,7 @@
   }
 
   onMount(async () => {
-    let res = await fetch("data/coefficients4.json");
+    let res = await fetch("data/" + bikeSettings.coefficientsFile);
     coefficients = await res.json();
     res = await fetch("data/slope.txt");
     const slopeFile = await res.text();
@@ -64,9 +63,9 @@
     ended = false;
     console.log(document.getElementsByClassName("relative").length);
     document
-      .getElementsByClassName("relative")
-      .item(0)
-      .setAttribute("style", "width:" + width + "px");
+            .getElementsByClassName("relative")
+            .item(0)
+            .setAttribute("style", "width:" + width + "px");
   });
 
   onDestroy(() => {
@@ -82,11 +81,12 @@
     changeVideoSpeed(distance, 1, speed);
     const slope = slopeCalculator(speed, 1, distance);
     speed = nextValue(speed, power, 1, slope);
+    console.log(speed);
     time++;
     distance += speed / 3.6;
   }
 
-  function changeVideoSpeed(d0, t, vs) {
+  function changeVideoSpeed(d0: number, t: number, vs: number) {
     let s = 0;
     while (fitFile[s]["sec"] < t_video && s < 581) s++;
     if (s === 581) {
@@ -103,14 +103,14 @@
     playbackRate = vs / vr;
     if (playbackRate !== 0 && (playbackRate < 0.0625 || playbackRate > 16.0)) {
       alert(
-        "Sorry but the speed is too low or too high, the activity will be restarted."
+              "Sorry but the speed is too low or too high, the activity will be restarted."
       );
       reset();
     }
     t_video += playbackRate * t;
   }
 
-  function slopeCalculator(v0, t, d0) {
+  function slopeCalculator(v0: number, t: number, d0: number) {
     v0 = v0 / 3.6;
     // calcolo la pendenza media nella discorsa percorsa nel tempo t
     let d1 = Math.round(v0 * t + d0);
@@ -121,21 +121,21 @@
     return d1 !== d0 ? -s / (d1 - d0) : 0;
   }
 
-  function nextValue(v0, power, t, slope) {
-      v0 = v0/3.6;
-      const i = v0>40 ? 400 : Math.round(v0*10);
-      const cr = coefficients[i]['cr'];
-      const cx = coefficients[i]['cx']*bikeSettings.cx;
-      const e_k0 = 0.5 * (bikeSettings.bikeWeight+userSettings.riderWeight) * Math.pow(v0, 2);
-      const e_kr0 = 0.5 * bikeSettings.wheelsInertia * Math.pow(v0, 2)/Math.pow(bikeSettings.wheelsRadius, 2);
-      const e_w = bikeSettings.efficiency * t * power;
-      const ascent = -slope * v0 * t;
-      const e_u = (bikeSettings.bikeWeight+userSettings.riderWeight) * g * ascent;
-      const a_r = cr * (bikeSettings.bikeWeight+userSettings.riderWeight) * g * t * v0;
-      const a_a = 0.5 * userSettings.rho * cx * bikeSettings.area * Math.pow(v0, 3) * t;
-      return 3.6*Math.pow(2*(e_k0+e_kr0+e_w+e_u-a_a-a_r)
-          /((bikeSettings.bikeWeight+userSettings.riderWeight)
-              +bikeSettings.wheelsInertia/Math.pow(bikeSettings.wheelsRadius, 2)), 1/2);
+  function nextValue(v0: number, power: number, t: number, slope: number) {
+    v0 = v0/3.6;
+    const i = v0>40 ? 400 : Math.round(v0*10);
+    const cr = coefficients[i]['cr'];
+    const cx = coefficients[i]['cx']*bikeSettings.cx;
+    const e_k0 = 0.5 * (bikeSettings.bikeWeight+userSettings.riderWeight) * Math.pow(v0, 2);
+    const e_kr0 = 0.5 * bikeSettings.wheelsInertia * Math.pow(v0, 2)/Math.pow(bikeSettings.wheelsRadius, 2);
+    const e_w = bikeSettings.efficiency * t * power;
+    const ascent = -slope * v0 * t;
+    const e_u = (bikeSettings.bikeWeight+userSettings.riderWeight) * g * ascent;
+    const a_r = cr * (bikeSettings.bikeWeight+userSettings.riderWeight) * g * t * v0;
+    const a_a = 0.5 * userSettings.rho * cx * bikeSettings.area * Math.pow(v0, 3) * t;
+    return 3.6*Math.pow(2*(e_k0+e_kr0+e_w+e_u-a_a-a_r)
+            /((bikeSettings.bikeWeight+userSettings.riderWeight)
+                    +bikeSettings.wheelsInertia/Math.pow(bikeSettings.wheelsRadius, 2)), 1/2);
   }
   // azioni che compio quando gli stati vengono aggiornati
   $: {
@@ -145,19 +145,19 @@
       trap_info = `Distance to END ${Math.round(trap_end - distance)}m`;
       sum += speed;
       count_speed++;
-            console.log(sum, '', count_speed);
-        }
-        // without it we can increase suspense, evaluate if write it or not
-        else if (distance>trap_end) {
-            // trap_info = `⚡ ${Math.round(sum * 100 / count_speed) / 100} km/h ⚡`;
-            trap_info = `Slow down before catching! 😁🎳`;
-        }
-        else {
-            trap_info = "";
-            count_speed = 0;
-            sum = 0;
-        }
+      console.log(sum, '', count_speed);
     }
+    // without it we can increase suspense, evaluate if write it or not
+    else if (distance>trap_end) {
+      // trap_info = `⚡ ${Math.round(sum * 100 / count_speed) / 100} km/h ⚡`;
+      trap_info = `Slow down before catching! 😁🎳`;
+    }
+    else {
+      trap_info = "";
+      count_speed = 0;
+      sum = 0;
+    }
+  }
 </script>
 
 <style>
@@ -211,9 +211,10 @@
     /*width: 800px;*/
     /*height: 480px;*/
   }
-  div.border {
+
+  /* div.border {
     border: 3px solid #0084f6;
-  }
+  } */
   h2 {
     padding-top: 190px;
     vertical-align: middle;
@@ -223,20 +224,20 @@
     z-index: 1;
   }
 
-  #video_div {
+  /* #video_div {
     position: relative;
-  }
+  } */
 </style>
 
 <section>
   {#if !ended}
     <div class="relative">
       <video
-        bind:this={video}
-        bind:playbackRate
-        {width}
-        height={width / 1.666666666}
-        muted>
+              bind:this={video}
+              bind:playbackRate
+              {width}
+              height={width / 1.666666666}
+              muted>
         <source src="data/bm-13-09-19_no_scritte.mp4" type="video/mp4" />
         Your browser does not support the video tag.
       </video>

@@ -5,12 +5,11 @@
   import { getContext } from "svelte";
   import { getDebug, getUserSettings } from "./store";
 
-  import type { BikeSettings, Bike } from "./models/Bike";
-  import UserSettings from "./models/UserSettings";
+  import type { BikeSettings, UserSettings, Bike } from "./models/Settings";
 
   import Simulator from "./Simulator.svelte";
   import ResultModal from "./ResultContent.svelte";
-  import { hrValue, powerValue } from "./store.js";
+  import { hrValue, powerValue } from "./store";
   import Welcome from "./Welcome.svelte";
   import ResultContainer from "./ResultContainer.svelte";
   import BikePicker from "./BikePicker.svelte";
@@ -80,7 +79,7 @@
     left: 0;
     height: 100%;
     width: 100%;
-    overflow: hidden;
+    overflow: auto;
   }
 
   @media (min-width: 640px) {
@@ -175,10 +174,10 @@
           max="1000"
           bind:value={power} />
       </div>
-      <button on:click={handleResult}>Test save result dialog</button>
+<!--      <button on:click={handleResult}>Test save result dialog</button>-->
     {/if}
   {/if}
   <Modal>
-    <!-- <ResultContainer bind:openModal /> -->
+     <ResultContainer bind:openModal />
   </Modal>
 </main>

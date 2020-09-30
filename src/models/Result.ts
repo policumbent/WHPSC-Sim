@@ -1,4 +1,4 @@
-import type { BikeSettings } from "./Bike";
+import type { BikeSettings, UserSettings } from "./Settings";
 
 export default class ResultModel {
   firstName: string;
@@ -9,10 +9,12 @@ export default class ResultModel {
   datetime: Date;
   expanded: boolean;
   bikeSettings: BikeSettings;
+  userSettings: UserSettings;
 
   constructor(
     speed: number,
     bikeSettings: BikeSettings,
+    userSettings: UserSettings,
     bikeName: string,
     firstName: string = "",
     lastName: string = "",
@@ -26,6 +28,7 @@ export default class ResultModel {
     this.speed = speed;
     this.bikeName = bikeName;
     this.bikeSettings = bikeSettings;
+    this.userSettings = userSettings;
     this.expanded = expanded;
     timestamp.concat(" ");
     const t = timestamp.split(/[- :]/);

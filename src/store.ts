@@ -1,18 +1,17 @@
 import { writable } from "svelte/store";
+import { BikeSettings, UserSettings } from "./models/Settings";
 
-import { BikeSettings } from "./models/Bike";
-import UserSettings from "./models/UserSettings";
 
 export const hrValue = writable(0);
-export const powerValue = writable(-1);
-const newSettings = new BikeSettings(30, 0.06, 0.254, 0.95, 0.50,  0.45);
+export const powerValue = writable(0);
+const newSettings = new BikeSettings(30, 0.06, 1.254, 0.95, 0.50,  0.45, 'coefficients4.json');
 const newUserSettings = new UserSettings(70, 180, 1.01);
 export const getDebug = () => {
     const storageValue = localStorage.getItem("debug");
     return storageValue==='true';
 }
-export let getSettings = () =>{
-    function toSettingsType(storageValue) {
+export let getSettings = (): BikeSettings =>{
+    function toSettingsType(storageValue: any[]) {
         // todo: trovare un metodo più bello
         return new BikeSettings(
             storageValue['_bikeWeight'],
@@ -20,7 +19,8 @@ export let getSettings = () =>{
             storageValue['_wheelsRadius'],
             storageValue['_efficiency'],
             storageValue['_area'],
-            storageValue['_cx']
+            storageValue['_cx'],
+            'coefficients4.json'
         );
     }
     const storageValue = localStorage.getItem("bike_settings");

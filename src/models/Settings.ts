@@ -1,11 +1,11 @@
 class BikeSettings {
-  private readonly _bikeWeight: number;
+  private readonly _bikeWeight: number; // kg
   private readonly _wheelsInertia: number;
-  private readonly _wheelsRadius: number;
+  private readonly _wheelsRadius: number; // m
   private readonly _efficiency: number;
-  private readonly _area: number;
-  private readonly _rho: number;
+  private readonly _area: number; // m²
   private readonly _cx: number;
+  private readonly _coefficientsFile: string;
 
   constructor(
     bikeWeight: number,
@@ -13,16 +13,16 @@ class BikeSettings {
     wheelsRadius: number,
     efficiency: number,
     area: number,
-    rho: number,
     cx: number,
+    coefficientsFile: string,
   ) {
     this._bikeWeight = bikeWeight;
     this._wheelsInertia = wheelsInertia;
     this._wheelsRadius = wheelsRadius;
     this._efficiency = efficiency;
     this._area = area;
-    this._rho = rho;
     this._cx = cx;
+    this._coefficientsFile = coefficientsFile;
   }
 
   get bikeWeight(): number {
@@ -45,12 +45,36 @@ class BikeSettings {
     return this._area;
   }
 
-  get rho(): number {
-    return this._rho;
-  }
-
   get cx(): number {
     return this._cx;
+  }
+
+  get coefficientsFile(): string {
+    return this._coefficientsFile;
+  }
+}
+
+class UserSettings {
+  private readonly _riderWeight: number;
+  private readonly _riderHeight: number;
+  private readonly _rho: number;
+
+constructor(riderWeight: number, riderHeight: number, rho: number) {
+      this._riderWeight = riderWeight;
+      this._riderHeight = riderHeight;
+      this._rho = rho;
+  }
+
+get riderWeight(): number {
+  return this._riderWeight;
+}
+
+  get riderHeight(): number {
+      return this._riderHeight;
+  }
+
+  get rho(): number {
+      return this._rho;
   }
 }
 
@@ -73,4 +97,4 @@ class Bike {
   }
 }
 
-export { Bike, BikeSettings };
+export { Bike, BikeSettings, UserSettings };

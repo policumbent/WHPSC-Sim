@@ -1,16 +1,16 @@
 <script lang="ts">
-  import { Form, Input } from "sveltejs-forms";
   import { createEventDispatcher, onMount } from "svelte";
 
   import ResultModel from "./models/Result";
-  import type { BikeSettings } from "./models/Bike";
+  import type { BikeSettings, UserSettings } from "./models/Settings";
 
   const dispatch = createEventDispatcher();
   const uploadUrl =
     "https://www.policumbent.it/whpsc_sim_backend/upload_result.php";
-  export let speed;
-  export let bikeName;
+  export let speed: number;
+  export let bikeName: string;
   export let config: BikeSettings;
+  export let userConfig: UserSettings;
   let count = 0;
   let errorMex = "";
   const next = () => {
@@ -27,7 +27,7 @@
       .catch((error) => (errorMex = error));
   }
   onMount(
-    () => (result = new ResultModel(parseFloat(speed), config, bikeName))
+    () => (result = new ResultModel(speed, config, userConfig, bikeName))
   );
 </script>
 
@@ -109,7 +109,7 @@
         <label for="email">Email</label>
         <input required id="email" bind:value={result.email} type="email" />
       </div>
-      <p value={errorMex} />
+      <p value={errorMex}></p>
       <input class="btn right" type="submit" value="Send" />
     </form>
   {:else}

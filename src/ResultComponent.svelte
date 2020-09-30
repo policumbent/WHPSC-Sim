@@ -1,5 +1,5 @@
 <script lang="ts">
-    import {ResultModel} from "./models/Result";
+    import ResultModel from "./models/Result";
 
     export let result: ResultModel;
 </script>
@@ -84,7 +84,8 @@
 <div>
     <div class="container" on:click style="height: {!result.expanded? '100px': '200px'}">
         <div class="left30">
-            <span class="left middle_top"><em class="big">{Math.round(result.speed)}</em>.{Math.round((result.speed-Math.round(result.speed))*100)} km/h</span>
+            <span class="left middle_top"><em class="big">{Math.round(result.speed)}</em>
+                .{Math.round((result.speed-Math.round(result.speed))*100)} km/h</span>
             <span class="left middle_bottom">{result.bikeName}</span>
         </div>
         <span class="top right">{result.firstName} {result.lastName}</span>
@@ -105,7 +106,7 @@
                     <td>{result.bikeSettings.wheelsRadius}cm</td>
                     <td>{result.bikeSettings.efficiency}</td>
                     <td>{result.bikeSettings.area}m²</td>
-                    <td>{result.bikeSettings.rho}</td>
+                    <td>{result.userSettings.rho}</td>
                     <td>{result.bikeSettings.cx}</td>
                 </tr>
 

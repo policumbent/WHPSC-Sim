@@ -4,20 +4,10 @@ import {BlePowerMeter} from "./models/bt/BlePowerMeter";
 // import {BlePowerCadenceMeter} from "./models/bt/BlePowerCadenceMeter";
 import {CyclingPowerMeasurementParser} from "./models/bt/CyclingPowerMeasurementParser";
 
-export function btSearch(){
-    startSearch()
-        .catch(error => {
-            alert('This functionality is available only in Google Chrome 83+. ' +
-                'If you are already using it on Linux the "chrome://flags/#enable-experimental-web-platform-features" flag must be enabled.' +
-                'For further information read this page https://github.com/WebBluetoothCG/web-bluetooth/blob/gh-pages/implementation-status.md')
-            console.log(error);
-        })
-}
-
 let powerMeter;
 let hrMeter: BleHRMeter;
 
-async function startSearch() {
+export async function startSearch() {
     let options = {
         // todo: filter only powermeters
         filters: [
@@ -85,5 +75,5 @@ async function startSearch() {
         console.log(meter);
         meter.listen();
     }
-
+    return powerMeter !== undefined || hrMeter !== undefined;
 }
