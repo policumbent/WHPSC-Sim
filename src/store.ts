@@ -16,7 +16,7 @@ export let getSettings = (): BikeSettings =>{
         return new BikeSettings(
             storageValue['_bikeWeight'],
             storageValue['_wheelsInertia'],
-            storageValue['_wheelsRadius'],
+            storageValue['_wheelsCircumference'],
             storageValue['_efficiency'],
             storageValue['_area'],
             storageValue['_cx'],

@@ -107,7 +107,7 @@
         <tr>
           <td>{result.bikeSettings.bikeWeight}kg</td>
           <td>{result.bikeSettings.wheelsInertia}</td>
-          <td>{result.bikeSettings.wheelsRadius}cm</td>
+          <td>{result.bikeSettings.wheelsCircumference}cm</td>
           <td>{result.bikeSettings.efficiency}</td>
           <td>{result.bikeSettings.area}m²</td>
           <td>{result.userSettings.rho}</td>

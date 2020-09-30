@@ -18,7 +18,7 @@
   let users_settings_value: UserSettings;
   let debug_setting_value = false;
   let bikeWeight: number, riderWeight: number, wheelsInertia: number,
-    wheelsRadius: number, efficiency: number, area: number, rho: number,
+    wheelsCircumference: number, efficiency: number, area: number, rho: number,
     debugMode: boolean, cx: number, riderHeight:number;
 
   onMount(() => {
@@ -29,7 +29,7 @@
         riderWeight = users_settings_value.riderWeight;
         riderHeight = users_settings_value.riderHeight;
         wheelsInertia = bike_settings_value.wheelsInertia;
-        wheelsRadius = bike_settings_value.wheelsRadius;
+        wheelsCircumference = bike_settings_value.wheelsCircumference;
         efficiency = bike_settings_value.efficiency;
         area = bike_settings_value.area;
         rho = users_settings_value.rho;
@@ -38,7 +38,7 @@
   });
 
   function save() {
-    saveBikeSettings(new BikeSettings(bikeWeight, wheelsInertia, wheelsRadius, efficiency, area, cx, 'coefficients4.json'));
+    saveBikeSettings(new BikeSettings(bikeWeight, wheelsInertia, wheelsCircumference, efficiency, area, cx, 'coefficients4.json'));
         saveDebug(debugMode);
         saveUserSettings(new UserSettings(riderWeight, riderHeight, rho));
 
@@ -116,8 +116,8 @@
       <input class="slider" id="wheels_inertia" type="range" step="0.001" min="0.001" max="0.1" bind:value={wheelsInertia}>
       <label for="efficiency">Efficiency: {efficiency}</label>
       <input class="slider" id="efficiency" type="range" step="0.01" min="0.8" max="1" bind:value={efficiency}>
-      <label for="wheels_radius">Wheels Radius: {wheelsRadius}m</label>
-      <input class="slider" id="wheels_radius" type="range" step="0.001" min="1" max="2.5" bind:value={wheelsRadius}>
+      <label for="wheels_circumference">Wheels Circumference: {wheelsCircumference}m</label>
+      <input class="slider" id="wheels_circumference" type="range" step="0.001" min="1" max="2.5" bind:value={wheelsCircumference}>
       <label for="area">Area: {area}m²</label>
       <input class="slider" id="area" type="range" step="0.00001" min="0" max="2" bind:value={area}>
       <label for="cx">Cx @120km/h: {cx}</label>

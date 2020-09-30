@@ -1,7 +1,7 @@
 class BikeSettings {
   private readonly _bikeWeight: number; // kg
   private readonly _wheelsInertia: number;
-  private readonly _wheelsRadius: number; // m
+  private readonly _wheelsCircumference: number; // m
   private readonly _efficiency: number;
   private readonly _area: number; // m²
   private readonly _cx: number;
@@ -18,7 +18,7 @@ class BikeSettings {
   ) {
     this._bikeWeight = bikeWeight;
     this._wheelsInertia = wheelsInertia;
-    this._wheelsRadius = wheelsRadius;
+    this._wheelsCircumference = wheelsRadius;
     this._efficiency = efficiency;
     this._area = area;
     this._cx = cx;
@@ -33,8 +33,12 @@ class BikeSettings {
     return this._wheelsInertia;
   }
 
+  get wheelsCircumference(): number {
+    return this._wheelsCircumference;
+  }
+
   get wheelsRadius(): number {
-    return this._wheelsRadius;
+    return this._wheelsCircumference/(2*3.1415);
   }
 
   get efficiency(): number {

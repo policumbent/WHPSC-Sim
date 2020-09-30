@@ -32,7 +32,7 @@
           const s = new BikeSettings(
             e.bikeSettings.bikeWeight,
             e.bikeSettings.wheelsInertia,
-            e.bikeSettings.wheelsRadius,
+            e.bikeSettings.wheelsCircumference,
             e.bikeSettings.efficiency,
             e.bikeSettings.area,
             e.bikeSettings.cx
