@@ -84,6 +84,16 @@
     margin: 1em auto;
   }
 
+  .survey {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    margin: 1em;
+    background-color: yellow;
+    color: black;
+    font-size: 1em;
+    z-index: 99;
+  }
 
   section {
     text-align: center;
@@ -112,4 +122,5 @@
   <Modal>
     <ResultsListContainer bind:show={showModal} />
   </Modal>
+  <button class="survey btn" on:click={() => window.open('https://forms.gle/hK2XADnP4FkvjtmD7','_blank')}>Survey</button>
 </section>
