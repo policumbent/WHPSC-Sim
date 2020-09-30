@@ -4,7 +4,7 @@ import { BikeSettings, UserSettings } from "./models/Settings";
 
 export const hrValue = writable(0);
 export const powerValue = writable(0);
-const newSettings = new BikeSettings(30, 0.06, 1.254, 0.95, 0.50,  0.45, 'coefficients4.json');
+const newSettings = new BikeSettings(30, 0.09, 1.450, 0.95, 0.30,  0.05, 'coefficients4.json');
 const newUserSettings = new UserSettings(70, 180, 1.01);
 export const getDebug = () => {
     const storageValue = localStorage.getItem("debug");
