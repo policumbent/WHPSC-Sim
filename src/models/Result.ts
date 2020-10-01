@@ -45,7 +45,7 @@ export default class ResultModel {
   }
 
   get date(): string {
-    return `${this.datetime.getDate()}/${this.datetime.getMonth()+1}/${this.datetime.getFullYear()}`;
+    return `${this.datetime.getDate()}/${this.datetime.getMonth()}/${this.datetime.getFullYear()}`;
   }
   checkTime(i) {
         return (i < 10) ? '0' + i : i;

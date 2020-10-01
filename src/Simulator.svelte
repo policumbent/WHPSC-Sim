@@ -223,6 +223,11 @@
   video {
     z-index: 1;
   }
+  section{
+    max-height: 100vh;
+    max-width: 100vw;
+    overflow: hidden;
+  }
 
   /* #video_div {
     position: relative;

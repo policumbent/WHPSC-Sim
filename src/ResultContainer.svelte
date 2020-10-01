@@ -4,11 +4,11 @@
 
   const { open } = getContext("simple-modal");
 
-  export const openModal = (speed, bikeName, config) => {
+  export const openModal = (speed, bikeName, config, userConfig) => {
     console.log("CONFIG:", config);
     open(
       ResultModal,
-      { speed, bikeName, config },
+      { speed, bikeName, config, userConfig },
       { closeButton: true, closeOnEsc: true, closeOnOuterClick: false }
     );
   };

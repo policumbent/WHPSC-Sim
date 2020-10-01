@@ -87,8 +87,8 @@
     style="height: {!result.expanded ? '100px' : '200px'}">
     <div class="left30">
       <span class="left middle_top">
-        <em class="big">{Math.round(result.speed)}</em>
-        .{Math.round((result.speed - Math.round(result.speed)) * 100)} km/h
+        <em class="big">{Math.trunc(result.speed)}</em>
+        .{Math.round((result.speed - Math.trunc(result.speed)) * 100)} km/h
       </span>
       <span class="left middle_bottom">{result.bikeName}</span>
     </div>
@@ -98,7 +98,7 @@
         <tr>
           <th>Bike Weight</th>
           <th>Wheels Inertia</th>
-          <th>Wheels Radius</th>
+          <th>Wheels Circumference</th>
           <th>Efficiency</th>
           <th>Area</th>
           <th>Rho</th>
@@ -107,7 +107,7 @@
         <tr>
           <td>{result.bikeSettings.bikeWeight}kg</td>
           <td>{result.bikeSettings.wheelsInertia}</td>
-          <td>{result.bikeSettings.wheelsCircumference}cm</td>
+          <td>{result.bikeSettings.wheelsCircumference}m</td>
           <td>{result.bikeSettings.efficiency}</td>
           <td>{result.bikeSettings.area}m²</td>
           <td>{result.userSettings.rho}</td>
