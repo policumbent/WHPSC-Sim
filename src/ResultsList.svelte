@@ -52,16 +52,17 @@
 </script>
 
 <style>
-  h1 {
-    font-size: 3em;
-    margin-bottom: 0.5em;
-  }
+
   .scroller {
     scroll-behavior: smooth;
     overflow-x: hidden;
     overflow-y: auto;
     height: 50vh;
     /*margin: 0 10% 3em;*/
+  }
+  h1 {
+    font-size: 3em;
+    margin-bottom: 0.5em;
   }
 
   ::-webkit-scrollbar-track {

@@ -39,7 +39,7 @@
       .then(() => {
         simulation_started = true;
         window.document.body.classList.toggle("dark-mode");
-        console.log(getWidth());
+        // console.log(getWidth());
       })
       .catch((err) => console.log(err));
   }
@@ -51,12 +51,6 @@
 
   function exitFullscreen() {
     document.exitFullscreen();
-  }
-
-  function getWidth() {
-    if (window.screen.width / 1.666666 > window.screen.height)
-      return window.screen.height * 1.666666;
-    return window.screen.width;
   }
 
   function handleResult(event) {
@@ -130,11 +124,15 @@
   /*}*/
 
   .top-right-fixed {
+    color: gold;
+    text-shadow: 2px 2px #333333;
     margin-top: 8px;
     margin-right: 8px;
     position: absolute;
     top: 0;
     right: 0;
+    z-index: 9999;
+    cursor: pointer;
   }
   :global(body) {
     background-color: #f2eee2;
@@ -154,7 +152,6 @@
     </span>
     <Simulator
       bind:this={simulator}
-      width={getWidth()}
       power={!isNaN(power) ? power : 0}
       on:message={handleResult}
       bikeSettings={bike.settings}

@@ -6,7 +6,7 @@
 
   export let bikeSettings: BikeSettings;
   export let userSettings: UserSettings;
-  export let width: number = 480;
+  let width: number = 480;
   export let power: number = 0;
 
   const dispatch = createEventDispatcher();
@@ -51,7 +51,23 @@
     started = false;
   }
 
+  function getWidth() {
+    console.log('Window size');
+    if (window.screen.width / 1.666666 > window.screen.height){
+      console.log('1: ', window.screen.height * 1.666666);
+      width = window.screen.height * 1.666666;
+    }else {
+      console.log('2: ', window.screen.width);
+      width = window.screen.width;
+    }
+    document.getElementsByClassName("relative")
+            .item(0)
+            .setAttribute("style", "width:" + width + "px");
+  }
+
   onMount(async () => {
+    getWidth();
+    window.onresize = getWidth;
     let res = await fetch("data/" + bikeSettings.coefficientsFile);
     coefficients = await res.json();
     res = await fetch("data/slope.txt");
@@ -62,10 +78,7 @@
     await start();
     ended = false;
     console.log(document.getElementsByClassName("relative").length);
-    document
-            .getElementsByClassName("relative")
-            .item(0)
-            .setAttribute("style", "width:" + width + "px");
+
   });
 
   onDestroy(() => {
@@ -167,7 +180,7 @@
     background-color: rgba(221, 221, 221, 0);
     width: 40vw;
     padding: 10px 0;
-    z-index: 2147483647;
+    z-index: 99;
   }
   div.top_left {
     top: 10px;
@@ -244,7 +257,7 @@
               height={width / 1.666666666}
               muted>
         <source src="data/bm-13-09-19_no_scritte.mp4" type="video/mp4" />
-        Your browser does not support the video tag.
+        Your browser does not support video.
       </video>
       <div class="overlay bottom_left">
         Speed: {Math.round(speed * 10) / 10} km/h
