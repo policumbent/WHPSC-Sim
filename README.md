@@ -16,7 +16,7 @@
 
 ## Requirements
 
-- *Android*: Requires Android 6.0 Marshmallow or later.
-- *Mac*: Requires OS X Yosemite or later. (Some MacBooks may not work: Check "About this Mac" / "System Report" / "Bluetooth" and verify that Low Energy is supported.)
-- *Linux*: Requires Kernel 3.19+ and BlueZ 5.41+ installed. Read How to get Chrome Web Bluetooth working on Linux.(Note that Bluetooth daemon needs to run with experimental interfaces if BlueZ version is lower than 5.43: sudo /usr/sbin/bluetoothd -E)
-- *Windows*: Requires Windows 10 version 1706 (Creators Update) or later.
+- **Android**: Requires Android 6.0 Marshmallow or later.
+- **Mac**: Requires OS X Yosemite or later. (Some MacBooks may not work: Check "About this Mac" / "System Report" / "Bluetooth" and verify that Low Energy is supported.)
+- **Linux**: Requires Kernel 3.19+ and BlueZ 5.41+ installed. Read How to get Chrome Web Bluetooth working on Linux.(Note that Bluetooth daemon needs to run with experimental interfaces if BlueZ version is lower than 5.43: sudo /usr/sbin/bluetoothd -E)
+- **Windows**: Requires Windows 10 version 1706 (Creators Update) or later.
