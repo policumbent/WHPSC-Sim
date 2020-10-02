@@ -11,6 +11,8 @@
 
   const dispatch = createEventDispatcher();
 
+  let powerCount = 0;
+  let powerSum = 0;
   let speed: number = 0;
   let distance: number = 0;
   let time: number = 0;
@@ -106,7 +108,10 @@
       playbackRate = 0;
       // send message with result to outer component
       dispatch("message", {
-        text: Math.round((sum * 100) / count_speed) / 100,
+        text: {
+          speed: Math.round((sum * 100) / count_speed) / 100,
+          power: powerSum/powerCount
+        },
       });
       ended = true;
       clearInterval(interval);
@@ -152,6 +157,11 @@
   }
   // azioni che compio quando gli stati vengono aggiornati
   $: {
+    if (distance > 1 && distance<trap_end){
+      powerCount++;
+      powerSum += power;
+      // console.log('Average power: ', powerCount !== 0 ? powerSum/powerCount : 0)
+    }
     if (distance > trap_start - 1609 && distance < trap_start)
       trap_info = `Distance to GO ${Math.round(trap_start - distance)}m`;
     else if (distance >= trap_start && distance <= trap_end) {
@@ -160,8 +170,8 @@
       count_speed++;
       console.log(sum, '', count_speed);
     }
-    // without it we can increase suspense, evaluate if write it or not
     else if (distance>trap_end) {
+      // without it we can increase suspense, evaluate if write it or not
       // trap_info = `⚡ ${Math.round(sum * 100 / count_speed) / 100} km/h ⚡`;
       trap_info = `Slow down before catching! 😁🎳`;
     }

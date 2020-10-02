@@ -6,6 +6,7 @@ export default class ResultModel {
   bikeName: string;
   email: string;
   speed: number;
+  power: number;
   datetime: Date;
   expanded: boolean;
   bikeSettings: BikeSettings;
@@ -13,6 +14,7 @@ export default class ResultModel {
 
   constructor(
     speed: number,
+    power: number,
     bikeSettings: BikeSettings,
     userSettings: UserSettings,
     bikeName: string,
@@ -26,6 +28,7 @@ export default class ResultModel {
     this.lastName = lastName;
     this.email = email;
     this.speed = speed;
+    this.power = power;
     this.bikeName = bikeName;
     this.bikeSettings = bikeSettings;
     this.userSettings = userSettings;

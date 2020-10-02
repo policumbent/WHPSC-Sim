@@ -39,7 +39,7 @@
                 );
                 const u = new UserSettings(undefined, undefined, e.bikeSettings.rho);
                 v.push(
-                        new ResultModel(e.speed, s, u, e.bikeName, e.firstName, e.lastName, "", e.timestamp)
+                        new ResultModel(e.speed, s.power, s, u, e.bikeName, e.firstName, e.lastName, "", e.timestamp)
                 );
               });
               // console.log(v);

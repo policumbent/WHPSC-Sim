@@ -53,6 +53,7 @@
 
 <style>
   nav {
+      z-index: 9999;
       position: fixed;
       top: 0;
       right: 0;
@@ -109,7 +110,7 @@
   </div>
   <hr class="solid">
   <div class="sliders_div">
-      <label class="group_label">Custom bike settings:</label>
+      <label class="group_label">Your custom streamliner settings:</label>
       <label for="bike_weight">Bike weight: {bikeWeight}kg</label>
       <input class="slider" id="bike_weight" type="range" min="1" max="200" bind:value={bikeWeight}>
       <label for="wheels_inertia">Wheels Inertia: {wheelsInertia}</label>

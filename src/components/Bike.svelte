@@ -12,6 +12,7 @@
     font-style: italic;
   }
   .container {
+    cursor: pointer;
     color: black;
     display: inline-block;
     position: relative;

@@ -8,6 +8,7 @@
   const uploadUrl =
     "https://www.policumbent.it/whpsc_sim_backend/upload_result.php";
   export let speed: number;
+  export let power: number;
   export let bikeName: string;
   export let config: BikeSettings;
   export let userConfig: UserSettings;
@@ -27,7 +28,7 @@
       .catch((error) => (errorMex = error));
   }
   onMount(
-    () => (result = new ResultModel(speed, config, userConfig, bikeName))
+    () => (result = new ResultModel(speed, power, config, userConfig, bikeName))
   );
 </script>
 

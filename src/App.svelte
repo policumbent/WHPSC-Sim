@@ -57,10 +57,9 @@
     console.log("HANDLE", bike.settings);
     console.log(event.detail.text);
     if (event.detail.text !== undefined) exitFullscreen();
-    console.log(event.detail.text);
-    const speed = event.detail.text !== undefined ? event.detail.text : 141.0;
-    console.log(speed);
-    openModal(speed, bike.bikeName, bike.settings, getUserSettings());
+    const speed = event.detail.text !== undefined ? event.detail.text.speed : 141.0;
+    const power = event.detail.text !== undefined ? event.detail.text.power : 0;
+    openModal(speed, power, bike.bikeName, bike.settings, getUserSettings());
   }
 </script>
 
