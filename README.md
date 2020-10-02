@@ -1,5 +1,4 @@
-# Bike-Simulator-Svelte
-
+# Policumbent WHPSC Simulator
 ## How to use it
 
 ### Windows/MacOs/Chrome OS/Android
