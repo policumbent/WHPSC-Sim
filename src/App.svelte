@@ -116,13 +116,6 @@
     cursor: pointer;
   }
 
-  /*.center {*/
-  /*	position: absolute;*/
-  /*	display: flex;*/
-  /*	justify-content: center;*/
-  /*	!*todo: non sono buono con i css, va centrato*!*/
-  /*}*/
-
   .top-right-fixed {
     color: gold;
     text-shadow: 2px 2px #333333;

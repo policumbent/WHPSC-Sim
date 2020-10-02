@@ -78,11 +78,11 @@
     await start();
     ended = false;
     console.log(document.getElementsByClassName("relative").length);
-
   });
 
   onDestroy(() => {
     clearInterval(interval);
+    window.onresize = null;
   });
 
   function intervalFunction() {
