@@ -6,7 +6,7 @@
 
   const dispatch = createEventDispatcher();
   const uploadUrl =
-    "https://www.policumbent.it/whpsc_sim_backend/upload_result.php";
+          "https://www.policumbent.it/whpsc_sim_backend/upload_result.php";
   export let speed: number;
   export let power: number;
   export let bikeName: string;
@@ -21,14 +21,14 @@
   function handleSubmit() {
     console.log(result);
     fetch(uploadUrl, { method: "POST", body: JSON.stringify(result) })
-      .then((resp) => {
-        if (resp.status === 200) next();
-        console.log(resp);
-      })
-      .catch((error) => (errorMex = error));
+            .then((resp) => {
+              if (resp.status === 200) next();
+              console.log(resp);
+            })
+            .catch((error) => (errorMex = error));
   }
   onMount(
-    () => (result = new ResultModel(speed, power, config, userConfig, bikeName))
+          () => (result = new ResultModel(speed, power, config, userConfig, bikeName))
   );
 </script>
 
@@ -76,15 +76,16 @@
 
 <section>
   {#if count === 0}
-    <h1>🎉 Congratulations 🍾</h1>
-    <p>Your speed is</p>
-    <p>
-      <span class="speed">{speed} km/h</span>
-    </p>
-    <p />
-    <p>
-      <span class="mph">({Math.round(speed * 0.621371 * 100) / 100}mph)</span>
-    </p>
+    <div id="result">
+      <h1>🎉 Congratulations 🍾</h1>
+      <p>Your speed is</p>
+      <p>
+        <span class="speed">{speed} km/h</span>
+      </p>
+      <p>
+        <span class="mph">({Math.round(speed * 0.621371 * 100) / 100}mph)</span>
+      </p>
+    </div>
     <button class="btn" on:click={next}>Save your result</button>
   {:else if count === 1}
     <h1>Save your result</h1>
@@ -93,18 +94,18 @@
       <div class="formData">
         <label for="firstName">First name</label>
         <input
-          required
-          id="firstName"
-          bind:value={result.firstName}
-          type="text" />
+                required
+                id="firstName"
+                bind:value={result.firstName}
+                type="text" />
       </div>
       <div class="formData">
         <label for="lastName">Last name</label>
         <input
-          required
-          id="lastName"
-          bind:value={result.lastName}
-          type="text" />
+                required
+                id="lastName"
+                bind:value={result.lastName}
+                type="text" />
       </div>
       <div class="formData">
         <label for="email">Email</label>
@@ -112,6 +113,7 @@
       </div>
       <p value={errorMex}></p>
       <input class="btn right" type="submit" value="Send" />
+<!--      <button on:click={share}>Share on facebook</button>-->
     </form>
   {:else}
     <h1>One more step</h1>

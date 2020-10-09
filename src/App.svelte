@@ -1,25 +1,29 @@
 <script lang="ts">
   import Icon from "svelte-awesome";
-  import { close } from "svelte-awesome/icons";
+  import {close} from "svelte-awesome/icons";
   import Modal from "svelte-simple-modal";
-  import { getContext } from "svelte";
-  import { getDebug, getUserSettings } from "./store";
-
-  import type { BikeSettings, UserSettings, Bike } from "./models/Settings";
+  import {getContext, onMount} from "svelte";
+  import {getDebug, getUserSettings} from "./store";
+  import { Email, Reddit, LinkedIn, Telegram, WhatsApp, Facebook, Twitter } from 'svelte-share-buttons-component';
+  import type {BikeSettings, UserSettings, Bike} from "./models/Settings";
 
   import Simulator from "./Simulator.svelte";
   import ResultModal from "./ResultContent.svelte";
-  import { hrValue, powerValue } from "./store";
+  import {hrValue, powerValue} from "./store";
   import Welcome from "./Welcome.svelte";
   import ResultContainer from "./ResultContainer.svelte";
   import BikePicker from "./BikePicker.svelte";
+  import YourResultComponent from "./components/YourResultComponent.svelte";
 
   let power = 0;
   let simulator;
   let simulation_started = false;
   let openModal;
   let bike: Bike;
-
+  let res = null;
+  const title = 'WHPSC Simulator';
+  const desc = 'Try a fast streamliner on Battle Mountain track.';
+  const url = window.location.href;
   // todo: do unsubscribe onDestroy
   // uso la fc al posto della potenza per il primo test
   // const hrUnsubscribe = hrValue.subscribe(value => power = value);
@@ -28,21 +32,27 @@
   // right click disabled
   document.addEventListener("contextmenu", (event) => event.preventDefault());
   document.addEventListener("fullscreenchange", (event) =>
-    document.fullscreenElement === null ? exitSimulation() : event
+          document.fullscreenElement === null ? exitSimulation() : event
   );
 
   function startSimulation(event) {
     bike = event.detail.text;
     console.log("START", bike);
     document.documentElement
-      .requestFullscreen()
-      .then(() => {
-        simulation_started = true;
-        window.document.body.classList.toggle("dark-mode");
-        // console.log(getWidth());
-      })
-      .catch((err) => console.log(err));
+            .requestFullscreen()
+            .then(() => {
+              simulation_started = true;
+              window.document.body.classList.toggle("dark-mode");
+              // console.log(getWidth());
+            })
+            .catch((err) => console.log(err));
   }
+
+  onMount(() => {
+    const params = new URLSearchParams(window.location.search);
+    console.log(params.get('res'));
+    res = params.get('res');
+  })
 
   function exitSimulation() {
     simulation_started = false;
@@ -135,38 +145,59 @@
     background-color: #1d3040;
     color: #bfc2c7;
   }
+  .bottom {
+    position: fixed;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    margin-bottom: 1em;
+  }
 </style>
 
 <main>
-  {#if simulation_started}
+  {#if res===null}
+    {#if simulation_started}
     <span class="top-right-fixed" on:click={exitFullscreen}>
       <Icon class="top-right-fixed" data={close} scale="3" />
     </span>
-    <Simulator
-      bind:this={simulator}
-      power={!isNaN(power) ? power : 0}
-      on:message={handleResult}
-      bikeSettings={bike.settings}
-      userSettings={getUserSettings()} />
-  {:else}
-    <Welcome on:message={startSimulation} />
-    {#if getDebug()}
-      <div id="power_debug_div">
-        <label id="power_debug_label" for="power_debug">
-          Power Debug Slider: {power}W
-        </label>
-        <input
-          class="slider"
-          id="power_debug"
-          type="range"
-          min="0"
-          max="1000"
-          bind:value={power} />
+      <Simulator
+              bind:this={simulator}
+              power={!isNaN(power) ? power : 0}
+              on:message={handleResult}
+              bikeSettings={bike.settings}
+              userSettings={getUserSettings()} />
+    {:else}
+      <Welcome on:message={startSimulation} />
+      {#if getDebug()}
+        <div id="power_debug_div">
+          <label id="power_debug_label" for="power_debug">
+            Power Debug Slider: {power}W
+          </label>
+          <input
+                  class="slider"
+                  id="power_debug"
+                  type="range"
+                  min="0"
+                  max="1000"
+                  bind:value={power} />
+        </div>
+        <!--      <button on:click={handleResult}>Test save result dialog</button>-->
+
+      {/if}
+      <div class="bottom">
+        <Email subject="{title}" body="{desc} {url}" />
+        <Reddit class="share-button" {title} {url} />
+        <LinkedIn class="share-button" {url} />
+        <Telegram class="share-button" text={title} {url} />
+        <WhatsApp class="share-button" text="{title} {url}" />
+        <Facebook class="share-button" {url} />
+        <Twitter class="share-button" text="{title}" {url} />
       </div>
-<!--      <button on:click={handleResult}>Test save result dialog</button>-->
     {/if}
+    <Modal>
+      <ResultContainer bind:openModal />
+    </Modal>
+  {:else}
+    <YourResultComponent />
   {/if}
-  <Modal>
-     <ResultContainer bind:openModal />
-  </Modal>
 </main>

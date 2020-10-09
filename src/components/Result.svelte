@@ -42,7 +42,7 @@
       font-size: 1.1em;
     }
 
-    .middle_bottom {
+    .bike_name {
       /*position: absolute;*/
       position: absolute;
       width: 100%;
@@ -88,7 +88,7 @@
       left: 0.5em;
     }
 
-    .middle_bottom {
+    .bike_name {
       position: absolute;
       /*margin-left: -2.5em;*/
       left: 30%;
@@ -120,7 +120,7 @@
 
 
 
-  .bottom {
+  .timestamp {
     position: absolute;
     bottom: 0.5em;
     font-size: 0.9em;

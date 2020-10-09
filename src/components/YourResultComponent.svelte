@@ -1,0 +1,167 @@
+<script lang="ts">
+    import ResultModel from "../models/Result";
+    import {BikeSettings, UserSettings} from "../models/Settings";
+    import { Email, Reddit, LinkedIn, Telegram, WhatsApp, Facebook, Twitter } from 'svelte-share-buttons-component';
+    export let result: ResultModel = new ResultModel(
+        130,
+        200,
+        new BikeSettings(30, 0.07, 1.450, 0.99, 0.005, 0.3, undefined),
+        new UserSettings(60, 180, 1),
+        'pippo'
+    );
+    const title = 'WHPSC Simulator Result';
+    const desc = 'Watch my result on WHPSC Simulator';
+    const url = window.location.href;
+    function clearParams() {
+        const params = new URLSearchParams();
+        params.delete('res');
+        window.history.replaceState({}, '', `${location.pathname}?${params}`);
+        window.location.reload();
+    }
+</script>
+
+<style>
+    table {
+        width: 300px;
+        text-align: left;
+        font-weight: lighter;
+        margin: 2em auto; /* or margin: 0 auto 0 auto */
+    }
+    th {
+        font-weight: normal;
+    }
+    td {
+        text-align: right;
+    }
+    .middle_top {
+        font-weight: bold;
+        color: gold;
+    }
+    .bike_name {
+        margin: 1em;
+        display: block;
+        text-transform: uppercase;
+    }
+    .big {
+        font-size: 4em;
+    }
+    .top {
+        top: 15%;
+        -webkit-transform: translateY(-15%);
+        transform: translateY(-15%);
+        font-size: 1.1em;
+    }
+    .timestamp {
+        font-size: 0.9em;
+        font-weight: 300;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+    }
+    .content {
+        position: absolute;
+        top: 50%; left: 50%;
+        transform: translate(-50%,-50%);
+        width: 500px;
+        height: 450px;
+        border: 1px solid black;
+        /*margin: 10px 2%;*/
+        padding: 0.5em;
+        border-radius: 15px;
+        /*box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.3);*/
+        box-shadow: 0 4px 8px 0 rgb(191, 194, 199);
+        transition: 0.3s;
+    }
+    .container {
+        position: relative;
+        background-color: #1d3040;
+        color: #bfc2c7;
+        width: 100vw;
+        height: 100vh;
+        vertical-align: middle;
+        text-align: center;
+    }
+    h1, h2 {
+        text-transform: uppercase;
+        /*font-weight: 300;*/
+        letter-spacing: 2px;
+    }
+    .title {
+        font-size: 2.5em;
+        position: absolute;
+        top: 10%;
+        left: 50%;
+        transform: translate(-50%, -10%);
+    }
+
+    .btn {
+        position: fixed;
+        bottom: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        margin-bottom: 2em;
+        text-align: center;
+        background-color: yellow;
+        border: #ffffff;
+        color: black;
+        font-size: 1.2em;
+        z-index: 99;
+        text-transform: uppercase;
+        font-weight: 200;
+        padding: 0.5em 1em;
+    }
+
+</style>
+
+<div>
+    <div class="container">
+        <h1 class="title">WHPSC Simulator</h1>
+        <div class="content">
+            <h1>Stefano Loscalzo</h1>
+            <span class="middle_top"><em class="big">{Math.round(result.speed)}</em>
+                .{Math.round((result.speed-Math.round(result.speed))*100)} km/h</span>
+            <span class="top right">{result.firstName} {result.lastName}</span>
+            <table>
+                <tr>
+                    <th>Bike Weight</th>
+                    <td>{result.bikeSettings.bikeWeight}kg</td>
+                </tr>
+                <tr>
+                    <th>Wheels Inertia</th>
+                    <td>{result.bikeSettings.wheelsInertia}</td>
+                </tr>
+                <tr>
+                    <th>Wheels Circumference</th>
+                    <td>{result.bikeSettings.wheelsCircumference}m</td>
+                </tr>
+                <tr>
+                    <th>Efficiency</th>
+                    <td>{result.bikeSettings.efficiency}</td>
+                </tr>
+                <tr>
+                    <th>Area</th>
+                    <td>{result.bikeSettings.area}m²</td>
+                </tr>
+                <tr>
+                    <th>Rho</th>
+                    <td>{result.userSettings.rho}</td>
+                </tr>
+                <tr>
+                    <th>Cx</th>
+                    <td>{result.bikeSettings.cx}</td>
+                </tr>
+            </table>
+            <span class="bike_name">{result.bikeName}</span>
+            <span class="right timestamp">{result.time} {result.date}</span>
+        </div>
+        <button on:click="{clearParams}" class="btn">Go to WHPSC simulator</button>
+        <div>
+            <Email subject="{title}" body="{desc} {url}" />
+            <Reddit class="share-button" {title} {url} />
+            <LinkedIn class="share-button" {url} />
+            <Telegram class="share-button" text={title} {url} />
+            <WhatsApp class="share-button" text="{title} {url}" />
+            <Facebook class="share-button" {url} />
+            <Twitter class="share-button" text="{title}" {url} />
+        </div>
+    </div>
+</div>
