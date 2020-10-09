@@ -10,7 +10,7 @@
   export let power: number = 0;
 
   const dispatch = createEventDispatcher();
-
+  let buffering = false;
   let powerCount = 0;
   let powerSum = 0;
   let speed: number = 0;
@@ -37,7 +37,6 @@
     playbackRate = 0;
     await video.play();
     started = true;
-    interval = setInterval(intervalFunction, 1000);
   }
 
   export async function reset() {
@@ -77,6 +76,17 @@
     slope = await slopeFile.split("\n");
     res = await fetch("data/19-09-19-am-gallo_t2.json");
     fitFile = await res.json();
+    video.onwaiting = () => {
+      console.log("WAITING");
+      buffering = true;
+      clearInterval(interval);
+    }
+    video.onplaying = () => {
+      console.log("PLAYING");
+      buffering = false;
+      interval = setInterval(intervalFunction, 1000);
+    }
+    video.preload = true;
     await start();
     ended = false;
     console.log(document.getElementsByClassName("relative").length);
@@ -95,10 +105,21 @@
     }
     changeVideoSpeed(distance, 1, speed);
     const slope = slopeCalculator(speed, 1, distance);
-    speed = nextValue(speed, power, 1, slope);
+    const powerOrBrake = brakeCalculator(distance, speed, power)
+    speed = nextValue(speed, powerOrBrake, 1, slope);
     console.log(speed);
     time++;
     distance += speed / 3.6;
+  }
+
+  function brakeCalculator(distance: number, speed: number, power: number) {
+    if(distance > trap_end + 200){
+      if(distance < trap_end + 1000 && speed > 60)
+        return -2000
+      else if(distance >= trap_end + 1000 && speed > 35)
+        return -10000
+    }
+    return power
   }
 
   function changeVideoSpeed(d0: number, t: number, vs: number) {
@@ -151,9 +172,10 @@
     const e_u = (bikeSettings.bikeWeight+userSettings.riderWeight) * g * ascent;
     const a_r = cr * (bikeSettings.bikeWeight+userSettings.riderWeight) * g * t * v0;
     const a_a = 0.5 * userSettings.rho * cx * bikeSettings.area * Math.pow(v0, 3) * t;
-    return 3.6*Math.pow(2*(e_k0+e_kr0+e_w+e_u-a_a-a_r)
+    const v = 3.6*Math.pow(2*(e_k0+e_kr0+e_w+e_u-a_a-a_r)
             /((bikeSettings.bikeWeight+userSettings.riderWeight)
                     +bikeSettings.wheelsInertia/Math.pow(bikeSettings.wheelsRadius, 2)), 1/2);
+  return v > 0 ? v: 0
   }
   // azioni che compio quando gli stati vengono aggiornati
   $: {
@@ -200,6 +222,14 @@
   }
   div.center {
     top: 11vh;
+    margin: 0 auto;
+    font-size: 3vw;
+    width: 100%;
+    color: #000;
+    text-align: center;
+  }
+  div.center2 {
+    top: 15vh;
     margin: 0 auto;
     font-size: 3vw;
     width: 100%;
@@ -274,6 +304,9 @@
       </div>
       <div class="overlay bottom_right">Power: {power} W</div>
       <div class="overlay center">{trap_info}</div>
+      {#if buffering}
+        <div class="overlay center2">Slow internet connection!</div>
+      {/if}
       <div class="overlay top_left">
         Time: {Math.trunc(time / 60) > 0 ? Math.trunc(time / 60) + "'" : ''} {Math.round(time % 60) + '"'}
       </div>
