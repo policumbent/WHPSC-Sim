@@ -61,6 +61,7 @@
     overflow: hidden;
   } */
   .top-right-fixed {
+    z-index: 999999;
     margin-top: 5px;
     margin-right: 5px;
     position: absolute;

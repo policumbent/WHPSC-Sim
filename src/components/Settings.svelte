@@ -53,6 +53,7 @@
 
 <style>
   nav {
+      z-index: 9999;
       position: fixed;
       top: 0;
       right: 0;
@@ -109,7 +110,7 @@
   </div>
   <hr class="solid">
   <div class="sliders_div">
-      <label class="group_label">Custom bike settings:</label>
+      <label class="group_label">Your custom streamliner settings:</label>
       <label for="bike_weight">Bike weight: {bikeWeight}kg</label>
       <input class="slider" id="bike_weight" type="range" min="1" max="200" bind:value={bikeWeight}>
       <label for="wheels_inertia">Wheels Inertia: {wheelsInertia}</label>
@@ -120,7 +121,7 @@
       <input class="slider" id="wheels_circumference" type="range" step="0.001" min="1" max="2.5" bind:value={wheelsCircumference}>
       <label for="area">Area: {area}m²</label>
       <input class="slider" id="area" type="range" step="0.00001" min="0" max="2" bind:value={area}>
-      <label for="cx">Cx @120km/h: {cx}</label>
+      <label for="cx">Cd @120km/h: {cx}</label>
       <input class="slider" id="cx" type="range" step="0.0001" min="0.02" max="1.2" bind:value={cx}>
   </div>
   <hr class="solid">
