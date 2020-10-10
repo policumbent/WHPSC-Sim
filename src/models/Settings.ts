@@ -10,7 +10,7 @@ class BikeSettings {
   constructor(
     bikeWeight: number,
     wheelsInertia: number,
-    wheelsRadius: number,
+    wheelsCircumference: number,
     efficiency: number,
     area: number,
     cx: number,
@@ -18,7 +18,7 @@ class BikeSettings {
   ) {
     this._bikeWeight = bikeWeight;
     this._wheelsInertia = wheelsInertia;
-    this._wheelsCircumference = wheelsRadius;
+    this._wheelsCircumference = wheelsCircumference;
     this._efficiency = efficiency;
     this._area = area;
     this._cx = cx;

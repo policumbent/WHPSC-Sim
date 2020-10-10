@@ -18,7 +18,7 @@
     new Bike("Coral", "img/recumbent.svg", "A recumbent bike",
             new BikeSettings(14, 0.091, 1.450, 0.97, 0.32, 0.6, 'coefficients_normal_bike.json')),
     new Bike("Road Bike", "img/normal.svg", "A road bike",
-            new BikeSettings(7.5, 0.0786, 2.105, 0.98, 0.43, 0.8, 'coefficients_normal_bike.json'))
+            new BikeSettings(7.5, 0.0786, 2.105, 0.98, 0.43, 0.78, 'coefficients_normal_bike.json'))
   ];
 
   function shuffle(array) {
