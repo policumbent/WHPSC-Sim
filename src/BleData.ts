@@ -3,6 +3,9 @@ import type {BleMeter} from "./models/bt/BleMeter";
 import {BlePowerMeter} from "./models/bt/BlePowerMeter";
 // import {BlePowerCadenceMeter} from "./models/bt/BlePowerCadenceMeter";
 import {CyclingPowerMeasurementParser} from "./models/bt/CyclingPowerMeasurementParser";
+// const Bluetooth	= require('node-web-bluetooth');
+// declare function require(name:string);
+// const Bluetooth = require('node-web-bluetooth');
 
 let powerMeter;
 let hrMeter: BleHRMeter;
