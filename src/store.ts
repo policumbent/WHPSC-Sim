@@ -28,10 +28,10 @@ export let getSettings = (): BikeSettings =>{
 };
 
 export let getUserSettings = () => {
-  function toSettingsType(storageValue) {
-    // todo: trovare un metodo più bello
-    return new UserSettings(
-      storageValue["_riderWeight"],
+    function toSettingsType(storageValue) {
+        // todo: trovare un metodo più bello
+        return new UserSettings(
+            storageValue["_riderWeight"],
             storageValue['_riderHeight'],
             storageValue['_rho']
         );
@@ -41,7 +41,15 @@ export let getUserSettings = () => {
 };
 
 export let saveBikeSettings = (value) =>
-  localStorage.setItem("bike_settings", JSON.stringify(value));
+    localStorage.setItem("bike_settings", JSON.stringify(value));
 export let saveUserSettings = (value) =>
-  localStorage.setItem("user_settings", JSON.stringify(value));
+    localStorage.setItem("user_settings", JSON.stringify(value));
 export let saveDebug = (value) => localStorage.setItem("debug", value);
+
+let sensors: number[] = [];
+export let addSensorsToList = (value: number) => {
+    if(sensors.findIndex(e => e === value) === -1)
+        sensors.push(value);
+}
+export let getSensorsList = (): number[] => sensors;
+export let clearSensorsList = () => sensors = [];

@@ -10,7 +10,7 @@
     open(
       ResultsList,
       {},
-      { closeButton: true, closeOnEsc: true, closeOnOuterClick: false }
+      { closeButton: true, closeOnEsc: true, closeOnOuterClick: true }
     );
     show = false;
   }

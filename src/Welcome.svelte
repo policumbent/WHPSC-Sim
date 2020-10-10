@@ -1,19 +1,23 @@
 <script lang="ts">
   import Icon from "svelte-awesome";
-  import { gear } from "svelte-awesome/icons";
+  import {gear} from "svelte-awesome/icons";
   import Modal from "svelte-simple-modal";
-  import { createEventDispatcher } from "svelte";
-  import { getDebug } from "./store"
-  import { startSearch } from "./BleData";
+  import {createEventDispatcher} from "svelte";
+  import {getDebug} from "./store"
+  import {startSearch} from "./BleData";
   import BikePicker from "./BikePicker.svelte";
   import Settings from "./components/Settings.svelte";
   import ResultsListContainer from "./ResultsListContainer.svelte";
-
+  import SearchAnt from "./components/SearchAnt.svelte";
+  import SearchAntContainer from "./components/SearchAntContainer.svelte";
   const dispatch = createEventDispatcher();
   let sidebar_show = false;
   let chooseBike = false;
+  let searchAnt = false;
   let showModal = false;
-  let powerMeterPaired = false;
+  let btPowerMeterPaired = false;
+  let antPowerMeterPaired = false;
+
   function pickBike() {
     chooseBike = true;
   }
@@ -32,15 +36,15 @@
     });
   }
 
-  function btSearch(){
+  function btSearch() {
     startSearch()
-            .then(data => powerMeterPaired = data)
+            .then(data => btPowerMeterPaired = data)
             .catch(error => {
               alert('This functionality is available only in Google Chrome 83+. ' +
                       'If you are already using it on Linux the "chrome://flags/#enable-experimental-web-platform-features" flag must be enabled.' +
                       'For further information read this page https://github.com/WebBluetoothCG/web-bluetooth/blob/gh-pages/implementation-status.md')
               console.log(error);
-              powerMeterPaired = false;
+              btPowerMeterPaired = false;
             })
   }
 
@@ -114,14 +118,20 @@
     class="top-right-fixed click_t">
     <Icon class="top-right-fixed" data={gear} scale="2" />
   </span>
-  <button class="btn" disabled="{!powerMeterPaired && !getDebug()}" on:click={pickBike}>Start</button>
-  <button class="btn" on:click={btSearch}>Search powermeter</button>
+  <button class="btn" disabled="{!(btPowerMeterPaired || antPowerMeterPaired) && !getDebug()}" on:click={pickBike}>Start</button>
+  <button class="btn" on:click={showResults}>Results</button>
+  <div>
+    <button class="btn" disabled="{antPowerMeterPaired}" on:click={btSearch}>BT powermeter</button>
+    <button class="btn" disabled="{btPowerMeterPaired}" on:click={() => searchAnt = true}>ANT powermeter</button>
+  </div>
   {#if chooseBike}
     <BikePicker on:message={bikeChosen} />
   {/if}
-  <button class="btn results" on:click={showResults}>Results</button>
   <Modal>
     <ResultsListContainer bind:show={showModal} />
+  </Modal>
+  <Modal>
+    <SearchAntContainer bind:connected={antPowerMeterPaired} bind:show={searchAnt}/>
   </Modal>
   <button class="survey btn" on:click={() => window.open('https://forms.gle/hK2XADnP4FkvjtmD7','_blank')}>Survey</button>
 </section>

@@ -14,6 +14,7 @@
   import ResultContainer from "./ResultContainer.svelte";
   import BikePicker from "./BikePicker.svelte";
   import YourResultComponent from "./components/YourResultComponent.svelte";
+  // import {startAnt} from "./Ant";
 
   let power = 0;
   let simulator;
