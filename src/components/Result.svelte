@@ -2,13 +2,26 @@
   import type ResultModel from "../models/Result";
 
   export let result: ResultModel;
-  const minSize = window.innerWidth < 550 ? '150px' : '100px';
-  const maxSize = window.innerWidth < 550 ? '330px' : '200px';
+  let minSize = window.innerWidth < 550 ? '150px' : '100px';
+  let maxSize = window.innerWidth < 550 ? '330px' : '200px';
+  let width = window.innerWidth;
+  window.onresize = setSize;
+  let height = !result.expanded ? minSize : maxSize;
+  function setSize() {
+    minSize = window.innerWidth < 550 ? '150px' : '100px';
+    maxSize = window.innerWidth < 550 ? '330px' : '200px';
+    width = window.innerWidth;
+    height = !result.expanded ? minSize : maxSize;
+    console.log(minSize);
+  }
+  $: height = !result.expanded ? minSize : maxSize;
+  $: console.log('H:', height);
+
 </script>
 
 <style>
 
-  @media only screen and (max-device-width: 550px) {
+  @media only screen and (max-width: 550px) {
     /* styles for mobile browsers smaller than 480px; (iPhone) */
     .left30 {
       position: absolute;
@@ -42,7 +55,7 @@
       font-size: 1.1em;
     }
 
-    .bike_name {
+    .middle_bottom {
       /*position: absolute;*/
       position: absolute;
       width: 100%;
@@ -88,7 +101,7 @@
       left: 0.5em;
     }
 
-    .bike_name {
+    .middle_bottom {
       position: absolute;
       /*margin-left: -2.5em;*/
       left: 30%;
@@ -120,7 +133,7 @@
 
 
 
-  .timestamp {
+  .bottom {
     position: absolute;
     bottom: 0.5em;
     font-size: 0.9em;
@@ -132,6 +145,7 @@
     border: 1px solid black;
     background: #1d3040;
     margin: 10px 2%;
+    height: var(--div-height);
     /*padding: 0.5em;*/
     border-radius: 15px;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.3);
@@ -142,7 +156,7 @@
 <div>
   <div class="container"
        on:click
-       style="height: {!result.expanded ? minSize : maxSize}">
+       style="--div-height: {height}">
     <div class="left30">
       <span class="middle_top">
         <em class="big">{Math.trunc(result.speed)}</em>
@@ -153,7 +167,7 @@
     <span class="top right">{result.firstName} {result.lastName}</span>
     {#if result.expanded}
       <table>
-        {#if window.screen.width>550}
+        {#if width>550}
           <tr>
             <th>Bike Weight</th>
             <th>Wheels Inertia</th>
@@ -161,7 +175,7 @@
             <th>Efficiency</th>
             <th>Area</th>
             <th>Rho</th>
-            <th>Cx</th>
+            <th>Cd@120km/h</th>
           </tr>
           <tr>
             <td>{result.bikeSettings.bikeWeight}kg</td>
@@ -198,7 +212,7 @@
             <td>{result.userSettings.rho}</td>
           </tr>
           <tr>
-            <th>Cx</th>
+            <th>Cd@120km/h</th>
             <td>{result.bikeSettings.cx}</td>
           </tr>
         {/if}

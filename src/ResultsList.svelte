@@ -22,7 +22,6 @@
   ];
 
   onMount(() => {
-    const myHeaders = new Headers();
     fetch(url, { cache: "no-store" })
             .then((resp) => resp.json())
             .then((data) => {

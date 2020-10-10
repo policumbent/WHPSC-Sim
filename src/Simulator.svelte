@@ -115,9 +115,9 @@
   function brakeCalculator(distance: number, speed: number, power: number) {
     if(distance > trap_end + 200){
       if(distance < trap_end + 1000 && speed > 60)
-        return -2000
+        return -speed*20
       else if(distance >= trap_end + 1000 && speed > 35)
-        return -10000
+        return -speed*50
     }
     return power
   }

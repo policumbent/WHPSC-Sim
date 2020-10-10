@@ -2,12 +2,17 @@
     import ResultModel from "../models/Result";
     import {BikeSettings, UserSettings} from "../models/Settings";
     import { Email, Reddit, LinkedIn, Telegram, WhatsApp, Facebook, Twitter } from 'svelte-share-buttons-component';
-    export let result: ResultModel = new ResultModel(
-        130,
-        200,
-        new BikeSettings(30, 0.07, 1.450, 0.99, 0.005, 0.3, undefined),
-        new UserSettings(60, 180, 1),
-        'pippo'
+    import {onMount} from "svelte";
+    export let resultId;
+    const server_url = "https://www.policumbent.it/whpsc_sim_backend/results.php";
+    let result: ResultModel = new ResultModel(
+        0,
+        0,
+        new BikeSettings(0, 0, 0, 0, 0, 0, undefined),
+        new UserSettings(0, 0, 0),
+        '',
+        '',
+        ''
     );
     const title = 'WHPSC Simulator Result';
     const desc = 'Watch my result on WHPSC Simulator';
@@ -18,6 +23,27 @@
         window.history.replaceState({}, '', `${location.pathname}?${params}`);
         window.location.reload();
     }
+    onMount(() => {
+        fetch(server_url, { cache: "no-store" })
+            .then((resp) => resp.json())
+            .then((data) => {
+                const d = data.find(e => e.id === resultId);
+                if(d === undefined)
+                    clearParams();
+                const s = new BikeSettings(
+                    d.bikeSettings.bikeWeight,
+                    d.bikeSettings.wheelsInertia,
+                    d.bikeSettings.wheelsCircumference,
+                    d.bikeSettings.efficiency,
+                    d.bikeSettings.area,
+                    d.bikeSettings.cx,
+                    undefined
+                );
+                const u = new UserSettings(undefined, undefined, d.bikeSettings.rho);
+                result = new ResultModel(d.speed, s.power, s, u, d.bikeName, d.firstName, d.lastName, "", d.timestamp)
+            });
+    // .then((data) => console.log(data));
+    });
 </script>
 
 <style>
@@ -38,7 +64,7 @@
         color: gold;
     }
     .bike_name {
-        margin: 1em;
+        margin-top: 1em;
         display: block;
         text-transform: uppercase;
     }
@@ -62,14 +88,17 @@
         top: 50%; left: 50%;
         transform: translate(-50%,-50%);
         width: 500px;
+        max-width: 90%;
         height: 450px;
         border: 1px solid black;
         /*margin: 10px 2%;*/
+        background-color: #1d3040;
         padding: 0.5em;
         border-radius: 15px;
         /*box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.3);*/
         box-shadow: 0 4px 8px 0 rgb(191, 194, 199);
         transition: 0.3s;
+        z-index: 2;
     }
     .container {
         position: relative;
@@ -86,15 +115,16 @@
         letter-spacing: 2px;
     }
     .title {
-        font-size: 2.5em;
+        z-index: 0;
+        font-size: 2.2em;
         position: absolute;
-        top: 10%;
+        top: 7%;
         left: 50%;
         transform: translate(-50%, -10%);
     }
 
     .btn {
-        position: fixed;
+        position: absolute;
         bottom: 0;
         left: 50%;
         transform: translateX(-50%);
@@ -116,10 +146,10 @@
     <div class="container">
         <h1 class="title">WHPSC Simulator</h1>
         <div class="content">
-            <h1>Stefano Loscalzo</h1>
+            <h1>{result.firstName} {result.lastName}</h1>
             <span class="middle_top"><em class="big">{Math.round(result.speed)}</em>
                 .{Math.round((result.speed-Math.round(result.speed))*100)} km/h</span>
-            <span class="top right">{result.firstName} {result.lastName}</span>
+<!--            <span class="top right">{result.firstName} {result.lastName}</span>-->
             <table>
                 <tr>
                     <th>Bike Weight</th>

@@ -146,10 +146,7 @@
     color: #bfc2c7;
   }
   .bottom {
-    position: fixed;
-    bottom: 0;
-    left: 50%;
-    transform: translateX(-50%);
+    margin-top: 5em;
     margin-bottom: 1em;
   }
 </style>
@@ -166,8 +163,6 @@
               on:message={handleResult}
               bikeSettings={bike.settings}
               userSettings={getUserSettings()} />
-    {:else}
-      <Welcome on:message={startSimulation} />
       {#if getDebug()}
         <div id="power_debug_div">
           <label id="power_debug_label" for="power_debug">
@@ -181,9 +176,11 @@
                   max="1000"
                   bind:value={power} />
         </div>
-        <!--      <button on:click={handleResult}>Test save result dialog</button>-->
+        {/if}
+    {:else}
+      <Welcome on:message={startSimulation} />
 
-      {/if}
+        <!--      <button on:click={handleResult}>Test save result dialog</button>-->
       <div class="bottom">
         <Email subject="{title}" body="{desc} {url}" />
         <Reddit class="share-button" {title} {url} />
@@ -198,6 +195,6 @@
       <ResultContainer bind:openModal />
     </Modal>
   {:else}
-    <YourResultComponent />
+    <YourResultComponent resultId="{res}" />
   {/if}
 </main>
