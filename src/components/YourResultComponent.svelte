@@ -176,7 +176,7 @@
                     <td>{result.userSettings.rho}</td>
                 </tr>
                 <tr>
-                    <th>Cx</th>
+                    <th>Cd@120km/h</th>
                     <td>{result.bikeSettings.cx}</td>
                 </tr>
                 <tr>
