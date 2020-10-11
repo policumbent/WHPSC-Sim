@@ -1,8 +1,8 @@
 {
-  "name": "taurus-simulator",
-  "productName": "Taurus Simulator",
-  "version": "1.0.2",
-  "description": "Taurus Bike Simulator",
+  "name": "whpsc-simulator",
+  "productName": "WHPS Simulator",
+  "version": "1.1.0",
+  "description": "WHPSC Bike Simulator",
   "author": "Stefano Loscalzo <stefano.loscalzo@gmail.com>",
   "main": "./app/index.js",
   "scripts": {
@@ -15,11 +15,11 @@
     "deb64": "electron-installer-debian --src dist/app-linux-x64/ --dest dist/installers/ --arch amd64",
     "pack": "build --dir",
     "dist": "build",
-    "publish": "electron-builder"
+    "publish": "electron-builder -m"
   },
   "build": {
-    "appId": "taurus-simulator",
-    "productName": "Taurus Bike Simulator",
+    "appId": "whpsc-simulator",
+    "productName": "WHPSC Simulator",
     "directories": {
       "output": "release/"
     },
@@ -29,6 +29,7 @@
       "node_modules"
     ],
     "dmg": {
+      "icon": "build/icon.png",
       "contents": [
         {
           "x": 110,
@@ -43,6 +44,7 @@
       ]
     },
     "linux": {
+      "icon": "build/icon.png",
       "target": [
         "AppImage",
         "deb"
@@ -60,7 +62,6 @@
     "@tsconfig/svelte": "^1.0.0",
     "dom-to-image": "^2.6.0",
     "electron": "^11.0.0-beta.11",
-    "electron-alert": "^0.1.11",
     "electron-builder": "^22.7.0",
     "electron-builder-squirrel-windows": "^22.8.0",
     "electron-rebuild": "^2.2.0",
@@ -84,6 +85,7 @@
     "ant-plus": "^0.1.24",
     "node-fetch": "^2.6.1",
     "node-web-bluetooth": "^1.2.0",
-    "svelte-loading-spinners": "^0.1.1"
+    "svelte-loading-spinners": "^0.1.1",
+    "electron-alert": "^0.1.11"
   }
 }
