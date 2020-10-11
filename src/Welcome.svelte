@@ -40,9 +40,10 @@
     startSearch()
             .then(data => btPowerMeterPaired = data)
             .catch(error => {
-              alert('This functionality is available only in Google Chrome 83+. ' +
-                      'If you are already using it on Linux the "chrome://flags/#enable-experimental-web-platform-features" flag must be enabled.' +
-                      'For further information read this page https://github.com/WebBluetoothCG/web-bluetooth/blob/gh-pages/implementation-status.md')
+              alert('Bluetooth off or this functionality isn\'t available on this PC.')
+              // alert('This functionality is available only in Google Chrome 83+. ' +
+              //         'If you are already using it on Linux the "chrome://flags/#enable-experimental-web-platform-features" flag must be enabled.' +
+              //         'For further information read this page https://github.com/WebBluetoothCG/web-bluetooth/blob/gh-pages/implementation-status.md')
               console.log(error);
               btPowerMeterPaired = false;
             })
@@ -114,8 +115,8 @@
 <section>
   <h1>WHPSC Simulator</h1>
   <span
-    on:click={() => (sidebar_show = !sidebar_show)}
-    class="top-right-fixed click_t">
+          on:click={() => (sidebar_show = !sidebar_show)}
+          class="top-right-fixed click_t">
     <Icon class="top-right-fixed" data={gear} scale="2" />
   </span>
   <button class="btn" disabled="{!(btPowerMeterPaired || antPowerMeterPaired) && !getDebug()}" on:click={pickBike}>Start</button>

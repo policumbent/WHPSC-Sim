@@ -76,13 +76,12 @@
     <h1>Search ANT sensors</h1>
 
     <div class="content">
-
-        {#each sensors as sensor}
-            <Sensor on:click={() => sensorChosen(sensor)} sensorId={sensor}/>
-        {/each}
         {#if sensorConnected()}
             <Sensor on:click={() => sensorChosen(0)} sensorId={-1}/>
         {/if}
+        {#each sensors as sensor}
+            <Sensor on:click={() => sensorChosen(sensor)} sensorId={sensor}/>
+        {/each}
         {#if sensors.length === 0}
             <div class="loading">
                 <SyncLoader size="60" color="#FF3E00" unit="px"/>
