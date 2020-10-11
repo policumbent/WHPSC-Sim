@@ -37,6 +37,7 @@ const createWindow = async () => {
         width: 1080,
         height: 720,
         webPreferences: {
+            experimentalFeatures: true,
             nodeIntegration: true
         }
     });
@@ -56,6 +57,7 @@ const createWindow = async () => {
 
 let window = null;
 app.allowRendererProcessReuse = false;
+// app.commandLine.appendSwitch('enable-features', 'ExperimentalWebPlatform');
 app.whenReady().then(createWindow);
 app.on('window-all-closed', () => {
     // Su macOS è comune che l'applicazione e la barra menù
@@ -69,7 +71,7 @@ app.on('activate', () => {
     // Su macOS è comune ri-creare la finestra dell'app quando
     // viene cliccata l'icona sul dock e non ci sono altre finestre aperte.
     if (BrowserWindow.getAllWindows().length === 0) {
-        createWindow()
+        createWindow().then()
     }
 });
 

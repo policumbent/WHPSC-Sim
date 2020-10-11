@@ -3,17 +3,20 @@
   import {gear} from "svelte-awesome/icons";
   import Modal from "svelte-simple-modal";
   import {createEventDispatcher} from "svelte";
-  import {getDebug} from "./store"
+  import {getDebug, setBtSensorName} from "./store"
   import {startSearch} from "./BleData";
   import BikePicker from "./BikePicker.svelte";
   import Settings from "./components/Settings.svelte";
   import ResultsListContainer from "./ResultsListContainer.svelte";
   import SearchAnt from "./components/SearchAnt.svelte";
   import SearchAntContainer from "./components/SearchAntContainer.svelte";
+  import SearchBtContainer from "./components/SearchBtContainer.svelte";
+
   const dispatch = createEventDispatcher();
   let sidebar_show = false;
   let chooseBike = false;
   let searchAnt = false;
+  let searchBt = false;
   let showModal = false;
   let btPowerMeterPaired = false;
   let antPowerMeterPaired = false;
@@ -35,15 +38,18 @@
       text: event.detail.text,
     });
   }
-
+  // todo: metodo per disassociare misuratore bt
   function btSearch() {
+    searchBt = true;
     startSearch()
             .then(data => btPowerMeterPaired = data)
             .catch(error => {
-              alert('Bluetooth off or this functionality isn\'t available on this PC.')
+              if(searchBt)
+                alert('Bluetooth off or this functionality isn\'t available on this PC.')
               // alert('This functionality is available only in Google Chrome 83+. ' +
               //         'If you are already using it on Linux the "chrome://flags/#enable-experimental-web-platform-features" flag must be enabled.' +
               //         'For further information read this page https://github.com/WebBluetoothCG/web-bluetooth/blob/gh-pages/implementation-status.md')
+              searchBt = false;
               console.log(error);
               btPowerMeterPaired = false;
             })
@@ -133,6 +139,9 @@
   </Modal>
   <Modal>
     <SearchAntContainer bind:connected={antPowerMeterPaired} bind:show={searchAnt}/>
+  </Modal>
+  <Modal>
+    <SearchBtContainer bind:show={searchBt}/>
   </Modal>
   <button class="survey btn" on:click={() => window.open('https://forms.gle/hK2XADnP4FkvjtmD7','_blank')}>Survey</button>
 </section>

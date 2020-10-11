@@ -1,27 +1,21 @@
 <script lang="ts">
     import {createEventDispatcher, getContext, onDestroy, onMount} from "svelte";
-    import {startSearch, stopSearch, attachSensor, sensorConnected} from "../Ant"
-    import { getSensorsList } from "../store"
+    import { clearBtSensorName, getBtSensorName } from "../store"
     import { SyncLoader } from 'svelte-loading-spinners'
     import Sensor from "./Sensor.svelte";
     const { close } = getContext('simple-modal');
-    let sensors = [];
+    let sensorName: string;
     let interval;
     function getData(){
-        sensors = getSensorsList();
+        sensorName = getBtSensorName();
     }
     onMount(() => {
-        startSearch();
-        interval = setInterval(getData, 1000);
+        clearBtSensorName();
+        interval = setInterval(getData, 500);
     });
     onDestroy(() => {
-        stopSearch();
         clearInterval(interval);
     });
-    function sensorChosen(sensorId: number) {
-        attachSensor(sensorId);
-        close();
-    }
 </script>
 
 <style>
@@ -70,22 +64,32 @@
         display: inline-block;
         margin: 2em;
     }
-    .cursor_pointer {
+    .btn {
+        /*display: block;*/
+        pointer-events: auto;
         cursor: pointer;
+        text-align: center;
+        background-color: #ff532e;
+        color: #ffffff;
+        border: #ffffff;
+        text-transform: uppercase;
+        font-weight: 300;
+        padding: 0.5em 1em;
+        margin: 1em auto;
+    }
+    .no_click {
+        cursor: default;
     }
 </style>
 
 <div>
-    <h1>Search ANT sensors</h1>
+    <h1>Search BT sensor</h1>
 
     <div class="content">
-        {#if sensorConnected()}
-            <Sensor on:click={() => sensorChosen(0)} sensorId={-1}/>
-        {/if}
-        {#each sensors as sensor}
-            <Sensor class="cursor_pointer" on:click={() => sensorChosen(sensor)} sensorId={sensor}/>
-        {/each}
-        {#if sensors.length === 0}
+        {#if sensorName !== undefined}
+            <Sensor class="no_click" bt={true} sensorId={sensorName}/>
+            <button on:click={() => close()} class="btn">Close</button>
+        {:else}
             <div class="loading">
                 <SyncLoader size="60" color="#FF3E00" unit="px"/>
             </div>

@@ -1,5 +1,6 @@
 <script lang="ts">
-    export let sensorId: number;
+    export let sensorId;
+    export let bt = false;
 </script>
 
 <style>
@@ -10,7 +11,6 @@
         height: 100px;
         /*background: #1d3040;*/
         margin: 5px;
-        cursor: pointer;
 
         /*padding: 0.5em;*/
         border-radius: 15px;
@@ -63,7 +63,7 @@
 <div>
     <div class="container" on:click>
         {#if sensorId !== -1}
-            <span>Sensor id:<em class="space"></em><em>{sensorId}</em></span>
+            <span>Sensor {bt ? 'name' : 'id'}:<em class="space"></em><em>{sensorId}</em></span>
             <img class="image" src="img/power.svg" alt="" />
         {:else}
             <span class="detach">Detach</span>

@@ -3,6 +3,7 @@ import type {BleMeter} from "./models/bt/BleMeter";
 import {BlePowerMeter} from "./models/bt/BlePowerMeter";
 // import {BlePowerCadenceMeter} from "./models/bt/BlePowerCadenceMeter";
 import {CyclingPowerMeasurementParser} from "./models/bt/CyclingPowerMeasurementParser";
+import {setBtSensorName} from "./store";
 // const Bluetooth	= require('node-web-bluetooth');
 // declare function require(name:string);
 // const Bluetooth = require('node-web-bluetooth');
@@ -25,9 +26,18 @@ export async function startSearch() {
     console.log('Requesting Bluetooth Device...');
 
     // @ts-ignore
-    let device = await navigator.bluetooth.requestDevice(options);
+    let device = await navigator.bluetooth
+        .requestDevice(options)
+        // .then(device => {
+        console.log('> Name:             ' + device.name);
+        console.log('> Id:               ' + device.id);
+        console.log('> Connected:        ' + device.gatt.connected);
+        // })
+        // .catch(error => {
+        //     console.log('Argh! ' + error);
+        // });
     let server = await device.gatt.connect();
-
+    setBtSensorName(device.name);
     console.log(device);
     console.log(server);
 

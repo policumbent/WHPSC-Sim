@@ -53,3 +53,8 @@ export let addSensorsToList = (value: number) => {
 }
 export let getSensorsList = (): number[] => sensors;
 export let clearSensorsList = () => sensors = [];
+
+let btSensorName: string;
+export let setBtSensorName = (value: string) => btSensorName = value
+export let getBtSensorName = (): string => btSensorName;
+export let clearBtSensorName = () => btSensorName = undefined;
