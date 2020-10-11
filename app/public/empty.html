@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset='utf-8'>
+	<meta name='viewport' content='width=device-width,initial-scale=1'>
+	<link rel='stylesheet' href='loading.css'>
+	<title>WHPSC Simulator</title>
+
+</head>
+<body>
+<!--https://codepen.io/mr_alien/pen/FDLjg?q=loader&limit=all&type=type-pens-->
+<!--https://codepen.io/dmaristem/pen/RLeXXK-->
+<!--https://codepen.io/lucawater/pen/feuar-->
+<!--http://pixel-industry.com/blog/animate-bicycle-svg-with-css/-->
+<!-- A loose HTML + CSS translation of Dribble shot "Cycling" by Moncho Massé -->
+<div>
+	<!-- Box to contain the bike -->
+	<div class="box">
+		<!-- The Whole Bike -->
+		<div class="bike">
+			<!-- Components of the bike -->
+			<!-- Back wheel -->
+			<div class="back-wheel">
+				<!-- Inside the wheel -->
+				<div class="cassette">
+					<!-- Spokes ~ the numbers are clock number orientation-->
+					<div class="_12-6"></div>
+					<div class="_1-7"></div>
+					<div class="_2-8"></div>
+					<div class="_3-9"></div>
+					<div class="_4-10"></div>
+					<div class="_5-11"></div>
+				</div>
+			</div>
+			<div class="hub"></div>
+
+			<!-- Front wheel -->
+			<div class="front-wheel">
+				<!-- Inside the wheel -->
+				<div class="cassette">
+					<!-- Spokes -->
+					<div class="_12-6"></div>
+					<div class="_1-7"></div>
+					<div class="_2-8"></div>
+					<div class="_3-9"></div>
+					<div class="_4-10"></div>
+					<div class="_5-11"></div>
+					<div class="_6-12"></div>
+				</div>
+			</div>
+
+			<!-- Handlebar -->
+			<div class="handlebar">
+				<div class="bar headset"></div>
+				<div class="bar stem"></div>
+				<div class="bar hb1"></div>
+				<dv class="bar hb2"></div>
+		</div>
+
+		<!-- Seat -->
+		<div class="seat">
+		</div>
+
+		<!-- Bike frame -->
+		<div class="body-frame">
+			<div class="bk-upper"></div>
+			<div class="bk-lower"></div>
+			<div class="fr-upper"></div>
+			<div class="fr-lower"></div>
+			<div class="seat-frame">
+				<div class="seatpost"></div>
+			</div>
+			<div class="handlebar-frame"></div>
+		</div>
+
+
+		<!-- Crankset -->
+		<div class="crank">
+		</div>
+
+		<div class="crankset">
+		</div>
+
+		<!-- Chain -->
+		<div class="chain-upp"></div>
+		<div class="chain-lo"></div>
+
+		<!-- Bike Shadow -->
+		<div class="bike-shadow"></div>
+
+		<!-- Streaks of ground-light -->
+		<div class="streak1"></div>
+		<div class="streak2"></div>
+		<div class="streak3"></div>
+		<div class="streak4"></div>
+
+
+		<!--Girl-->
+		<div class="girl">
+			<!--HEAD-->
+			<div class="face">
+				<div class="l-eye"></div>
+				<div class="r-eye"></div>
+				<div class="nose"></div>
+				<div class="mouth"></div>
+				<div class="ear">
+					<div class="ear-shadow"></div>
+				</div>
+				<div class="l-cheek"></div>
+				<div class="r-hair"></div>
+				<div class="l-hair"></div>
+				<div class="jaw-shadow"></div>
+			</div>
+
+			<div class="ponytail"></div>
+
+			<div class="neck">
+				<div class="neck-shadow"></div>
+			</div>
+
+
+			<!-- TORSO -->
+			<div class="belly">
+				<div class="back-shadow"></div>
+			</div>
+			<div class="pelvic-reg"></div>
+
+			<div class="chest">
+				<!-- ARMS -->
+				<div class="r-arm">
+					<div class="r-sleeve"></div>
+					<div class="r-a-shadow"></div>
+				</div>
+
+
+			</div>
+
+			<div class="l-arm">
+				<div class="l-sleeve"></div>
+				<div class="l-a-shadow"></div>
+			</div>
+
+			<!-- Legs -->
+			<!-- Right Leg -->
+			<div class="r-thigh">
+				<div class="r-pants"></div>
+				<div class="r-shadow"></div>
+				<div class="r-calf">
+					<!-- Sock -->
+					<div class="sock">
+						<div class="blue-top"></div>
+						<!-- Shoe -->
+						<div class="shoe-base">
+							<div class="shoe-lining"></div>
+							<div class="toecap"></div>
+							<div class="heelcap"></div>
+							<div class="shoetongue"></div>
+							<div class="lace1"></div>
+							<div class="lace2"></div>
+							<div class="pedal"></div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<!-- Left Leg -->
+			<div class="l-thigh">
+				<div class="l-shadow"></div>
+				<div class="l-calf">
+					<div class="darker sock">
+						<div class="blue-top" id="dark-blue"></div>
+						<div class="shoe-base">
+							<div class="shoe-lining"></div>
+							<div class="toecap"></div>
+							<div class="heelcap"></div>
+							<div class="shoetongue"></div>
+							<div class="lace lace1"></div>
+							<div class="lace lace2"></div>
+							<div class="pedal"></div>
+						</div>
+					</div>
+				</div>
+				<div class="l-pants"></div>
+			</div>
+
+
+
+
+			<!-- End of Girl -->
+		</div>
+
+
+
+		<!-- End of Bike -->
+	</div>
+
+	<!-- Environment -->
+	<!-- Wind -->
+	<div class="w1"></div>
+	<div class="w2"></div>
+	<div class="w3"></div>
+
+	<!-- End of box -->
+</div>
+<h1 id="loading"></h1>
+<script>
+	const changeText = () => {
+		const title = document.getElementById('loading');
+		title.innerHTML = baseText + '. '.repeat(count);
+		count === 5 ? count=0 : count++
+	}
+	let count = 0;
+	const baseText = 'Loading '
+	changeText();
+	setInterval(changeText, 1000);
+</script>
+</body>
+</html>
+

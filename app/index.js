@@ -1,8 +1,36 @@
 const { app, BrowserWindow, Menu } = require('electron');
+const fetch = require('node-fetch');
+const Alert = require("electron-alert");
 //require('electron-reload')(__dirname);
 // let Ant = require('ant-plus');
 
-const createWindow = () => {
+async function isOnline(){
+    try {
+        const resp = await fetch('https://www.policumbent.it/whpsc_sim_backend/online.php');
+        const data = await resp.json();
+        return data.online;
+    }
+    catch (e) {
+        return false;
+    }
+}
+
+const notOnline = () => {
+    console.log('check online')
+    let alert = new Alert();
+
+    let swalOptions = {
+        title: "Event is ended!",
+        text: "You aren't online or virtual WHPSC event is ended!",
+        type: "error",
+        showCancelButton: false
+    };
+
+    let promise = alert.fireFrameless(swalOptions, null, true, false);
+    promise.then( () => app.quit())
+}
+
+const createWindow = async () => {
     // const { width, height } = screen.getPrimaryDisplay().workAreaSize;
 
     window = new BrowserWindow({
@@ -12,8 +40,9 @@ const createWindow = () => {
             nodeIntegration: true
         }
     });
-
-    window.loadFile('app/public/index.html');
+    await window.loadFile('app/public/empty.html')
+    const online = await isOnline();
+    await window.loadFile(online ? 'app/public/index.html' : 'app/public/empty.html');
 
     //Quit app when closed
     window.on('closed', ()=>app.quit());
@@ -21,6 +50,8 @@ const createWindow = () => {
     //build menu from the template
     const mainMenu = Menu.buildFromTemplate(mainMenuTemplate);
     Menu.setApplicationMenu(mainMenu);
+    if(!online)
+        notOnline();
 };
 
 let window = null;
