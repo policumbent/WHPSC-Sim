@@ -40,7 +40,7 @@
                     undefined
                 );
                 const u = new UserSettings(undefined, undefined, d.bikeSettings.rho);
-                result = new ResultModel(d.speed, s.power, s, u, d.bikeName, d.firstName, d.lastName, "", d.timestamp)
+                result = new ResultModel(d.speed, d.power, s, u, d.bikeName, d.firstName, d.lastName, "", d.timestamp)
             });
     // .then((data) => console.log(data));
     });
@@ -87,9 +87,9 @@
         position: absolute;
         top: 50%; left: 50%;
         transform: translate(-50%,-50%);
-        width: 500px;
+        width: 460px;
         max-width: 90%;
-        height: 450px;
+        height: 500px;
         border: 1px solid black;
         /*margin: 10px 2%;*/
         background-color: #1d3040;
@@ -147,8 +147,8 @@
         <h1 class="title">WHPSC Simulator</h1>
         <div class="content">
             <h1>{result.firstName} {result.lastName}</h1>
-            <span class="middle_top"><em class="big">{Math.round(result.speed)}</em>
-                .{Math.round((result.speed-Math.round(result.speed))*100)} km/h</span>
+            <span class="middle_top"><em class="big">{Math.trunc(result.speed)}</em>
+                .{Math.round((result.speed-Math.trunc(result.speed))*100)} km/h</span>
 <!--            <span class="top right">{result.firstName} {result.lastName}</span>-->
             <table>
                 <tr>
@@ -176,8 +176,12 @@
                     <td>{result.userSettings.rho}</td>
                 </tr>
                 <tr>
-                    <th>Cx</th>
+                    <th>Cd@120km/h</th>
                     <td>{result.bikeSettings.cx}</td>
+                </tr>
+                <tr>
+                    <th>Average Power</th>
+                    <td>{result.power}W</td>
                 </tr>
             </table>
             <span class="bike_name">{result.bikeName}</span>
