@@ -42,15 +42,16 @@ const createWindow = async () => {
         }
     });
     await window.loadFile('app/public/empty.html')
+    //build menu from the template
+    const mainMenu = Menu.buildFromTemplate(mainMenuTemplate);
+    Menu.setApplicationMenu(mainMenu);
     const online = await isOnline();
     await window.loadFile(online ? 'app/public/index.html' : 'app/public/empty.html');
 
     //Quit app when closed
     window.on('closed', ()=>app.quit());
 
-    //build menu from the template
-    const mainMenu = Menu.buildFromTemplate(mainMenuTemplate);
-    Menu.setApplicationMenu(mainMenu);
+
     if(!online)
         notOnline();
 };
@@ -92,6 +93,9 @@ const mainMenuTemplate = [
                 click(){
                     app.quit();
                 }
+            },
+            {
+                role: 'reload'
             }
         ]
     }
@@ -106,8 +110,6 @@ if(process.env.NODE_ENV !== 'production'){
             click(item, focusedWindow) {
                 focusedWindow.webContents.toggleDevTools();
             }
-        },{
-            role: 'reload'
         }
         ]
     });
