@@ -147,8 +147,8 @@
         <h1 class="title">WHPSC Simulator</h1>
         <div class="content">
             <h1>{result.firstName} {result.lastName}</h1>
-            <span class="middle_top"><em class="big">{Math.round(result.speed)}</em>
-                .{Math.round((result.speed-Math.round(result.speed))*100)} km/h</span>
+            <span class="middle_top"><em class="big">{Math.trunc(result.speed)}</em>
+                .{Math.round((result.speed-Math.trunc(result.speed))*100)} km/h</span>
 <!--            <span class="top right">{result.firstName} {result.lastName}</span>-->
             <table>
                 <tr>
