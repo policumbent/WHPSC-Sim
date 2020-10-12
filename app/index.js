@@ -35,7 +35,7 @@ const createWindow = async () => {
 
     window = new BrowserWindow({
         width: 1080,
-        height: 720,
+        height: 750,
         webPreferences: {
             experimentalFeatures: true,
             nodeIntegration: true
