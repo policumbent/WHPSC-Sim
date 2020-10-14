@@ -1,5 +1,6 @@
-let Ant = require('ant-plus');
 import {addSensorsToList, clearSensorsList, powerValue} from "./store"
+let Ant = require('ant-plus');
+
 // const dgram = require('dgram');
 let stick = new Ant.GarminStick2;
 let stickStarted = false;

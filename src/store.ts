@@ -10,7 +10,7 @@ export const getDebug = () => {
     const storageValue = localStorage.getItem("debug");
     return storageValue==='true';
 }
-export let getSettings = (): BikeSettings =>{
+export const getSettings = (): BikeSettings =>{
     function toSettingsType(storageValue: any[]) {
         // todo: trovare un metodo più bello
         return new BikeSettings(
@@ -27,7 +27,7 @@ export let getSettings = (): BikeSettings =>{
     return storageValue===null ? newSettings: toSettingsType(JSON.parse(storageValue));
 };
 
-export let getUserSettings = () => {
+export const getUserSettings = () => {
     function toSettingsType(storageValue) {
         // todo: trovare un metodo più bello
         return new UserSettings(
@@ -40,21 +40,21 @@ export let getUserSettings = () => {
     return storageValue===null ? newUserSettings: toSettingsType(JSON.parse(storageValue));
 };
 
-export let saveBikeSettings = (value) =>
+export const saveBikeSettings = (value) =>
     localStorage.setItem("bike_settings", JSON.stringify(value));
-export let saveUserSettings = (value) =>
+export const saveUserSettings = (value) =>
     localStorage.setItem("user_settings", JSON.stringify(value));
-export let saveDebug = (value) => localStorage.setItem("debug", value);
+export const saveDebug = (value) => localStorage.setItem("debug", value);
 
 let sensors: number[] = [];
-export let addSensorsToList = (value: number) => {
+export const addSensorsToList = (value: number) => {
     if(sensors.findIndex(e => e === value) === -1)
         sensors.push(value);
 }
-export let getSensorsList = (): number[] => sensors;
-export let clearSensorsList = () => sensors = [];
+export const getSensorsList = (): number[] => sensors;
+export const clearSensorsList = () => sensors = [];
 
 let btSensorName: string;
-export let setBtSensorName = (value: string) => btSensorName = value
-export let getBtSensorName = (): string => btSensorName;
-export let clearBtSensorName = () => btSensorName = undefined;
+export const setBtSensorName = (value: string) => btSensorName = value
+export const getBtSensorName = (): string => btSensorName;
+export const clearBtSensorName = () => btSensorName = undefined;
