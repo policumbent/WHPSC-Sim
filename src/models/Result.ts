@@ -34,12 +34,13 @@ export default class ResultModel {
     this.userSettings = userSettings;
     this.expanded = expanded;
     timestamp.concat(" ");
+    timestamp.concat(" ");
     const t = timestamp.split(/[- :]/);
-    console.log(timestamp);
-    console.log(t);
+    // console.log(timestamp);
+    // console.log(t);
     this.datetime = new Date(Date.UTC(
       Number(t[0]),
-      Number(t[1]),
+      Number(t[1])-1,
       Number(t[2]),
       Number(t[3]),
       Number(t[4]),
@@ -48,7 +49,7 @@ export default class ResultModel {
   }
 
   get date(): string {
-    return `${this.datetime.getDate()}/${this.datetime.getMonth()}/${this.datetime.getFullYear()}`;
+    return `${this.datetime.getDate()}/${this.datetime.getMonth()+1}/${this.datetime.getFullYear()}`;
   }
   checkTime(i) {
         return (i < 10) ? '0' + i : i;

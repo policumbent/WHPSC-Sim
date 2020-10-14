@@ -11,14 +11,14 @@
     result.expanded = !expanded;
     results = [...results];
   };
-  // const s = new BikeSettings(50, 0.44, 1450, 0.99, 1, 1, undefined);
-  // const u = new UserSettings(undefined, undefined, 1.01);
+  const s = new BikeSettings(50, 0.44, 1450, 0.99, 1, 1, undefined);
+  const u = new UserSettings(undefined, undefined, 1.01);
   let results: ResultModel[] = [
-    // new ResultModel(100, s, u, 'Taurus', 'Stefano Luigi', 'Loscalzo', undefined, '2020-09-06 20:27:04', true),
-    // new ResultModel(100, s, u, 'Mtb', 'Test', 'Test', undefined, '2020-09-06 20:27:04'),
-    // new ResultModel(100, s, u,'ParolaLunga', 'Test', 'Test', undefined, '2020-09-06 20:27:04'),
-    // new ResultModel(100, s, u, 'Pulsar', 'Parola lunghissimissima', 'Test lungoooooooooooo', undefined, '2020-09-06 20:27:04'),
-    // new ResultModel(100, s, u, 'Varna', 'Test', 'Test', undefined, '2020-09-06 20:27:04')
+    // new ResultModel(100, 100, s, u, 'Taurus', 'Stefano Luigi', 'Loscalzo', undefined, '2020-10-14 17:36:21', true),
+    // new ResultModel(100, 200, s, u, 'Mtb', 'Test', 'Test', undefined, '2020-09-06 20:27:04'),
+    // new ResultModel(100, 399.2, s, u,'ParolaLunga', 'Test', 'Test', undefined, '2020-09-06 20:27:04'),
+    // new ResultModel(100, 33.32222222, s, u, 'Pulsar', 'Parola lunghissimissima', 'Test lungoooooooooooo', undefined, '2020-09-06 20:27:04'),
+    // new ResultModel(100, 33.5534235,s, u, 'Varna', 'Test', 'Test', undefined, '2020-09-06 20:27:04')
   ];
 
   onMount(() => {

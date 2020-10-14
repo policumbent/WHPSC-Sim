@@ -157,7 +157,7 @@
                 </tr>
                 <tr>
                     <th>Wheels Inertia</th>
-                    <td>{result.bikeSettings.wheelsInertia}</td>
+                    <td>{result.bikeSettings.wheelsInertia}J/s²</td>
                 </tr>
                 <tr>
                     <th>Wheels Circumference</th>
@@ -173,7 +173,7 @@
                 </tr>
                 <tr>
                     <th>Rho</th>
-                    <td>{result.userSettings.rho}</td>
+                    <td>{result.userSettings.rho}kg/m³</td>
                 </tr>
                 <tr>
                     <th>Cd@120km/h</th>
@@ -181,7 +181,7 @@
                 </tr>
                 <tr>
                     <th>Average Power</th>
-                    <td>{result.power}W</td>
+                    <td>{Math.round(result.power)}W</td>
                 </tr>
             </table>
             <span class="bike_name">{result.bikeName}</span>

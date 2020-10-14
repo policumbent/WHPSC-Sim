@@ -1,5 +1,5 @@
 <script lang="ts">
-  import type ResultModel from "../models/Result";
+  import ResultModel from "../models/Result";
 
   export let result: ResultModel;
   let minSize = window.innerWidth < 550 ? '150px' : '100px';
@@ -12,10 +12,10 @@
     maxSize = window.innerWidth < 550 ? '330px' : '200px';
     width = window.innerWidth;
     height = !result.expanded ? minSize : maxSize;
-    console.log(minSize);
+    // console.log(minSize);
   }
   $: height = !result.expanded ? minSize : maxSize;
-  $: console.log('H:', height);
+  // $: console.log('H:', height);
 
 </script>
 
@@ -179,11 +179,11 @@
           </tr>
           <tr>
             <td>{result.bikeSettings.bikeWeight}kg</td>
-            <td>{result.bikeSettings.wheelsInertia}</td>
+            <td>{result.bikeSettings.wheelsInertia}J/s²</td>
             <td>{result.bikeSettings.wheelsCircumference}m</td>
             <td>{result.bikeSettings.efficiency}</td>
             <td>{result.bikeSettings.area}m²</td>
-            <td>{result.userSettings.rho}</td>
+            <td>{result.userSettings.rho}kg/m³</td>
             <td>{result.bikeSettings.cx}</td>
           </tr>
         {:else}
@@ -193,7 +193,7 @@
           </tr>
           <tr>
             <th>Wheels Inertia</th>
-            <td>{result.bikeSettings.wheelsInertia}</td>
+            <td>{result.bikeSettings.wheelsInertia}J/s²</td>
           </tr>
           <tr>
             <th>Wheels Circumference</th>
@@ -209,7 +209,7 @@
           </tr>
           <tr>
             <th>Rho</th>
-            <td>{result.userSettings.rho}</td>
+            <td>{result.userSettings.rho}kg/m³</td>
           </tr>
           <tr>
             <th>Cd@120km/h</th>

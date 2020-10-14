@@ -50,7 +50,7 @@
 
   onMount(() => {
     const params = new URLSearchParams(window.location.search);
-    console.log(params.get('res'));
+    // console.log(params.get('res'));
     res = params.get('res');
   })
 
