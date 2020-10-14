@@ -3,13 +3,13 @@
 
   export let result: ResultModel;
   let minSize = window.innerWidth < 550 ? '150px' : '100px';
-  let maxSize = window.innerWidth < 550 ? '330px' : '200px';
+  let maxSize = window.innerWidth < 550 ? '370px' : '350px';
   let width = window.innerWidth;
   window.onresize = setSize;
   let height = !result.expanded ? minSize : maxSize;
   function setSize() {
     minSize = window.innerWidth < 550 ? '150px' : '100px';
-    maxSize = window.innerWidth < 550 ? '330px' : '200px';
+    maxSize = window.innerWidth < 550 ? '370px' : '350px';
     width = window.innerWidth;
     height = !result.expanded ? minSize : maxSize;
     // console.log(minSize);
@@ -119,7 +119,7 @@
 
   table {
     position: absolute;
-    top: calc(60px + 20%);
+    top: calc(60px + 15%);
     width: 90%;
     text-align: left;
     margin-left: 5%;
@@ -167,55 +167,59 @@
     <span class="top right">{result.firstName} {result.lastName}</span>
     {#if result.expanded}
       <table>
-        {#if width>550}
-          <tr>
-            <th>Bike Weight</th>
-            <th>Wheels Inertia</th>
-            <th>Wheels Circumference</th>
-            <th>Efficiency</th>
-            <th>Area</th>
-            <th>Rho</th>
-            <th>Cd@120km/h</th>
-          </tr>
-          <tr>
-            <td>{result.bikeSettings.bikeWeight}kg</td>
-            <td>{result.bikeSettings.wheelsInertia}J/s²</td>
-            <td>{result.bikeSettings.wheelsCircumference}m</td>
-            <td>{result.bikeSettings.efficiency}</td>
-            <td>{result.bikeSettings.area}m²</td>
-            <td>{result.userSettings.rho}kg/m³</td>
-            <td>{result.bikeSettings.cx}</td>
-          </tr>
-        {:else}
-          <tr>
-            <th>Bike Weight</th>
-            <td>{result.bikeSettings.bikeWeight}kg</td>
-          </tr>
-          <tr>
-            <th>Wheels Inertia</th>
-            <td>{result.bikeSettings.wheelsInertia}J/s²</td>
-          </tr>
-          <tr>
-            <th>Wheels Circumference</th>
-            <td>{result.bikeSettings.wheelsCircumference}m</td>
-          </tr>
-          <tr>
-            <th>Efficiency</th>
-            <td>{result.bikeSettings.efficiency}</td>
-          </tr>
-          <tr>
-            <th>Area</th>
-            <td>{result.bikeSettings.area}m²</td>
-          </tr>
-          <tr>
-            <th>Rho</th>
-            <td>{result.userSettings.rho}kg/m³</td>
-          </tr>
-          <tr>
-            <th>Cd@120km/h</th>
-            <td>{result.bikeSettings.cx}</td>
-          </tr>
-        {/if}
+        <!--{#if width>550}-->
+        <!--  <tr>-->
+        <!--    <th>Bike Weight</th>-->
+        <!--    <th>Wheels Inertia</th>-->
+        <!--    <th>Wheels Circumference</th>-->
+        <!--    <th>Efficiency</th>-->
+        <!--    <th>Area</th>-->
+        <!--    <th>Rho</th>-->
+        <!--    <th>Cd@120km/h</th>-->
+        <!--  </tr>-->
+        <!--  <tr>-->
+        <!--    <td>{result.bikeSettings.bikeWeight}kg</td>-->
+        <!--    <td>{result.bikeSettings.wheelsInertia}J/s²</td>-->
+        <!--    <td>{result.bikeSettings.wheelsCircumference}m</td>-->
+        <!--    <td>{result.bikeSettings.efficiency}</td>-->
+        <!--    <td>{result.bikeSettings.area}m²</td>-->
+        <!--    <td>{result.userSettings.rho}kg/m³</td>-->
+        <!--    <td>{result.bikeSettings.cx}</td>-->
+        <!--  </tr>-->
+        <!--{:else}-->
+        <tr>
+          <th>Bike Weight</th>
+          <td>{result.bikeSettings.bikeWeight} kg</td>
+        </tr>
+        <tr>
+          <th>Wheels Inertia</th>
+          <td>{result.bikeSettings.wheelsInertia} J/s²</td>
+        </tr>
+        <tr>
+          <th>Wheels Circumference</th>
+          <td>{result.bikeSettings.wheelsCircumference} m</td>
+        </tr>
+        <tr>
+          <th>Efficiency</th>
+          <td>{result.bikeSettings.efficiency}</td>
+        </tr>
+        <tr>
+          <th>Area</th>
+          <td>{result.bikeSettings.area} m²</td>
+        </tr>
+        <tr>
+          <th>Rho</th>
+          <td>{result.userSettings.rho} kg/m³</td>
+        </tr>
+        <tr>
+          <th>Cd@120km/h</th>
+          <td>{result.bikeSettings.cx}</td>
+        </tr>
+        <tr>
+          <th>Average Power</th>
+          <td>{result.power} W</td>
+        </tr>
+        <!--{/if}-->
       </table>
 
     {/if}
