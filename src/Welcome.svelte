@@ -103,11 +103,32 @@
   .results {
     display: block;
   }
+  .triangle-top-left {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 0;
+    height: 0;
+    border-top: 100px solid yellow;
+    border-right: 100px solid transparent;
+  }
+  .beta {
+    position: fixed;
+    font-size: 2em;
+    font-weight: 100;
+    transform: rotate(-45deg);
+    top: 14px;
+    left: 0;
+    color: black;
+    z-index: 99;
+  }
 </style>
 
 <Settings bind:show={sidebar_show} />
 
 <section>
+  <div class="triangle-top-left"></div>
+  <span class="beta">BETA</span>
   <h1>WHPSC Simulator</h1>
   <span
     on:click={() => (sidebar_show = !sidebar_show)}

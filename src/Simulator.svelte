@@ -175,10 +175,12 @@
     const v = 3.6*Math.pow(2*(e_k0+e_kr0+e_w+e_u-a_a-a_r)
             /((bikeSettings.bikeWeight+userSettings.riderWeight)
                     +bikeSettings.wheelsInertia/Math.pow(bikeSettings.wheelsRadius, 2)), 1/2);
-  return v > 0 ? v: 0
+    return v > 0 ? v: 0
   }
   // azioni che compio quando gli stati vengono aggiornati
   $: {
+    if (distance < 1)
+      time = 0;
     if (distance > 1 && distance<trap_end){
       powerCount++;
       powerSum += power;
@@ -282,6 +284,11 @@
     overflow: hidden;
   }
 
+  #start_message {
+    color: white;
+    font-size: 5em;
+  }
+
   /* #video_div {
     position: relative;
   } */
@@ -304,6 +311,9 @@
       </div>
       <div class="overlay bottom_right">Power: {power} W</div>
       <div class="overlay center">{trap_info}</div>
+      {#if distance<1}
+        <div id="start_message" class="overlay center">Start pedaling!!</div>
+      {/if}
       {#if buffering}
         <div class="overlay center2">Slow internet connection!</div>
       {/if}
