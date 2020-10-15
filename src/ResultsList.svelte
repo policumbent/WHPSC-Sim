@@ -13,7 +13,7 @@
   };
   let error = false;
   // const s = new BikeSettings(50, 0.44, 1450, 0.99, 1, 1, undefined);
-  // const u = new UserSettings(undefined, undefined, 1.01);
+  // const u = new UserSettings(undefined, undefined, 1.01, 100, 200);
   let results: ResultModel[] = [
     // new ResultModel(100, 100, s, u, 'Taurus', 'Stefano Luigi', 'Loscalzo', undefined, '2020-10-14 17:36:21', true),
     // new ResultModel(100, 200, s, u, 'Mtb', 'Test', 'Test', undefined, '2020-09-06 20:27:04'),
@@ -27,10 +27,9 @@
             .then((resp) => {
               if(resp.status !== 200)
                 throw new Error('Something went wrong');
-              resp.json();
+              return resp.json();
             })
             .then((data) => {
-              console.log(data);
               let v: ResultModel[] = [];
               data.forEach((e) => {
                 const s = new BikeSettings(
@@ -47,9 +46,9 @@
                         e.userSettings.riderWeight,
                         e.userSettings.temperature,
                         e.userSettings.altitude,
-                        e.bikeSettings.humidity);
+                        e.userSettings.humidity);
                 v.push(
-                        new ResultModel(e.speed, s.power, s, u, e.bikeName, e.firstName, e.lastName, "", e.timestamp)
+                        new ResultModel(e.speed, e.power, s, u, e.bikeName, e.firstName, e.lastName, "", e.timestamp)
                 );
               });
               // console.log(v);
@@ -61,7 +60,7 @@
               console.log(e);
               error = true;
             });
-    // .then((data) => console.log(data));
+            // .then((data) => console.log(data));
   });
 </script>
 

@@ -3,13 +3,13 @@
 
     export let result: ResultModel;
     let minSize = window.innerWidth < 550 ? '150px' : '100px';
-    let maxSize = window.innerWidth < 550 ? '370px' : '350px';
+    let maxSize = window.innerWidth < 550 ? '430px' : '370px';
     let width = window.innerWidth;
     window.onresize = setSize;
     let height = !result.expanded ? minSize : maxSize;
     function setSize() {
         minSize = window.innerWidth < 550 ? '150px' : '100px';
-        maxSize = window.innerWidth < 550 ? '370px' : '350px';
+        maxSize = window.innerWidth < 550 ? '430px' : '370px';
         width = window.innerWidth;
         height = !result.expanded ? minSize : maxSize;
         // console.log(minSize);
@@ -206,7 +206,7 @@
                 </tr>
                 <tr>
                     <th>Average Power</th>
-                    <td>{result.power} W</td>
+                    <td>{Math.round(result.power)} W</td>
                 </tr>
             </table>
 
