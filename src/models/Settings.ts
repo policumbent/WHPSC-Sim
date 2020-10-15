@@ -8,13 +8,13 @@ class BikeSettings {
   private readonly _coefficientsFile: string;
 
   constructor(
-    bikeWeight: number,
-    wheelsInertia: number,
-    wheelsCircumference: number,
-    efficiency: number,
-    area: number,
-    cx: number,
-    coefficientsFile: string,
+      bikeWeight: number,
+      wheelsInertia: number,
+      wheelsCircumference: number,
+      efficiency: number,
+      area: number,
+      cx: number,
+      coefficientsFile: string,
   ) {
     this._bikeWeight = bikeWeight;
     this._wheelsInertia = wheelsInertia;
@@ -61,24 +61,54 @@ class BikeSettings {
 class UserSettings {
   private readonly _riderWeight: number;
   private readonly _riderHeight: number;
+  private readonly _temperature: number;
+  private readonly _altitude: number;
+  private readonly _humidity: number;
   private readonly _rho: number;
 
-constructor(riderWeight: number, riderHeight: number, rho: number) {
-      this._riderWeight = riderWeight;
-      this._riderHeight = riderHeight;
-      this._rho = rho;
+  constructor(
+      riderWeight: number,
+      riderHeight: number,
+      temperature: number,
+      altitude:number,
+      humidity: number) {
+    this._riderWeight = riderWeight;
+    this._riderHeight = riderHeight;
+    this._altitude = altitude;
+    this._temperature = temperature;
+    this._humidity = humidity;
+    const p = 6.1078*Math.pow(10, ((7.5*(temperature + 273.15)-2048.625)/(this.temperature+273.15-35.85)));
+    this._rho = (this.pressure(altitude)*100-humidity*p) /
+        (287.05*(temperature+273.15)) + (humidity*p) /
+        (461.495*(temperature+273.15));
+    // console.log('rho', this._rho);
+  }
+  pressure(altitude: number): number {
+    return 10.1325*(-0.0101*altitude+98.7);
   }
 
-get riderWeight(): number {
-  return this._riderWeight;
-}
+  get riderWeight(): number {
+    return this._riderWeight;
+  }
 
   get riderHeight(): number {
-      return this._riderHeight;
+    return this._riderHeight;
   }
 
   get rho(): number {
-      return this._rho;
+    return this._rho;
+  }
+
+  get temperature(): number {
+    return this._temperature;
+  }
+
+  get altitude(): number {
+    return this._altitude;
+  }
+
+  get humidity(): number {
+    return this._humidity;
   }
 }
 
@@ -89,10 +119,10 @@ class Bike {
   settings: BikeSettings;
 
   constructor(
-    bikeName: string,
-    imgSrc: string,
-    description: string,
-    settings: BikeSettings,
+      bikeName: string,
+      imgSrc: string,
+      description: string,
+      settings: BikeSettings,
   ) {
     this.bikeName = bikeName;
     this.imgSrc = imgSrc;
