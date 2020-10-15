@@ -11,8 +11,8 @@
     result.expanded = !expanded;
     results = [...results];
   };
-  const s = new BikeSettings(50, 0.44, 1450, 0.99, 1, 1, undefined);
-  const u = new UserSettings(undefined, undefined, 1.01);
+  // const s = new BikeSettings(50, 0.44, 1450, 0.99, 1, 1, undefined);
+  // const u = new UserSettings(undefined, undefined, 1.01);
   let results: ResultModel[] = [
     // new ResultModel(100, 100, s, u, 'Taurus', 'Stefano Luigi', 'Loscalzo', undefined, '2020-10-14 17:36:21', true),
     // new ResultModel(100, 200, s, u, 'Mtb', 'Test', 'Test', undefined, '2020-09-06 20:27:04'),
@@ -34,9 +34,14 @@
                         e.bikeSettings.efficiency,
                         e.bikeSettings.area,
                         e.bikeSettings.cx,
-                        undefined
+                        e.bikeSettings.coefficientsFile
                 );
-                const u = new UserSettings(undefined, undefined, e.bikeSettings.rho);
+                const u = new UserSettings(
+                        e.userSettings.riderWeight,
+                        e.userSettings.riderWeight,
+                        e.userSettings.temperature,
+                        e.userSettings.altitude,
+                        e.bikeSettings.humidity);
                 v.push(
                         new ResultModel(e.speed, s.power, s, u, e.bikeName, e.firstName, e.lastName, "", e.timestamp)
                 );

@@ -31,7 +31,7 @@
   let ended = false;
   let sum = 0;
   let count_speed = 0;
-  let intro_count = 10;
+  let intro_count = 11;
   let intro_message = '';
 
   async function start() {
@@ -102,9 +102,10 @@
 
   async function intervalCountdown() {
     switch (intro_count) {
+      case 11:
       case 10:
       case 9:
-        intro_message = 'The run length is 5mi (about 8 km)!'
+        intro_message = 'The length of the track is 5mi (about 8 km)!'
         break;
       case 8:
       case 7:
@@ -115,7 +116,7 @@
       case 4:
       case 3:
       case 2:
-        intro_message = 'You can evaluate the distance until the end reading road signs on the right.'
+        intro_message = 'You can evaluate the distance to the end reading road signs on the right.'
         break;
       case 1:
       case 0:
