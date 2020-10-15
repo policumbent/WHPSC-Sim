@@ -9,7 +9,7 @@
         0,
         0,
         new BikeSettings(0, 0, 0, 0, 0, 0, undefined),
-        new UserSettings(0, 0, 0),
+        new UserSettings(0, 0, 0, 0, 0),
         '',
         '',
         ''
@@ -42,7 +42,7 @@
                 const u = new UserSettings(undefined, undefined, d.bikeSettings.rho);
                 result = new ResultModel(d.speed, d.power, s, u, d.bikeName, d.firstName, d.lastName, "", d.timestamp)
             });
-    // .then((data) => console.log(data));
+        // .then((data) => console.log(data));
     });
 </script>
 
@@ -149,7 +149,7 @@
             <h1>{result.firstName} {result.lastName}</h1>
             <span class="middle_top"><em class="big">{Math.trunc(result.speed)}</em>
                 .{Math.round((result.speed-Math.trunc(result.speed))*100)} km/h</span>
-<!--            <span class="top right">{result.firstName} {result.lastName}</span>-->
+            <!--            <span class="top right">{result.firstName} {result.lastName}</span>-->
             <table>
                 <tr>
                     <th>Bike Weight</th>
@@ -157,11 +157,11 @@
                 </tr>
                 <tr>
                     <th>Wheels Inertia</th>
-                    <td>{result.bikeSettings.wheelsInertia}</td>
+                    <td>{result.bikeSettings.wheelsInertia} J/s²</td>
                 </tr>
                 <tr>
                     <th>Wheels Circumference</th>
-                    <td>{result.bikeSettings.wheelsCircumference}m</td>
+                    <td>{result.bikeSettings.wheelsCircumference} m</td>
                 </tr>
                 <tr>
                     <th>Efficiency</th>
@@ -169,11 +169,19 @@
                 </tr>
                 <tr>
                     <th>Area</th>
-                    <td>{result.bikeSettings.area}m²</td>
+                    <td>{result.bikeSettings.area} m²</td>
                 </tr>
                 <tr>
-                    <th>Rho</th>
-                    <td>{result.userSettings.rho}</td>
+                    <th>Altitude</th>
+                    <td>{result.userSettings.altitude} m</td>
+                </tr>
+                <tr>
+                    <th>Temperature</th>
+                    <td>{result.userSettings.temperature} °C</td>
+                </tr>
+                <tr>
+                    <th>Humidity</th>
+                    <td>{result.userSettings.humidity} %</td>
                 </tr>
                 <tr>
                     <th>Cd@120km/h</th>
@@ -181,7 +189,7 @@
                 </tr>
                 <tr>
                     <th>Average Power</th>
-                    <td>{result.power}W</td>
+                    <td>{Math.round(result.power)} W</td>
                 </tr>
             </table>
             <span class="bike_name">{result.bikeName}</span>

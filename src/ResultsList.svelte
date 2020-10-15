@@ -11,19 +11,24 @@
     result.expanded = !expanded;
     results = [...results];
   };
+  let error = false;
   // const s = new BikeSettings(50, 0.44, 1450, 0.99, 1, 1, undefined);
-  // const u = new UserSettings(undefined, undefined, 1.01);
+  // const u = new UserSettings(undefined, undefined, 1.01, 100, 200);
   let results: ResultModel[] = [
-    // new ResultModel(100, s, u, 'Taurus', 'Stefano Luigi', 'Loscalzo', undefined, '2020-09-06 20:27:04', true),
-    // new ResultModel(100, s, u, 'Mtb', 'Test', 'Test', undefined, '2020-09-06 20:27:04'),
-    // new ResultModel(100, s, u,'ParolaLunga', 'Test', 'Test', undefined, '2020-09-06 20:27:04'),
-    // new ResultModel(100, s, u, 'Pulsar', 'Parola lunghissimissima', 'Test lungoooooooooooo', undefined, '2020-09-06 20:27:04'),
-    // new ResultModel(100, s, u, 'Varna', 'Test', 'Test', undefined, '2020-09-06 20:27:04')
+    // new ResultModel(100, 100, s, u, 'Taurus', 'Stefano Luigi', 'Loscalzo', undefined, '2020-10-14 17:36:21', true),
+    // new ResultModel(100, 200, s, u, 'Mtb', 'Test', 'Test', undefined, '2020-09-06 20:27:04'),
+    // new ResultModel(100, 399.2, s, u,'ParolaLunga', 'Test', 'Test', undefined, '2020-09-06 20:27:04'),
+    // new ResultModel(100, 33.32222222, s, u, 'Pulsar', 'Parola lunghissimissima', 'Test lungoooooooooooo', undefined, '2020-09-06 20:27:04'),
+    // new ResultModel(100, 33.5534235,s, u, 'Varna', 'Test', 'Test', undefined, '2020-09-06 20:27:04')
   ];
 
   onMount(() => {
     fetch(url, { cache: "no-store" })
-            .then((resp) => resp.json())
+            .then((resp) => {
+              if(resp.status !== 200)
+                throw new Error('Something went wrong');
+              return resp.json();
+            })
             .then((data) => {
               let v: ResultModel[] = [];
               data.forEach((e) => {
@@ -34,11 +39,16 @@
                         e.bikeSettings.efficiency,
                         e.bikeSettings.area,
                         e.bikeSettings.cx,
-                        undefined
+                        e.bikeSettings.coefficientsFile
                 );
-                const u = new UserSettings(undefined, undefined, e.bikeSettings.rho);
+                const u = new UserSettings(
+                        e.userSettings.riderWeight,
+                        e.userSettings.riderWeight,
+                        e.userSettings.temperature,
+                        e.userSettings.altitude,
+                        e.userSettings.humidity);
                 v.push(
-                        new ResultModel(e.speed, s.power, s, u, e.bikeName, e.firstName, e.lastName, "", e.timestamp)
+                        new ResultModel(e.speed, e.power, s, u, e.bikeName, e.firstName, e.lastName, "", e.timestamp)
                 );
               });
               // console.log(v);
@@ -46,6 +56,10 @@
               v[0].expanded = true;
               return v;
             })
+            .catch((e) => {
+              console.log(e);
+              error = true;
+            });
             // .then((data) => console.log(data));
   });
 </script>
@@ -88,10 +102,17 @@
             transparent
     );
   }
+
+  .error {
+    color: #ff3e00;
+  }
 </style>
 
 <div class="container">
   <h1>Results</h1>
+  {#if error}
+    <h2 class="error">An error has occurred. Retry later.</h2>
+  {/if}
   <div class="scroller">
     {#each results as result}
       <ResultComponent on:click={() => expand(result)} {result} />

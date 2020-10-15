@@ -60,9 +60,9 @@ powerSensor.on('powerData',
         powerValue.set(Math.round(power));
     });
 if (!stick.open())
-    console.log('Stick not found!')
+    console.log('Stick not found!');
 else
-    console.log('Stick connected!')
+    console.log('Stick connected!');
 // let interval = setInterval(test, 3000);
 
 // powerSensor.on('hbData',
@@ -99,8 +99,8 @@ export async function startSearch() {
 }
 
 export function stopSearch() {
-    console.log('stop search')
-    console.log(stickStarted)
+    console.log('stop search');
+    console.log(stickStarted);
     if(!stickStarted)
         return;
     if(searchStarted)
