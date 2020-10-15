@@ -32,7 +32,7 @@
   let sum = 0;
   let count_speed = 0;
   let intro_count = 11;
-  let intro_message = '';
+  let intro_message = 'Loading...';
 
   async function start() {
     if (started) return;
@@ -209,6 +209,7 @@
                     +bikeSettings.wheelsInertia/Math.pow(bikeSettings.wheelsRadius, 2)), 1/2);
     return v > 0 ? v: 0
   }
+
   // azioni che compio quando gli stati vengono aggiornati
   $: {
     if (distance < 1)

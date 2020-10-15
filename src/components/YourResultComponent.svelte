@@ -39,7 +39,12 @@
                     d.bikeSettings.cx,
                     undefined
                 );
-                const u = new UserSettings(undefined, undefined, d.bikeSettings.rho);
+                const u = new UserSettings(
+                    d.userSettings.riderWeight,
+                    d.userSettings.riderHeight,
+                    d.userSettings.temperature,
+                    d.userSettings.altitude,
+                    d.userSettings.humidity);
                 result = new ResultModel(d.speed, d.power, s, u, d.bikeName, d.firstName, d.lastName, "", d.timestamp)
             });
         // .then((data) => console.log(data));
@@ -64,7 +69,7 @@
         color: gold;
     }
     .bike_name {
-        margin-top: 1em;
+        /*margin-top: 0.5em;*/
         display: block;
         text-transform: uppercase;
     }
@@ -89,7 +94,7 @@
         transform: translate(-50%,-50%);
         width: 460px;
         max-width: 90%;
-        height: 500px;
+        height: 570px;
         border: 1px solid black;
         /*margin: 10px 2%;*/
         background-color: #1d3040;
@@ -156,6 +161,14 @@
                     <td>{result.bikeSettings.bikeWeight}kg</td>
                 </tr>
                 <tr>
+                    <th>Rider Weight</th>
+                    <td>{result.userSettings.riderWeight}kg</td>
+                </tr>
+                <tr>
+                    <th>Rider Height</th>
+                    <td>{result.userSettings.riderHeight}kg</td>
+                </tr>
+                <tr>
                     <th>Wheels Inertia</th>
                     <td>{result.bikeSettings.wheelsInertia} J/s²</td>
                 </tr>
@@ -182,6 +195,10 @@
                 <tr>
                     <th>Humidity</th>
                     <td>{result.userSettings.humidity} %</td>
+                </tr>
+                <tr>
+                    <th>Air Density</th>
+                    <td>{result.userSettings.rho} kg/m³</td>
                 </tr>
                 <tr>
                     <th>Cd@120km/h</th>
