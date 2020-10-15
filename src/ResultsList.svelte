@@ -11,6 +11,7 @@
     result.expanded = !expanded;
     results = [...results];
   };
+  let error = false;
   // const s = new BikeSettings(50, 0.44, 1450, 0.99, 1, 1, undefined);
   // const u = new UserSettings(undefined, undefined, 1.01);
   let results: ResultModel[] = [
@@ -23,8 +24,13 @@
 
   onMount(() => {
     fetch(url, { cache: "no-store" })
-            .then((resp) => resp.json())
+            .then((resp) => {
+              if(resp.status !== 200)
+                throw new Error('Something went wrong');
+              resp.json();
+            })
             .then((data) => {
+              console.log(data);
               let v: ResultModel[] = [];
               data.forEach((e) => {
                 const s = new BikeSettings(
@@ -51,7 +57,11 @@
               v[0].expanded = true;
               return v;
             })
-            // .then((data) => console.log(data));
+            .catch((e) => {
+              console.log(e);
+              error = true;
+            });
+    // .then((data) => console.log(data));
   });
 </script>
 
@@ -93,10 +103,17 @@
             transparent
     );
   }
+
+  .error {
+    color: #ff3e00;
+  }
 </style>
 
 <div class="container">
   <h1>Results</h1>
+  {#if error}
+    <h2 class="error">An error has occurred. Retry later.</h2>
+  {/if}
   <div class="scroller">
     {#each results as result}
       <ResultComponent on:click={() => expand(result)} {result} />

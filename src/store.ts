@@ -42,12 +42,6 @@ export const getUserSettings = () => {
     return storageValue===null ? newUserSettings: toSettingsType(JSON.parse(storageValue));
 };
 
-export const saveBikeSettings = (value) =>
-    localStorage.setItem("bike_settings", JSON.stringify(value));
-export const saveUserSettings = (value) =>
-    localStorage.setItem("user_settings", JSON.stringify(value));
-export const saveDebug = (value) => localStorage.setItem("debug", value);
-
 let sensors: number[] = [];
 export const addSensorsToList = (value: number) => {
     if(sensors.findIndex(e => e === value) === -1)
