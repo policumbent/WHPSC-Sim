@@ -3,13 +3,13 @@
 
     export let result: ResultModel;
     let minSize = window.innerWidth < 550 ? '150px' : '100px';
-    let maxSize = window.innerWidth < 550 ? '430px' : '370px';
+    let maxSize = window.innerWidth < 550 ? '430px' : '420px';
     let width = window.innerWidth;
     window.onresize = setSize;
     let height = !result.expanded ? minSize : maxSize;
     function setSize() {
         minSize = window.innerWidth < 550 ? '150px' : '100px';
-        maxSize = window.innerWidth < 550 ? '430px' : '370px';
+        maxSize = window.innerWidth < 550 ? '430px' : '420px';
         width = window.innerWidth;
         height = !result.expanded ? minSize : maxSize;
         // console.log(minSize);
