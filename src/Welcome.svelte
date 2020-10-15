@@ -1,19 +1,21 @@
 <script lang="ts">
   import Icon from "svelte-awesome";
-  import { gear } from "svelte-awesome/icons";
+  import {gear} from "svelte-awesome/icons";
   import Modal from "svelte-simple-modal";
-  import { createEventDispatcher } from "svelte";
-  import { getDebug } from "./store"
-  import { startSearch } from "./BleData";
+  import {createEventDispatcher} from "svelte";
+  import {getDebug} from "./store"
+  import {startSearch} from "./BleData";
   import BikePicker from "./BikePicker.svelte";
   import Settings from "./components/Settings.svelte";
   import ResultsListContainer from "./ResultsListContainer.svelte";
+  import HelpButton from "./components/HelpButton.svelte";
 
   const dispatch = createEventDispatcher();
   let sidebar_show = false;
   let chooseBike = false;
   let showModal = false;
   let powerMeterPaired = false;
+
   function pickBike() {
     chooseBike = true;
   }
@@ -32,7 +34,7 @@
     });
   }
 
-  function btSearch(){
+  function btSearch() {
     startSearch()
             .then(data => powerMeterPaired = data)
             .catch(error => {
@@ -136,11 +138,17 @@
     <Icon class="top-right-fixed" data={gear} scale="2" />
   </span>
   <button class="btn" disabled="{!powerMeterPaired && !getDebug()}" on:click={pickBike}>Start</button>
-  <button class="btn" on:click={btSearch}>Search powermeter</button>
+  <button class="btn" on:click={showResults}>Results</button>
+  <div>
+    <button class="btn" disabled="{powerMeterPaired}" on:click={btSearch}>BT powermeter</button>
+    <button class="btn" disabled="{powerMeterPaired}" on:click={() => alert('Download standalone version to use ANT+! https://github.com/policumbent/WHPSC-Sim/releases')}>ANT powermeter</button>
+  </div>
+  <Modal>
+    <HelpButton/>
+  </Modal>
   {#if chooseBike}
     <BikePicker on:message={bikeChosen} />
   {/if}
-  <button class="btn results" on:click={showResults}>Results</button>
   <Modal>
     <ResultsListContainer bind:show={showModal} />
   </Modal>
