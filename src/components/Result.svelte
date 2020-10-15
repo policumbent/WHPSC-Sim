@@ -167,26 +167,7 @@
     <span class="top right">{result.firstName} {result.lastName}</span>
     {#if result.expanded}
       <table>
-        <!--{#if width>550}-->
-        <!--  <tr>-->
-        <!--    <th>Bike Weight</th>-->
-        <!--    <th>Wheels Inertia</th>-->
-        <!--    <th>Wheels Circumference</th>-->
-        <!--    <th>Efficiency</th>-->
-        <!--    <th>Area</th>-->
-        <!--    <th>Rho</th>-->
-        <!--    <th>Cd@120km/h</th>-->
-        <!--  </tr>-->
-        <!--  <tr>-->
-        <!--    <td>{result.bikeSettings.bikeWeight}kg</td>-->
-        <!--    <td>{result.bikeSettings.wheelsInertia}J/s²</td>-->
-        <!--    <td>{result.bikeSettings.wheelsCircumference}m</td>-->
-        <!--    <td>{result.bikeSettings.efficiency}</td>-->
-        <!--    <td>{result.bikeSettings.area}m²</td>-->
-        <!--    <td>{result.userSettings.rho}kg/m³</td>-->
-        <!--    <td>{result.bikeSettings.cx}</td>-->
-        <!--  </tr>-->
-        <!--{:else}-->
+
         <tr>
           <th>Bike Weight</th>
           <td>{result.bikeSettings.bikeWeight} kg</td>
@@ -219,7 +200,6 @@
           <th>Average Power</th>
           <td>{result.power} W</td>
         </tr>
-        <!--{/if}-->
       </table>
 
     {/if}

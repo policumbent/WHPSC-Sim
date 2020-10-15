@@ -31,6 +31,8 @@
   let ended = false;
   let sum = 0;
   let count_speed = 0;
+  let intro_count = 10;
+  let intro_message = '';
 
   async function start() {
     if (started) return;
@@ -87,15 +89,44 @@
       interval = setInterval(intervalFunction, 1000);
     }
     video.preload = true;
-    await start();
     ended = false;
-    console.log(document.getElementsByClassName("relative").length);
+    await intervalCountdown()
+    interval = setInterval(intervalCountdown, 1000);
+    // console.log(document.getElementsByClassName("relative").length);
   });
 
   onDestroy(() => {
     clearInterval(interval);
     window.onresize = null;
   });
+
+  async function intervalCountdown() {
+    switch (intro_count) {
+      case 10:
+      case 9:
+        intro_message = 'The run length is 5mi (about 8 km)!'
+        break;
+      case 8:
+      case 7:
+      case 6:
+        intro_message = 'Into the last 200m we will measure your average speed!'
+        break;
+      case 5:
+      case 4:
+      case 3:
+      case 2:
+        intro_message = 'You can evaluate the distance until the end reading road signs on the right.'
+        break;
+      case 1:
+      case 0:
+        intro_message = 'Good luck!'
+        break;
+    }
+    if(--intro_count === 0){
+      clearInterval(interval);
+      await start();
+    }
+  }
 
   function intervalFunction() {
     if (power > 5000 || power < 0) {
@@ -288,6 +319,11 @@
     color: white;
     font-size: 5em;
   }
+  #countdown {
+    top: 50%;
+    color: white;
+    font-size: 8em;
+  }
 
   /* #video_div {
     position: relative;
@@ -312,7 +348,8 @@
       <div class="overlay bottom_right">Power: {power} W</div>
       <div class="overlay center">{trap_info}</div>
       {#if distance<1}
-        <div id="start_message" class="overlay center">Start pedaling!!</div>
+        <div id="start_message" class="overlay center">{intro_message}</div>
+        <div id="countdown" class="overlay center">{intro_count > 0 ? intro_count : 'Start pedaling!!'}</div>
       {/if}
       {#if buffering}
         <div class="overlay center2">Slow internet connection!</div>
