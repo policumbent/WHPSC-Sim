@@ -12,7 +12,8 @@
         }
         const converter = new showdown.Converter();
         instructionsHTML = converter.makeHtml(instructionsMD);
-        console.log(instructionsHTML);
+        instructionsHTML = instructionsHTML.replaceAll('<a ', '<a target="_blank" ')
+        console.log('a', instructionsHTML);
     });
 </script>
 <style>

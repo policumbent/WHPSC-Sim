@@ -5,9 +5,9 @@ Welcome to the virtual World Human Powered Speed Challenge. Normally, when there
 
 This simulator allows you to run the course of the actual event. Simply connect your smart trainer or power meter to this application, get dressed, get warmed up and race! You can try different tactics and different bicycle settings to see which is the quickest result.
 
-The event is held on a section of State Road 305 just outside of Battle Mountain, Nevada. During the event the road is closed for other traffic. The event starts with a 5 mile (8 km) stretch of road to build up speed. After 5 miles (8 km) there is a section that is exactly 200 meters (0.12 miles) in which your speed is measured. After this section you have around 1 mile (1.6 km) to slow down and the end of this you will see our cathers teams. 
-
 ## WHPSC
+
+The event is held on a section of State Road 305 just outside of Battle Mountain, Nevada. During the event the road is closed for other traffic. The event starts with a 5 mile (8 km) stretch of road to build up speed. After 5 miles (8 km) there is a section that is exactly 200 meters (0.12 miles) in which your speed is measured. After this section you have around 1 mile (1.6 km) to slow down and the end of this you will see our cathers teams. 
 
 To learn more about the event click [here](https://www.policumbent.it/en/home-en/#section-2958)
 
@@ -54,7 +54,7 @@ This application uses a connection to your bluetooth power meter or smart traine
 
 You can further tweak and customise the simulator by modifying the following settings.
 
-- **Rider weight:** This influences the rolling resistance of the bicycle. 
+- **Rider weight:** This influences the rider’s dissipated energy by rolling resistance.
 
 - **Rider height:** This influences your air resistance on non streamlined bicycles. 
 
