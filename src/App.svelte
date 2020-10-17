@@ -72,6 +72,7 @@
     const power = event.detail.text !== undefined ? event.detail.text.power : 0;
     openModal(speed, power, bike.bikeName, bike.settings, getUserSettings());
   }
+
 </script>
 
 <style>

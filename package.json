@@ -20,6 +20,8 @@
     "rollup-plugin-livereload": "^1.0.0",
     "rollup-plugin-svelte": "^5.0.3",
     "rollup-plugin-terser": "^7.0.1",
+    "showdown": "^1.9.1",
+    "sirv-cli": "^1.0.0",
     "svelte": "^3.0.0",
     "svelte-awesome": "^2.3.0",
     "svelte-check": "^0.1.0",
@@ -29,9 +31,7 @@
     "sveltejs-forms": "^2.1.1",
     "tslib": "^2.0.0",
     "typescript": "^3.9.3",
-    "yup": "^0.29.3",
-    "sirv-cli": "^1.0.0",
-    "showdown": "^1.9.1"
+    "yup": "^0.29.3"
   },
   "dependencies": {}
 }

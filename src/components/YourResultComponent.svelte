@@ -181,7 +181,7 @@
                     <td>{result.bikeSettings.efficiency}</td>
                 </tr>
                 <tr>
-                    <th>Area</th>
+                    <th>Front Area</th>
                     <td>{result.bikeSettings.area} m²</td>
                 </tr>
                 <tr>
