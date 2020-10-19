@@ -35,7 +35,7 @@ const createWindow = async () => {
     const { width, height } = screen.getPrimaryDisplay().workAreaSize;
     window = new BrowserWindow({
         width: Math.round(width * 2/3),
-        height: Math.round(height * 0.8),
+        height: Math.round(height * 0.85),
         webPreferences: {
             experimentalFeatures: true,
             nodeIntegration: true
