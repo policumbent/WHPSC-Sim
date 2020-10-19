@@ -181,7 +181,7 @@
                     <td>{result.bikeSettings.efficiency}</td>
                 </tr>
                 <tr>
-                    <th>Area</th>
+                    <th>Front Area</th>
                     <td>{result.bikeSettings.area} m²</td>
                 </tr>
                 <tr>
@@ -198,7 +198,7 @@
                 </tr>
                 <tr>
                     <th>Air Density</th>
-                    <td>{result.userSettings.rho} kg/m³</td>
+                    <td>{Math.round(1000*result.userSettings.rho)/1000} kg/m³</td>
                 </tr>
                 <tr>
                     <th>Cd@120km/h</th>

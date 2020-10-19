@@ -126,7 +126,7 @@
             <input class="slider" id="efficiency" type="range" step="0.01" min="0.8" max="1" bind:value={efficiency}>
             <label for="wheels_circumference">Wheels Circumference: {wheelsCircumference}m</label>
             <input class="slider" id="wheels_circumference" type="range" step="0.001" min="1" max="2.5" bind:value={wheelsCircumference}>
-            <label for="area">Area: {area}m²</label>
+            <label for="area">Front Area: {area}m²</label>
             <input class="slider" id="area" type="range" step="0.00001" min="0" max="2" bind:value={area}>
             <label for="cx">Cd @120km/h: {cx}</label>
             <input class="slider" id="cx" type="range" step="0.0001" min="0.02" max="1.2" bind:value={cx}>

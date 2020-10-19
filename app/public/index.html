@@ -6,13 +6,44 @@
 
 	<title>WHPSC Simulator</title>
 
-	<link rel='icon' type='image/png' href='favicon.png'>
+	<link rel='icon' type='image/png' href='./favicon.png'>
 	<link rel='stylesheet' href='global.css'>
 	<link rel='stylesheet' href='build/bundle.css'>
 
 	<script defer src='build/bundle.js'></script>
+	<!--	<script defer src='ant.js'></script>-->
+
+	<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/cookieconsent@3/build/cookieconsent.min.css" />
+	<!-- Global site tag (gtag.js) - Google Analytics -->
+	<script async src="https://www.googletagmanager.com/gtag/js?id=UA-160554884-2"></script>
+	<script>
+		window.dataLayer = window.dataLayer || [];
+		function gtag(){dataLayer.push(arguments);}
+		gtag('js', new Date());
+
+		gtag('config', 'UA-160554884-2');
+	</script>
 </head>
 
 <body>
+<script src="https://cdn.jsdelivr.net/npm/cookieconsent@3/build/cookieconsent.min.js" data-cfasync="false"></script>
+<script>
+	window.cookieconsent.initialise({
+		"palette": {
+			"popup": {
+				"background": "#3399ff",
+				"text": "#ffffff"
+			},
+			"button": {
+				"background": "#f5d948"
+			}
+		},
+		"content": {
+			"message": "This website uses cookies to ensure you get the best experience on our website.",
+			"dismiss": "Got it!",
+			"href": "https://www.policumbent.it/whpsc-sim/GDPR.html"
+		}
+	});
+</script>
 </body>
 </html>

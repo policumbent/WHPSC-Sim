@@ -74,14 +74,14 @@ class UserSettings {
       humidity: number) {
     this._riderWeight = riderWeight;
     this._riderHeight = riderHeight;
-    this._altitude = altitude;
-    this._temperature = temperature;
-    this._humidity = humidity;
-    const p = 6.1078*Math.pow(10, ((7.5*(temperature + 273.15)-2048.625)/(this.temperature+273.15-35.85)));
-    this._rho = (this.pressure(altitude)*100-humidity*p) /
-        (287.05*(temperature+273.15)) + (humidity*p) /
-        (461.495*(temperature+273.15));
-    // console.log('rho', this._rho);
+    this._altitude = parseInt(String(altitude));
+    this._temperature = parseInt(String(temperature));
+    this._humidity = parseInt(String(humidity));
+    const p = 6.1078 * Math.pow(10, ((7.5*(this._temperature + 273.15)-2048.625)/(this._temperature+273.15-35.85)));
+    this._rho = (this.pressure(this._altitude)*100-this._humidity*p) /
+        (287.05*(this._temperature+273.15)) + (this._humidity*p) /
+        (461.495*(this._temperature+273.15));
+    console.log('rho', this._rho);
   }
   pressure(altitude: number): number {
     return 10.1325*(-0.0101*altitude+98.7);

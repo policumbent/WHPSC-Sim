@@ -24,7 +24,7 @@
   let res = null;
   const title = 'WHPSC Simulator';
   const desc = 'Try a fast streamliner on Battle Mountain track.';
-  const url = window.location.href;
+  const url = 'https://www.policumbent.it/whpsc-sim/'
   // todo: do unsubscribe onDestroy
   // uso la fc al posto della potenza per il primo test
   // const hrUnsubscribe = hrValue.subscribe(value => power = value);
@@ -73,6 +73,7 @@
     const power = event.detail.text !== undefined ? event.detail.text.power : 0;
     openModal(speed, power, bike.bikeName, bike.settings, getUserSettings());
   }
+
 </script>
 
 <style>
@@ -209,7 +210,7 @@
     {:else}
       <Welcome on:message={startSimulation} />
 
-        <!--      <button on:click={handleResult}>Test save result dialog</button>-->
+<!--              <button on:click={handleResult}>Test save result dialog</button>-->
       <div class="bottom">
         <Email subject="{title}" body="{desc} {url}" />
         <Reddit class="share-button" {title} {url} />

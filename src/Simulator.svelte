@@ -31,7 +31,7 @@
   let ended = false;
   let sum = 0;
   let count_speed = 0;
-  let intro_count = 11;
+  let intro_count = 10;
   let intro_message = 'Loading...';
 
   async function start() {
@@ -91,6 +91,7 @@
     video.preload = true;
     ended = false;
     await intervalCountdown()
+    intro_count = 10;
     interval = setInterval(intervalCountdown, 1000);
     // console.log(document.getElementsByClassName("relative").length);
   });
@@ -147,11 +148,11 @@
   function brakeCalculator(distance: number, speed: number, power: number) {
     if(distance > trap_end + 200){
       if(distance < trap_end + 1000 && speed > 60)
-        return -speed*20
+        return -speed*20;
       else if(distance >= trap_end + 1000 && speed > 35)
-        return -speed*50
+        return -speed*50;
     }
-    return power
+    return power;
   }
 
   function changeVideoSpeed(d0: number, t: number, vs: number) {
@@ -182,6 +183,7 @@
   }
 
   function slopeCalculator(v0: number, t: number, d0: number) {
+    return 0;
     v0 = v0 / 3.6;
     // calcolo la pendenza media nella discorsa percorsa nel tempo t
     let d1 = Math.round(v0 * t + d0);
@@ -256,7 +258,7 @@
     text-align: left;
   }
   div.center {
-    top: 11vh;
+    top: 11vw;
     margin: 0 auto;
     font-size: 3vw;
     width: 100%;
@@ -306,7 +308,7 @@
   h2 {
     padding-top: 190px;
     vertical-align: middle;
-    font-size: 4em;
+    font-size: 4vw;
   }
   video {
     z-index: 1;
@@ -319,12 +321,12 @@
 
   #start_message {
     color: white;
-    font-size: 5em;
+    font-size: 5vw;
   }
   #countdown {
-    top: 50%;
+    top: 30vw;
     color: white;
-    font-size: 8em;
+    font-size: 8vw;
   }
 
   /* #video_div {
@@ -344,6 +346,7 @@
         <source src="data/bm-13-09-19_no_scritte.mp4" type="video/mp4" />
         Your browser does not support video.
       </video>
+      <audio src=""></audio>
       <div class="overlay bottom_left">
         Speed: {Math.round(speed * 10) / 10} km/h
       </div>
