@@ -1,7 +1,7 @@
 {
   "name": "whpsc-simulator",
   "productName": "WHPS Simulator",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "description": "WHPSC Bike Simulator",
   "author": "Stefano Loscalzo <stefano.loscalzo@gmail.com>",
   "main": "./app/index.js",

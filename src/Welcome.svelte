@@ -3,18 +3,24 @@
   import {gear, download, github} from "svelte-awesome/icons";
   import Modal from "svelte-simple-modal";
   import {createEventDispatcher} from "svelte";
-  import {getDebug} from "./store"
+  import {getDebug, setBtSensorName} from "./store"
   import {startSearch} from "./BleData";
   import BikePicker from "./BikePicker.svelte";
   import Settings from "./components/Settings.svelte";
   import ResultsListContainer from "./ResultsListContainer.svelte";
+  import SearchAnt from "./components/SearchAnt.svelte";
+  import SearchAntContainer from "./components/SearchAntContainer.svelte";
+  import SearchBtContainer from "./components/SearchBtContainer.svelte";
   import HelpButton from "./components/HelpButton.svelte";
 
   const dispatch = createEventDispatcher();
   let sidebar_show = false;
   let chooseBike = false;
   let showModal = false;
-  let powerMeterPaired = false;
+  let searchAnt = false;
+  let searchBt = false;
+  let btPowerMeterPaired = false;
+  let antPowerMeterPaired = false;
 
   function pickBike() {
     chooseBike = true;
@@ -34,15 +40,20 @@
     });
   }
 
+  // todo: metodo per disassociare misuratore bt
   function btSearch() {
+    searchBt = true;
     startSearch()
-            .then(data => powerMeterPaired = data)
+            .then(data => btPowerMeterPaired = data)
             .catch(error => {
-              alert('This functionality is available only in Google Chrome 83+. ' +
-                      'If you are already using it on Linux the "chrome://flags/#enable-experimental-web-platform-features" flag must be enabled.' +
-                      'For further information read this page https://github.com/WebBluetoothCG/web-bluetooth/blob/gh-pages/implementation-status.md')
+              if(searchBt)
+                alert('Bluetooth off or this functionality isn\'t available on this PC.')
+              // alert('This functionality is available only in Google Chrome 83+. ' +
+              //         'If you are already using it on Linux the "chrome://flags/#enable-experimental-web-platform-features" flag must be enabled.' +
+              //         'For further information read this page https://github.com/WebBluetoothCG/web-bluetooth/blob/gh-pages/implementation-status.md')
+              searchBt = false;
               console.log(error);
-              powerMeterPaired = false;
+              btPowerMeterPaired = false;
             })
   }
 
@@ -139,16 +150,22 @@
   <span class="beta">BETA</span>
   <h1>WHPSC Simulator</h1>
   <span
-    on:click={() => (sidebar_show = !sidebar_show)}
-    class="top-right-fixed click_t">
+          on:click={() => (sidebar_show = !sidebar_show)}
+          class="top-right-fixed click_t">
     <Icon class="top-right-fixed" data={gear} scale="2" />
   </span>
-  <button class="btn" disabled="{!powerMeterPaired && !getDebug()}" on:click={pickBike}>Start</button>
+  <button class="btn" disabled="{!(btPowerMeterPaired || antPowerMeterPaired) && !getDebug()}" on:click={pickBike}>Start</button>
   <button class="btn" on:click={showResults}>Results</button>
   <div>
-    <button class="btn" disabled="{powerMeterPaired}" on:click={btSearch}>BT powermeter</button>
-    <button class="btn" disabled="{powerMeterPaired}" on:click={() => alert('Download standalone version to use ANT+! https://github.com/policumbent/WHPSC-Sim/releases')}>ANT powermeter</button>
+    <button class="btn" disabled="{antPowerMeterPaired}" on:click={btSearch}>BT powermeter</button>
+    <button class="btn" disabled="{btPowerMeterPaired}" on:click={() => searchAnt = true}>ANT powermeter</button>
   </div>
+  <Modal>
+    <SearchAntContainer bind:connected={antPowerMeterPaired} bind:show={searchAnt}/>
+  </Modal>
+  <Modal>
+    <SearchBtContainer bind:show={searchBt}/>
+  </Modal>
   <Modal>
     <HelpButton/>
   </Modal>
@@ -158,6 +175,6 @@
   <Modal>
     <ResultsListContainer bind:show={showModal} />
   </Modal>
-  <button class="left survey btn" on:click={() => window.open('https://github.com/policumbent/WHPSC-Sim/releases','_blank')}><Icon data={download}/> Download APP</button>
+  <!--  <button class="left survey btn" on:click={() => window.open('https://github.com/policumbent/WHPSC-Sim/releases','_blank')}><Icon data={download}/> Download APP</button>-->
   <button class="right survey btn" on:click={() => window.open('https://github.com/policumbent/WHPSC-Sim/','_blank')}><Icon data={github}/> GitHub</button>
 </section>
