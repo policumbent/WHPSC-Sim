@@ -63,6 +63,7 @@
     overflow: hidden;
   } */
   .top-right-fixed {
+    cursor: pointer;
     z-index: 999999;
     margin-top: 5px;
     margin-right: 5px;
@@ -76,6 +77,7 @@
   }
   .btn {
     /*display: block;*/
+    cursor: pointer;
     text-align: center;
     background-color: #ff532e;
     color: #ffffff;

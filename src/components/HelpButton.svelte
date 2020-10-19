@@ -14,6 +14,7 @@
 </script>
 <style>
     .btn {
+        cursor: pointer;
         /*display: block;*/
         text-align: center;
         background-color: #ff532e;
