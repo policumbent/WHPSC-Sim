@@ -46,9 +46,29 @@
             })
   }
 
+  function showSidebar(){
+      sidebar_show = !sidebar_show;
+      sidebar_show ?
+          document.getElementById("settings_icon").style.color = "#3399ff" :
+          document.getElementById("settings_icon").style.color = "#ffff00";
+  }
+
 </script>
 
 <style>
+
+
+  .bg_image {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url("/img/background_light.jpg");
+    background-position: center; /* Center the image */
+    background-repeat: no-repeat; /* Do not repeat the image */
+    background-size: cover; /* Resize the background image to cover the entire container */
+  }
   /*todo: same size buttons*/
   h1 {
     margin-top: 2em;
@@ -63,10 +83,11 @@
     overflow: hidden;
   } */
   .top-right-fixed {
+    color: yellow;
     cursor: pointer;
     z-index: 999999;
-    margin-top: 5px;
-    margin-right: 5px;
+    margin: 1em;
+
     position: absolute;
     top: 0;
     right: 0;
@@ -130,34 +151,41 @@
     color: black;
     z-index: 99;
   }
+
 </style>
 
 <Settings bind:show={sidebar_show} />
 
 <section>
-  <div class="triangle-top-left"></div>
-  <span class="beta">BETA</span>
-  <h1>WHPSC Simulator</h1>
-  <span
-    on:click={() => (sidebar_show = !sidebar_show)}
-    class="top-right-fixed click_t">
-    <Icon class="top-right-fixed" data={gear} scale="2" />
+  <div class="bg_image">
+      <div class="triangle-top-left"></div>
+      <span class="beta">BETA</span>
+      <h1>WHPSC Simulator</h1>
+      <span
+              id="settings_icon"
+              on:click={showSidebar}
+              class="top-right-fixed click_t">
+    <Icon  class="top-right-fixed" data={gear} scale="2.5" />
   </span>
-  <button class="btn" disabled="{!powerMeterPaired && !getDebug()}" on:click={pickBike}>Start</button>
-  <button class="btn" on:click={showResults}>Results</button>
-  <div>
-    <button class="btn" disabled="{powerMeterPaired}" on:click={btSearch}>BT powermeter</button>
-    <button class="btn" disabled="{powerMeterPaired}" on:click={() => alert('Download standalone version to use ANT+! https://github.com/policumbent/WHPSC-Sim/releases')}>ANT powermeter</button>
+      <div>
+        <button class="btn" disabled="{!powerMeterPaired && !getDebug()}" on:click={pickBike}>Start</button>
+        <button class="btn" on:click={showResults}>Results</button>
+      </div>
+      <div>
+        <button class="btn" disabled="{powerMeterPaired}" on:click={btSearch}>BT powermeter</button>
+        <button class="btn" disabled="{powerMeterPaired}" on:click={() => alert('Download standalone version to use ANT+! https://github.com/policumbent/WHPSC-Sim/releases')}>ANT powermeter</button>
+      </div>
+      <Modal>
+        <HelpButton/>
+      </Modal>
+      {#if chooseBike}
+        <BikePicker on:message={bikeChosen} />
+      {/if}
+      <Modal>
+        <ResultsListContainer bind:show={showModal} />
+      </Modal>
+      <button class="left survey btn" on:click={() => window.open('https://github.com/policumbent/WHPSC-Sim/releases','_blank')}><Icon data={download}/> Download APP</button>
+      <button class="right survey btn" on:click={() => window.open('https://github.com/policumbent/WHPSC-Sim/','_blank')}><Icon data={github}/> GitHub</button>
   </div>
-  <Modal>
-    <HelpButton/>
-  </Modal>
-  {#if chooseBike}
-    <BikePicker on:message={bikeChosen} />
-  {/if}
-  <Modal>
-    <ResultsListContainer bind:show={showModal} />
-  </Modal>
-  <button class="left survey btn" on:click={() => window.open('https://github.com/policumbent/WHPSC-Sim/releases','_blank')}><Icon data={download}/> Download APP</button>
-  <button class="right survey btn" on:click={() => window.open('https://github.com/policumbent/WHPSC-Sim/','_blank')}><Icon data={github}/> GitHub</button>
-</section>
+
+ </section>
