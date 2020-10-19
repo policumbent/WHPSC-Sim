@@ -1,6 +1,6 @@
 <script lang="ts">
   import Icon from "svelte-awesome";
-  import {gear} from "svelte-awesome/icons";
+  import {gear, download, github} from "svelte-awesome/icons";
   import Modal from "svelte-simple-modal";
   import {createEventDispatcher} from "svelte";
   import {getDebug} from "./store"
@@ -90,14 +90,18 @@
   .survey {
     position: fixed;
     bottom: 0;
-    left: 0;
     margin: 1em;
     background-color: yellow;
     color: black;
     font-size: 1em;
     z-index: 99;
   }
-
+  .left {
+    left: 0;
+  }
+  .right {
+    right: 0;
+  }
   section {
     text-align: center;
   }
@@ -152,5 +156,6 @@
   <Modal>
     <ResultsListContainer bind:show={showModal} />
   </Modal>
-  <button class="survey btn" on:click={() => window.open('https://forms.gle/hK2XADnP4FkvjtmD7','_blank')}>Survey</button>
+  <button class="left survey btn" on:click={() => window.open('https://github.com/policumbent/WHPSC-Sim/releases','_blank')}><Icon data={download}/> Download APP</button>
+  <button class="right survey btn" on:click={() => window.open('https://github.com/policumbent/WHPSC-Sim/','_blank')}><Icon data={github}/> GitHub</button>
 </section>
