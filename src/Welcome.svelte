@@ -85,6 +85,7 @@
   }
   .btn {
     /*display: block;*/
+    cursor: pointer;
     text-align: center;
     background-color: #ff532e;
     color: #ffffff;
