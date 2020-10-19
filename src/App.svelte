@@ -4,7 +4,6 @@
   import Modal from "svelte-simple-modal";
   import {getContext, onMount} from "svelte";
   import {getDebug, getUserSettings} from "./store";
-  import { Email, Reddit, LinkedIn, Telegram, WhatsApp, Facebook, Twitter } from 'svelte-share-buttons-component';
   import type {BikeSettings, UserSettings, Bike} from "./models/Settings";
 
   import Simulator from "./Simulator.svelte";
@@ -14,7 +13,6 @@
   import ResultContainer from "./ResultContainer.svelte";
   import BikePicker from "./BikePicker.svelte";
   import YourResultComponent from "./components/YourResultComponent.svelte";
-  // import {startAnt} from "./Ant";
 
   let power = 0;
   let simulator;
@@ -22,9 +20,7 @@
   let openModal;
   let bike: Bike;
   let res = null;
-  const title = 'WHPSC Simulator';
-  const desc = 'Try a fast streamliner on Battle Mountain track.';
-  const url = 'https://www.policumbent.it/whpsc-sim/'
+
   // todo: do unsubscribe onDestroy
   // uso la fc al posto della potenza per il primo test
   // const hrUnsubscribe = hrValue.subscribe(value => power = value);
@@ -50,7 +46,7 @@
   }
 
   onMount(() => {
-    console.log('v1.2.0');
+    console.log('v1.1.2');
     const params = new URLSearchParams(window.location.search);
     // console.log(params.get('res'));
     res = params.get('res');
@@ -148,36 +144,6 @@
     background-color: #1d3040;
     color: #bfc2c7;
   }
-  .bottom {
-    margin-top: 5em;
-    margin-bottom: 1em;
-  }
-
-  ::-webkit-scrollbar-track {
-    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
-    box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
-    background-color: #f5f5f5;
-  }
-
-  ::-webkit-scrollbar {
-    width: 10px;
-    background-color: #f5f5f5;
-  }
-
-  ::-webkit-scrollbar-thumb {
-    background-color: #ff3e00;
-    background-image: -webkit-linear-gradient(
-            45deg,
-            rgba(255, 255, 255, 0.2) 25%,
-            transparent 25%,
-            transparent 50%,
-            rgba(255, 255, 255, 0.2) 50%,
-            rgba(255, 255, 255, 0.2) 75%,
-            transparent 75%,
-            transparent
-    );
-  }
-
 
 </style>
 
@@ -211,15 +177,7 @@
       <Welcome on:message={startSimulation} />
 
 <!--              <button on:click={handleResult}>Test save result dialog</button>-->
-      <div class="bottom">
-        <Email subject="{title}" body="{desc} {url}" />
-        <Reddit class="share-button" {title} {url} />
-        <LinkedIn class="share-button" {url} />
-        <Telegram class="share-button" text={title} {url} />
-        <WhatsApp class="share-button" text="{title} {url}" />
-        <Facebook class="share-button" {url} />
-        <Twitter class="share-button" text="{title}" {url} />
-      </div>
+
     {/if}
     <Modal>
       <ResultContainer bind:openModal />
