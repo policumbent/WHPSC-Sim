@@ -4,7 +4,6 @@
   import Modal from "svelte-simple-modal";
   import {getContext, onMount} from "svelte";
   import {getDebug, getUserSettings} from "./store";
-  import { Email, Reddit, LinkedIn, Telegram, WhatsApp, Facebook, Twitter } from 'svelte-share-buttons-component';
   import type {BikeSettings, UserSettings, Bike} from "./models/Settings";
 
   import Simulator from "./Simulator.svelte";
@@ -21,9 +20,7 @@
   let openModal;
   let bike: Bike;
   let res = null;
-  const title = 'WHPSC Simulator';
-  const desc = 'Try a fast streamliner on Battle Mountain track.';
-  const url = 'https://www.policumbent.it/whpsc-sim/'
+
   // todo: do unsubscribe onDestroy
   // uso la fc al posto della potenza per il primo test
   // const hrUnsubscribe = hrValue.subscribe(value => power = value);
@@ -147,10 +144,7 @@
     background-color: #1d3040;
     color: #bfc2c7;
   }
-  .bottom {
-    margin-top: 5em;
-    margin-bottom: 1em;
-  }
+
 </style>
 
 <main>
@@ -183,15 +177,7 @@
       <Welcome on:message={startSimulation} />
 
 <!--              <button on:click={handleResult}>Test save result dialog</button>-->
-      <div class="bottom">
-        <Email subject="{title}" body="{desc} {url}" />
-        <Reddit class="share-button" {title} {url} />
-        <LinkedIn class="share-button" {url} />
-        <Telegram class="share-button" text={title} {url} />
-        <WhatsApp class="share-button" text="{title} {url}" />
-        <Facebook class="share-button" {url} />
-        <Twitter class="share-button" text="{title}" {url} />
-      </div>
+
     {/if}
     <Modal>
       <ResultContainer bind:openModal />
