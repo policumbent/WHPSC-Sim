@@ -15,7 +15,7 @@
     "deb64": "electron-installer-debian --src dist/app-linux-x64/ --dest dist/installers/ --arch amd64",
     "pack": "build --dir",
     "dist": "build",
-    "publish": "electron-builder"
+    "publish": "rollup -c && electron-builder"
   },
   "build": {
     "appId": "whpsc-simulator",
