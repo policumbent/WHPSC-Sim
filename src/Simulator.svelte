@@ -26,6 +26,7 @@
   let t_video = 0;
   let coefficients, slope, fitFile;
   let video;
+  let audio;
   let started = false;
   let interval;
   let ended = false;
@@ -39,6 +40,7 @@
     playbackRate = 0;
     await video.play();
     started = true;
+    await audio.play();
   }
 
   export async function reset() {
@@ -52,6 +54,7 @@
     distance = 0;
     speed = 0;
     started = false;
+    await audio.pause();
   }
 
   function getWidth() {
@@ -89,6 +92,7 @@
       interval = setInterval(intervalFunction, 1000);
     }
     video.preload = true;
+    audio.volume = 0;
     ended = false;
     await intervalCountdown()
     intro_count = 10;
@@ -179,6 +183,7 @@
       );
       reset();
     }
+    audio.volume = speed / 140 <= 1 ? speed/140 : 1;
     t_video += playbackRate * t;
   }
 
@@ -346,7 +351,9 @@
         <source src="data/bm-13-09-19_no_scritte.mp4" type="video/mp4" />
         Your browser does not support video.
       </video>
-      <audio src=""></audio>
+      <audio src="data/audio_run.m4a" bind:this={audio}>
+        Il tuo browser non supporta l'elemento <code>audio</code>.
+      </audio>
       <div class="overlay bottom_left">
         Speed: {Math.round(speed * 10) / 10} km/h
       </div>
