@@ -31,7 +31,8 @@
     "sveltejs-forms": "^2.1.1",
     "tslib": "^2.0.0",
     "typescript": "^3.9.3",
-    "yup": "^0.29.3"
+    "yup": "^0.29.3",
+    "svelte-flagicon": "^0.2.0"
   },
   "dependencies": {}
 }
