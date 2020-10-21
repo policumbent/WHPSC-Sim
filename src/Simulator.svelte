@@ -188,7 +188,6 @@
   }
 
   function slopeCalculator(v0: number, t: number, d0: number) {
-    return 0;
     v0 = v0 / 3.6;
     // calcolo la pendenza media nella discorsa percorsa nel tempo t
     let d1 = Math.round(v0 * t + d0);

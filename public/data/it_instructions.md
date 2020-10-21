@@ -66,7 +66,7 @@ Dopo che avrai connesso il tuo power meter o il tuo smart trainer, potrai premer
 
 Quando avrai selezionato la bici vedrai la vista della statale 305. Preparati a partire dopo il countdown e spingere più che puoi!
 
-Durante la gara vedrai dei cartelli stradali (sulla destra) che ti indicheranno le miglia mancanti ai 200 metri finali. Quando arriverai a 1500 metri prima dei 200 metri finali vedrai anche nel tuo "virtual display" il conto alla rovescia. Usalo per determinare il punto per iniziare il tuo sprint.
+Durante la gara vedrai dei cartelli stradali (sulla destra) che ti indicheranno le miglia mancanti all'arrivo. Quando arriverai a 1500 metri prima dei 200 metri finali vedrai anche nel tuo "virtual display" il conto alla rovescia. Usalo per determinare il punto per iniziare il tuo sprint.
 
 Dopo i 200 metri normalmente inizieresti a frenare lentamente, per non surriscaldare i freni. Hai circa un miglio per rallentare e alla fine vedrai il tuo team pronto a fermarti e a prenderti per non farti cadere. Per rallentare abbiamo simulato una forza frenante basata sulla tua velocità che inizia subito dopo i 200 metri finali.
 
