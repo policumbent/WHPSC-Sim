@@ -84,7 +84,7 @@
     "svelte-flagicon": "^0.2.0"
   },
   "dependencies": {
-    "ant-plus": "^0.1.24",
+    "ant-plus-ste": "^0.1.25",
     "electron-alert": "^0.1.11",
     "node-fetch": "^2.6.1",
     "node-web-bluetooth": "^1.2.0",
