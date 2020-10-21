@@ -15,7 +15,7 @@
     // const s = new BikeSettings(50, 0.44, 1450, 0.99, 1, 1, undefined);
     // const u = new UserSettings(undefined, undefined, 1.01, 100, 200);
     let results: ResultModel[] = [
-        // new ResultModel(100, 100, s, u, 'Taurus', 'Stefano Luigi', 'Loscalzo', undefined, '2020-10-14 17:36:21', true),
+        // new ResultModel(100, 100, s, u, 'Taurus', 'Stefano Luigi', 'Loscalzo', undefined, '2020-10-14 17:36:21', false),
         // new ResultModel(100, 200, s, u, 'Mtb', 'Test', 'Test', undefined, '2020-09-06 20:27:04'),
         // new ResultModel(100, 399.2, s, u,'ParolaLunga', 'Test', 'Test', undefined, '2020-09-06 20:27:04'),
         // new ResultModel(100, 33.32222222, s, u, 'Pulsar', 'Parola lunghissimissima', 'Test lungoooooooooooo', undefined, '2020-09-06 20:27:04'),
@@ -53,7 +53,7 @@
                 });
                 // console.log(v);
                 results = v.sort((e1: ResultModel, e2: ResultModel) => e2.datetime.getTime() - e1.datetime.getTime());
-                v[0].expanded = true;
+                // v[0].expanded = true;
                 return v;
             })
             .catch((e) => {
@@ -112,6 +112,8 @@
     <h1>Results</h1>
     {#if error}
         <h2 class="error">An error has occurred. Retry later.</h2>
+    {:else}
+        <h2>Click on a result to expand.</h2>
     {/if}
     <div class="scroller">
         {#each results as result}

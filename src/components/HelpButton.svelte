@@ -32,4 +32,4 @@
         font-size: 1.5em;
     }
 </style>
-<button on:click={openModal} class="blue btn">Instructions</button>
+<button on:click={openModal} class="blue btn">Instruction</button>
