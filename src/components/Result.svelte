@@ -111,8 +111,13 @@
             text-transform: uppercase;
             color: white;
         }
-    }
 
+    }
+    .mph {
+        display: block;
+        font-weight: lighter;
+        color: gold;
+    }
     .big {
         font-size: 4em;
     }
@@ -158,10 +163,16 @@
          on:click
          style="--div-height: {height}">
         <div class="left30">
-      <span class="middle_top">
-        <em class="big">{Math.trunc(result.speed)}</em>
-        .{Math.round((result.speed - Math.trunc(result.speed)) * 100)} km/h
-      </span>
+            <div class="middle_top">
+                <span>
+                <em class="big">{Math.trunc(result.speed)}</em>
+                .{Math.round((result.speed - Math.trunc(result.speed)) * 100)} km/h
+                </span>
+                {#if result.expanded}
+                    <span class="mph">({Math.round(result.speed*0.62137119223733*100)/100}mph)</span>
+                {/if}
+            </div>
+
             <span class="middle_bottom">{result.bikeName}</span>
         </div>
         <span class="top right">{result.firstName} {result.lastName}</span>
@@ -185,7 +196,7 @@
                     <td>{result.bikeSettings.efficiency}</td>
                 </tr>
                 <tr>
-                    <th>Area</th>
+                    <th>Front Area</th>
                     <td>{result.bikeSettings.area} m²</td>
                 </tr>
                 <tr>

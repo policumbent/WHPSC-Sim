@@ -1,7 +1,7 @@
 {
   "name": "whpsc-simulator",
   "productName": "WHPS Simulator",
-  "version": "1.2.0",
+  "version": "1.3.0",
   "description": "WHPSC Bike Simulator",
   "author": "Stefano Loscalzo <stefano.loscalzo@gmail.com>",
   "main": "./app/index.js",
@@ -15,7 +15,7 @@
     "deb64": "electron-installer-debian --src dist/app-linux-x64/ --dest dist/installers/ --arch amd64",
     "pack": "build --dir",
     "dist": "build",
-    "publish": "NODE_ENV=production electron-builder"
+    "publish": "rollup -c && electron-builder"
   },
   "build": {
     "appId": "whpsc-simulator",
@@ -69,6 +69,7 @@
     "rollup-plugin-livereload": "^1.0.0",
     "rollup-plugin-svelte": "^5.0.3",
     "rollup-plugin-terser": "^7.0.1",
+    "showdown": "^1.9.1",
     "sirv-cli": "^1.0.0",
     "svelte": "^3.0.0",
     "svelte-awesome": "^2.3.0",
@@ -79,7 +80,8 @@
     "sveltejs-forms": "^2.1.1",
     "tslib": "^2.0.0",
     "typescript": "^3.9.3",
-    "yup": "^0.29.3"
+    "yup": "^0.29.3",
+    "svelte-flagicon": "^0.2.0"
   },
   "dependencies": {
     "ant-plus": "^0.1.24",

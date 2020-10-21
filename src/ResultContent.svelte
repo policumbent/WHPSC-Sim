@@ -23,9 +23,10 @@
     fetch(uploadUrl, { method: "POST", body: JSON.stringify(result) })
             .then((resp) => {
               if (resp.status === 200) next();
+              else errorMex = 'An error has occurred.';
               console.log(resp);
             })
-            .catch((error) => (errorMex = error));
+            .catch(() => (errorMex = 'An error has occurred.'));
   }
   onMount(
           () => (result = new ResultModel(speed, power, config, userConfig, bikeName))
@@ -66,11 +67,22 @@
     position: relative;
     /*width: 200px;*/
   }
+  .gdpr {
+    text-align: left;
+    width: 270px;
+    display: inline-block;
+    margin-top: 1em;
+  }
+  .checkbox {
+  }
   label {
     display: block;
     margin-bottom: 0.5em;
     /*float: left;*/
     text-align: left;
+  }
+  .error {
+    color: red;
   }
 </style>
 
@@ -111,7 +123,12 @@
         <label for="email">Email</label>
         <input required id="email" bind:value={result.email} type="email" />
       </div>
-      <p value={errorMex}></p>
+      <div class="gdpr formData">
+        <input class="checkbox" required id="gdpr" type="checkbox">
+        <span class="checkbox">I give my consent to the processing of my personal data.</span>
+        <a target="_blank" href="https://www.policumbent.it/whpsc-sim/GDPR.html">Read more.</a>
+      </div>
+      <p class="error">{errorMex}</p>
       <input class="btn right" type="submit" value="Send" />
 <!--      <button on:click={share}>Share on facebook</button>-->
     </form>

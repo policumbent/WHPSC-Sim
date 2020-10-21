@@ -1,6 +1,7 @@
 const { app, BrowserWindow, Menu } = require('electron');
 const fetch = require('node-fetch');
 const Alert = require("electron-alert");
+const screen = require('electron').screen
 //require('electron-reload')(__dirname);
 // let Ant = require('ant-plus');
 
@@ -31,12 +32,12 @@ const notOnline = () => {
 }
 
 const createWindow = async () => {
-    // const { width, height } = screen.getPrimaryDisplay().workAreaSize;
-
+    const { width, height } = screen.getPrimaryDisplay().workAreaSize;
     window = new BrowserWindow({
-        width: 1080,
-        height: 750,
+        width: Math.round(width * 2/3),
+        height: Math.round(height * 0.85),
         webPreferences: {
+            contextIsolation: false,
             experimentalFeatures: true,
             nodeIntegration: true
         }

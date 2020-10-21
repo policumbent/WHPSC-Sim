@@ -15,8 +15,8 @@ export async function startSearch() {
     let options = {
         // todo: filter only powermeters
         filters: [
-            // https://www.bluetooth.com/specifications/gatt/viewer?attributeXmlFile=org.bluetooth.service.heart_rate.xml
-            {services: [0x180D]},
+            // // https://www.bluetooth.com/specifications/gatt/viewer?attributeXmlFile=org.bluetooth.service.heart_rate.xml
+            // {services: [0x180D]},
             // https://www.bluetooth.com/specifications/gatt/viewer?attributeXmlFile=org.bluetooth.service.cycling_power.xml
             {services: [0x1818]}]
         // // https://www.bluetooth.com/specifications/gatt/viewer?attributeXmlFile=org.bluetooth.service.cycling_speed_and_cadence.xml

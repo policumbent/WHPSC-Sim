@@ -16,9 +16,9 @@
     new Bike("Taurus", "img/taurus.svg", "A very fast streamliner",
             new BikeSettings(30, 0.09, 1.450, 0.96, 0.29, 0.04, 'coefficients4.json')),
     new Bike("Coral", "img/recumbent.svg", "A recumbent bike",
-            new BikeSettings(14, 0.091, 1.450, 0.97, 0.32, 0.6, 'coefficients_normal_bike_3.json')),
+            new BikeSettings(14, 0.091, 1.450, 0.97, 0.32, 0.57, 'coefficients_normal_bike_4.json')),
     new Bike("Road Bike", "img/normal.svg", "A road bike",
-            new BikeSettings(7.5, 0.0786, 2.105, 0.98, 0.43, 0.78, 'coefficients_normal_bike_3.json'))
+            new BikeSettings(7.5, 0.0786, 2.105, 0.98, 0.43, 0.67, 'coefficients_normal_bike_4.json'))
   ];
 
   function shuffle(array) {

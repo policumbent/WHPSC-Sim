@@ -144,7 +144,11 @@
         font-weight: 200;
         padding: 0.5em 1em;
     }
-
+    .mph {
+        display: block;
+        font-weight: lighter;
+        color: gold;
+    }
 </style>
 
 <div>
@@ -152,9 +156,12 @@
         <h1 class="title">WHPSC Simulator</h1>
         <div class="content">
             <h1>{result.firstName} {result.lastName}</h1>
-            <span class="middle_top"><em class="big">{Math.trunc(result.speed)}</em>
+            <div class="middle_top">
+            <span><em class="big">{Math.trunc(result.speed)}</em>
                 .{Math.round((result.speed-Math.trunc(result.speed))*100)} km/h</span>
-            <!--            <span class="top right">{result.firstName} {result.lastName}</span>-->
+                <!--            <span class="top right">{result.firstName} {result.lastName}</span>-->
+                <span class="mph">({Math.round(result.speed*0.62137119223733*100)/100}mph)</span>
+            </div>
             <table>
                 <tr>
                     <th>Bike Weight</th>
@@ -181,7 +188,7 @@
                     <td>{result.bikeSettings.efficiency}</td>
                 </tr>
                 <tr>
-                    <th>Area</th>
+                    <th>Front Area</th>
                     <td>{result.bikeSettings.area} m²</td>
                 </tr>
                 <tr>
@@ -198,7 +205,7 @@
                 </tr>
                 <tr>
                     <th>Air Density</th>
-                    <td>{result.userSettings.rho} kg/m³</td>
+                    <td>{Math.round(1000*result.userSettings.rho)/1000} kg/m³</td>
                 </tr>
                 <tr>
                     <th>Cd@120km/h</th>
