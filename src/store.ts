@@ -12,7 +12,6 @@ export const getDebug = () => {
 }
 export const getSettings = (): BikeSettings =>{
     function toSettingsType(storageValue: any[]) {
-        // todo: trovare un metodo più bello
         return new BikeSettings(
             storageValue['_bikeWeight'],
             storageValue['_wheelsInertia'],
@@ -29,7 +28,6 @@ export const getSettings = (): BikeSettings =>{
 
 export const getUserSettings = () => {
     function toSettingsType(storageValue) {
-        // todo: trovare un metodo più bello
         return new UserSettings(
             storageValue["_riderWeight"],
             storageValue['_riderHeight'],

@@ -13,7 +13,6 @@ let hrMeter: BleHRMeter;
 
 export async function startSearch() {
     let options = {
-        // todo: filter only powermeters
         filters: [
             // // https://www.bluetooth.com/specifications/gatt/viewer?attributeXmlFile=org.bluetooth.service.heart_rate.xml
             // {services: [0x180D]},
@@ -21,7 +20,7 @@ export async function startSearch() {
             {services: [0x1818]}]
         // // https://www.bluetooth.com/specifications/gatt/viewer?attributeXmlFile=org.bluetooth.service.cycling_speed_and_cadence.xml
         // {services: [0x1816]}]
-    }
+    };
 
     console.log('Requesting Bluetooth Device...');
 
