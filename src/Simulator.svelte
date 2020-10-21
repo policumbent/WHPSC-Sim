@@ -179,7 +179,7 @@
     playbackRate = vs / vr;
     if (playbackRate !== 0 && (playbackRate < 0.0625 || playbackRate > 16.0)) {
       alert(
-              "Sorry but the speed is too low or too high, the activity will be restarted."
+              "Sorry but the speed is too low, the activity will be restarted."
       );
       reset();
     }
@@ -189,7 +189,7 @@
 
   function slopeCalculator(v0: number, t: number, d0: number) {
     v0 = v0 / 3.6;
-    // calcolo la pendenza media nella discorsa percorsa nel tempo t
+    // calcolo la pendenza media nella distanza percorsa nel tempo t
     let d1 = Math.round(v0 * t + d0);
     d0 = Math.round(d0);
     let s = 0;

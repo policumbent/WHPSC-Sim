@@ -42,9 +42,11 @@
         startSearch()
             .then(data => powerMeterPaired = data)
             .catch(error => {
-                alert('This functionality is available only in Google Chrome 83+. ' +
-                    'If you are already using it on Linux the "chrome://flags/#enable-experimental-web-platform-features" flag must be enabled.' +
-                    'For further information read this page https://github.com/WebBluetoothCG/web-bluetooth/blob/gh-pages/implementation-status.md')
+                if(error.code !== 8)
+                    alert('An error has occurred! This functionality is available only in Google Chrome 83+. ' +
+                        'If you are already using it on Linux the "chrome://flags/#enable-experimental-web-platform-features" flag must be enabled.' +
+                        'For further information read this page https://github.com/WebBluetoothCG/web-bluetooth/blob/gh-pages/implementation-status.md ' +
+                        'You can also download the standalone version from here https://github.com/policumbent/WHPSC-Sim/releases');
                 console.log(error);
                 powerMeterPaired = false;
             })

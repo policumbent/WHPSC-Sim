@@ -29,10 +29,10 @@ Questa applicazione può usare una connessione bluetooth per connettersi al tuo 
 
 #### Linux
 
-1. Sulla versione Linux di Google Chrome l'API bluetooth è solo parzialmente implementata. Per potere usare l'applicazione devi abilitare: `chrome://flags/#enable-experimental-web-platform-features`.
-1. Vai su [policumbent.it/whpsc-sim](https://policumbent.it/whpsc-sim)
-1. Connetti il tuo misuratore di potenza bluetooth.
-1. Avvia una nuova run.
+1. Sulla versione Linux di Google Chrome l'API bluetooth è solo parzialmente implementata ([vedi qui](https://github.com/WebBluetoothCG/web-bluetooth/blob/gh-pages/implementation-status.md)). Per potere usare l'applicazione devi abilitare: `chrome://flags/#enable-experimental-web-platform-features`.
+2. Vai su [policumbent.it/whpsc-sim](https://policumbent.it/whpsc-sim)
+3. Connetti il tuo misuratore di potenza bluetooth.
+4. Avvia una nuova run.
 
 ### ANT+
 
@@ -99,9 +99,9 @@ Quando modifichi queste impostazioni per usarle dovrai iniziare la gara con un `
 
 - **Wheels circumference** *(default : 1.45)* (Circonferenza ruote) Questo permette di simulare ruote più piccole e più grandi. Ruote più grandi hanno minore resistenza al rotolamento.
 
-- **Front Area:** *(default : 0.3m²)* (Area frontale) Questo valore controlla l'area frontale della tua bici. Più piccola è l'area frontale, più veloce sarà la tua bici. Ovviamente nel mondo reale la dimenione della tua bici sarà controllata da molti più fattori che un semplice slider. La cosa più importante ovviamente … sei tu! Entreresti mai in una bici con un'area frontale di 0.01 m²?
+- **Frontal Area:** *(default : 0.3m²)* (Area frontale) Questo valore controlla l'area frontale della tua bici. Più piccola è l'area frontale, più veloce sarà la tua bici. Ovviamente nel mondo reale la dimenione della tua bici sarà controllata da molti più fattori che un semplice slider. La cosa più importante ovviamente … sei tu! Entreresti mai in una bici con un'area frontale di 0.01 m²?
 
-- **Cd @ 120 km/h** *(default : 0.05)* Questo è il coefficiente di drag della tua bici personalizzata. Un drag piccolo significa principalmente bici maggiormente affusolata. Le biciclette che corrono a Battle Mountain sono molto ben disegnate per avere un basso coefficiente di drag. Come esempio un normale ciclista con una bici da strada ha un Cd di 0.78 e una tipica automobile veloce da 0.25 a 0.32! Il coefficiente di drag totale delle biciclette che corrono a Battle Mountain è tipicamente lo stesso coefficiente di drag dello specchietto di una macchina!
+- **Cd @ 120 km/h** *(default : 0.05)* Questo è il coefficiente di drag della tua bici personalizzata. Un drag piccolo significa principalmente bici maggiormente affusolata. Le biciclette che corrono a Battle Mountain sono molto ben disegnate per avere un basso coefficiente di drag. Come esempio un normale ciclista con una bici da strada ha un Cd di 0.67 e una tipica automobile veloce da 0.25 a 0.32! Il coefficiente di drag totale delle biciclette che corrono a Battle Mountain è tipicamente lo stesso coefficiente di drag dello specchietto di una macchina!
 
 Clicca su **Save** per salvare localmente le tue impostazioni. Quando clicchi su `start` queste impostazioni saranno usate per calcolare la velocità.
 
