@@ -1,8 +1,8 @@
 {
-  "name": "taurus-simulator",
-  "productName": "Taurus Simulator",
-  "version": "1.0.1",
-  "description": "Taurus Bike Simulator",
+  "name": "whpsc-simulator",
+  "productName": "WHPS Simulator",
+  "version": "1.3.0",
+  "description": "WHPSC Bike Simulator",
   "author": "Stefano Loscalzo <stefano.loscalzo@gmail.com>",
   "scripts": {
     "build": "rollup -c",
