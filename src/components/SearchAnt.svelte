@@ -45,9 +45,12 @@
         display: inline-block;
         margin: 2em;
     }
-    .cursor_pointer {
+    .cursor_pointer{
+        pointer-events: auto;
         cursor: pointer;
     }
+
+
 </style>
 
 <div>
@@ -55,10 +58,14 @@
 
     <div class="content">
         {#if sensorConnected()}
+        <div class="cursor_pointer">
             <Sensor on:click={() => sensorChosen(0)} sensorId={-1}/>
+        </div>
         {/if}
         {#each sensors as sensor}
-            <Sensor class="cursor_pointer" on:click={() => sensorChosen(sensor)} sensorId={sensor}/>
+        <div class="cursor_pointer">
+            <Sensor on:click={() => sensorChosen(sensor)} sensorId={sensor}/>
+        </div>
         {/each}
         {#if sensors.length === 0}
             <div class="loading">
