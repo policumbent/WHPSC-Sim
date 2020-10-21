@@ -37,6 +37,7 @@ const createWindow = async () => {
         width: Math.round(width * 2/3),
         height: Math.round(height * 0.85),
         webPreferences: {
+            contextIsolation: false,
             experimentalFeatures: true,
             nodeIntegration: true
         }
