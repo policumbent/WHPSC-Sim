@@ -39,7 +39,7 @@ export let getUserSettings = () => {
         );
     }
     const storageValue = localStorage.getItem("user_settings");
-    console.log(newUserSettings);
+    // console.log(newUserSettings);
     return storageValue===null ? newUserSettings: toSettingsType(JSON.parse(storageValue));
 };
 

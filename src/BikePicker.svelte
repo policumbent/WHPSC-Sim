@@ -40,7 +40,7 @@
     return copy;
   }
   function bikeChosen(bike: Bike) {
-    console.log(bike);
+    // console.log(bike);
     dispatch("message", { text: bike });
   }
   onMount(async () => {

@@ -81,7 +81,7 @@ class UserSettings {
     this._rho = (this.pressure(this._altitude)*100-this._humidity*p) /
         (287.05*(this._temperature+273.15)) + (this._humidity*p) /
         (461.495*(this._temperature+273.15));
-    console.log('rho', this._rho);
+    // console.log('rho', this._rho);
   }
   pressure(altitude: number): number {
     return 10.1325*(-0.0101*altitude+98.7);
