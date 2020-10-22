@@ -40,12 +40,13 @@ Questa applicazione può usare una connessione bluetooth per connettersi al tuo 
 
 1. La prima volta
     1. Inserici l'ANT+ dongle
-    2. Scarica [Zadig](https://zadig.akeo.ie/)
-    3. Clicca su `Options` e poi su `List All Devices`
-    4. Seleziona `ANT USBStick2`
-    5. Seleziona `libusb-win32 (v1.2.6.0)`
-    6. Clicca su `Reinstall Driver`
-1. Scarica l'ultima versione dell'aplicazione [da qui](https://github.com/policumbent/WHPSC-Sim/releases)
+    1. Scarica [Zadig](https://zadig.akeo.ie/)
+    1. Apri Zadig
+    1. Clicca su `Options` e poi su `List All Devices`
+    1. Seleziona `ANT USBStick2`
+    1. Seleziona `libusb-win32 (v1.2.6.0)`
+    1. Clicca su `Reinstall Driver` o `Downgrade Driver`
+1. Scarica l'ultima versione dell'applicazione del simulatore [da qui](https://github.com/policumbent/WHPSC-Sim/releases)
 1. Inserisci l'ANT+ dongle
 1. Avvia l'app e connetti il tuo misuratore di potenza ANT+.
 

@@ -136,9 +136,8 @@
 
   function intervalFunction() {
     if (power > 5000 || power < 0) {
-      alert("Not valid number!!");
-      speed = 0;
-      clearInterval(interval);
+      console.log("Not valid number!!", power);
+      power = 0;
     }
     changeVideoSpeed(distance, 1, speed);
     const slope = slopeCalculator(speed, 1, distance);
