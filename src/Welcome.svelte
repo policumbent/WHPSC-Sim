@@ -8,7 +8,7 @@
     import BikePicker from "./BikePicker.svelte";
     import Settings from "./components/Settings.svelte";
     import ResultsListContainer from "./ResultsListContainer.svelte";
-    import HelpButton from "./components/HelpButton.svelte";
+    import InstructionButton from "./components/InstructionButton.svelte";
     import { Email, Reddit, LinkedIn, Telegram, WhatsApp, Facebook, Twitter } from 'svelte-share-buttons-component';
 
     const dispatch = createEventDispatcher();
@@ -180,7 +180,7 @@
             <button class="btn" disabled="{powerMeterPaired}" on:click={() => alert('Download standalone version to use ANT+! https://github.com/policumbent/WHPSC-Sim/releases')}>ANT powermeter</button>
         </div>
         <Modal>
-            <HelpButton/>
+            <InstructionButton/>
         </Modal>
         {#if chooseBike}
             <BikePicker on:message={bikeChosen} />

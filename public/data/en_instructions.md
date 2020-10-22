@@ -101,7 +101,7 @@ When modifying the following parameters, they will be set to be used when you st
 
 - **Cd @ 120 km/h** *(default : 0.05)* This is the drag coefficient of your custom bike. A lower drag coefficient is largely a result of a better streamlined bike. Bicycles that run at Battle mountain are really well designed for low drag coefficients. As a comparison a regular road cyclist has a Cd of 0.67 and a typical fast car around 0.25 to 0.32! The total coefficient of a Battle Mountain racer is typically about the same as the drag coefficient of a single car mirror!
 
-Click **Save** to save your settings locally, so that when you start a race with custom bike these settings will be used to calculate your speed.
+Click **Save** to save your settings locally, so that when you start a race with yoour custom bike these settings will be used to calculate your speed.
 
 ## Requirements
 
@@ -110,4 +110,3 @@ Click **Save** to save your settings locally, so that when you start a race with
 - **Linux:** Requires Kernel 3.19+ and BlueZ 5.41+ installed. Read How to get Chrome Web Bluetooth working on Linux.(Note that Bluetooth daemon needs to run with experimental interfaces if BlueZ version is lower than 5.43: sudo /usr/sbin/bluetoothd -E)
 - **Windows:** Requires Windows 10 version 1706 (Creators Update) or later.
 - **IOS and ipadOS:** Not supported at this time
-
