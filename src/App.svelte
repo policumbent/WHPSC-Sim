@@ -1,6 +1,4 @@
 <script lang="ts">
-  import Icon from "svelte-awesome";
-  import {close} from "svelte-awesome/icons";
   import Modal from "svelte-simple-modal";
   import {getContext, onMount} from "svelte";
   import {getDebug, getUserSettings} from "./store";
@@ -13,6 +11,7 @@
   import ResultContainer from "./ResultContainer.svelte";
   import BikePicker from "./BikePicker.svelte";
   import YourResultComponent from "./components/YourResultComponent.svelte";
+  import ExitButton from "./components/ExitButton.svelte";
 
   let power = 0;
   let simulator;
@@ -46,7 +45,7 @@
   }
 
   onMount(() => {
-    console.log('v1.1.2');
+    console.log('v1.3.1');
     const params = new URLSearchParams(window.location.search);
     // console.log(params.get('res'));
     res = params.get('res');
@@ -57,9 +56,6 @@
     window.document.body.classList.toggle("dark-mode");
   }
 
-  function exitFullscreen() {
-    document.exitFullscreen();
-  }
 
   function handleResult(event) {
     console.log("HANDLE", bike.settings);
@@ -150,9 +146,9 @@
 <main>
   {#if res===null}
     {#if simulation_started}
-    <span class="top-right-fixed" on:click={exitFullscreen}>
-      <Icon class="top-right-fixed" data={close} scale="3" />
-    </span>
+      <Modal>
+        <ExitButton/>
+      </Modal>
       <Simulator
               bind:this={simulator}
               power={!isNaN(power) ? power : 0}
@@ -172,11 +168,11 @@
                   max="1000"
                   bind:value={power} />
         </div>
-        {/if}
+      {/if}
     {:else}
       <Welcome on:message={startSimulation} />
 
-<!--              <button on:click={handleResult}>Test save result dialog</button>-->
+      <!--              <button on:click={handleResult}>Test save result dialog</button>-->
 
     {/if}
     <Modal>

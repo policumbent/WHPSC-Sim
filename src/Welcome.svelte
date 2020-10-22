@@ -11,7 +11,7 @@
   import SearchAnt from "./components/SearchAnt.svelte";
   import SearchAntContainer from "./components/SearchAntContainer.svelte";
   import SearchBtContainer from "./components/SearchBtContainer.svelte";
-    import HelpButton from "./components/HelpButton.svelte";
+    import InstructionButton from "./components/InstructionButton.svelte";
     import { Email, Reddit, LinkedIn, Telegram, WhatsApp, Facebook, Twitter } from 'svelte-share-buttons-component';
 
     const dispatch = createEventDispatcher();
@@ -195,7 +195,7 @@
             <SearchBtContainer bind:show={searchBt}/>
         </Modal>
         <Modal>
-            <HelpButton/>
+            <InstructionButton/>
         </Modal>
         {#if chooseBike}
             <BikePicker on:message={bikeChosen} />

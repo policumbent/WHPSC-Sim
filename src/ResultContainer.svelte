@@ -5,7 +5,7 @@
   const { open } = getContext("simple-modal");
 
   export const openModal = (speed, power, bikeName, config, userConfig) => {
-    console.log("CONFIG:", config);
+    // console.log("CONFIG:", config);
     open(
       ResultModal,
       { speed, power, bikeName, config, userConfig },
