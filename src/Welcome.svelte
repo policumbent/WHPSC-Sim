@@ -70,7 +70,7 @@
         top: 0;
         width: 100%;
         height: 100%;
-        background-image: url("../img/background_light.jpg");
+        background-image: url("../img/background_light.webp");
         background-position: center; /* Center the image */
         background-repeat: no-repeat; /* Do not repeat the image */
         background-size: cover; /* Resize the background image to cover the entire container */
