@@ -31,6 +31,10 @@
           document.fullscreenElement === null ? exitSimulation() : event
   );
 
+  function exitFullscreen() {
+    document.exitFullscreen();
+  }
+
   function startSimulation(event) {
     bike = event.detail.text;
     console.log("START", bike);
