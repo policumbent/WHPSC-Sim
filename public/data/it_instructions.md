@@ -56,6 +56,8 @@ Questa applicazione può usare una connessione bluetooth per connettersi al tuo 
 1. Inserisci l'ANT+ dongle
 1. Avvia l'app e connetti il tuo misuratore di potenza ANT+.
 
+**Per qualsiasi domanda o problema contatta [whpsc-simulator@policumbent.it](mailto:whpsc-simulator@policumbent.it).**
+
 ## Iniziare la prova
 
 Dopo che avrai connesso il tuo power meter o il tuo smart trainer, potrai premere il tasto `start` per avviare la gara. Questo di permetterà di scegliere dei preset che abbiamo fatto per te:

@@ -54,6 +54,8 @@ This application uses a connection to your bluetooth power meter or smart traine
 1. Insert the ANT+ dongle
 1. Start app and connect your ANT+ power meter
 
+**For any problem or question contact [whpsc-simulator@policumbent.it](mailto:whpsc-simulator@policumbent.it).**
+
 ## Starting a race
 
 When you have connected your power meter or smart trainer you can click on `start` to start a race. This will let you choose some presets we have made for you:
