@@ -89,12 +89,14 @@
         letter-spacing: 2px;
     }
     .content {
-        position: absolute;
-        top: 50%; left: 50%;
-        transform: translate(-50%,-50%);
+        /*position: absolute;*/
+        /*top: 50%; */
+        display: inline-block;
+        left: 50%;
+        /*transform: translate(-50%,-50%);*/
         width: 460px;
         max-width: 90%;
-        height: 570px;
+        /*height: 570px;*/
         border: 1px solid black;
         /*margin: 10px 2%;*/
         background-color: #1d3040;
@@ -106,7 +108,10 @@
         z-index: 2;
     }
     .container {
-        position: relative;
+        position: fixed;
+        overflow: auto;
+        top: 0;
+        left: 0;
         background-color: #1d3040;
         color: #bfc2c7;
         width: 100vw;
@@ -122,17 +127,19 @@
     .title {
         z-index: 0;
         font-size: 2.2em;
-        position: absolute;
-        top: 7%;
-        left: 50%;
-        transform: translate(-50%, -10%);
+        margin: 1em 2em;
+        /*position: absolute;*/
+        /*top: 7%;*/
+        /*left: 50%;*/
+        /*transform: translate(-50%, -10%);*/
     }
 
     .btn {
-        position: absolute;
-        bottom: 0;
-        left: 50%;
-        transform: translateX(-50%);
+        margin-top: 2em;
+        /*position: absolute;*/
+        /*bottom: 0;*/
+        /*left: 50%;*/
+        /*transform: translateX(-50%);*/
         margin-bottom: 2em;
         text-align: center;
         background-color: yellow;
@@ -148,6 +155,9 @@
         display: block;
         font-weight: lighter;
         color: gold;
+    }
+    .social {
+        margin: 2em 0;
     }
 </style>
 
@@ -219,8 +229,7 @@
             <span class="bike_name">{result.bikeName}</span>
             <span class="right timestamp">{result.time} {result.date}</span>
         </div>
-        <button on:click="{clearParams}" class="btn">Go to WHPSC simulator</button>
-        <div>
+        <div class="social">
             <Email subject="{title}" body="{desc} {url}" />
             <Reddit class="share-button" {title} {url} />
             <LinkedIn class="share-button" {url} />
@@ -229,5 +238,6 @@
             <Facebook class="share-button" {url} />
             <Twitter class="share-button" text="{title}" {url} />
         </div>
+        <button on:click="{clearParams}" class="btn">Go to WHPSC simulator</button>
     </div>
 </div>
