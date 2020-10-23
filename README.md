@@ -18,7 +18,7 @@ where on the right-hamd side:
 
 Coefficients for rolling resistance (Cr) and drag resistance (Cd) are needed for the energy balance equation.
 For the road bike Cr’s initial value at 0.1 m/s is taken as Cr = 0.005 (relatively smooth asphalt, mid-market 28’ tyres) and Cd = 0.68 at 15 m/s (see ‚CFD ‚analysis of an exceptional cyclist sprinter position‘, Blocken et al.).
-Cd’s value for the unfaired recumbent bike is taken basing on CdA = 0.18 at at 50 km/h (see The Recumbent Bicycle and Human Powered Vehicle Information Center) and Area = 0.2. Cr stays unchanged with respect to the road bike. Come abbiamo fatto variare il Cd?
+Cd’s value for the unfaired recumbent bike is taken basing on CdA = 0.18 at at 50 km/h (see The Recumbent Bicycle and Human Powered Vehicle Information Center) and Area = 0.2. Cr stays unchanged with respect to the road bike.
 Coefficients for Taurus are set with values similar to its estimated ones. In particular the drag coefficient’s curve shape is reproduced with a different reference value at v=120 km/h.
 
 | Vehicle | Cd@120 km/h | Cr | Frontal Area (m²) |
