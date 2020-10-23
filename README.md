@@ -17,15 +17,15 @@ where on the right-hamd side:
 ### Coefficients
 
 Coefficients for rolling resistance (Cr) and drag resistance (Cd) are needed for the energy balance equation.
-For the road bike Cr’s initial value at 0.1 m/s is taken as Cr = 0.005 (relatively smooth asphalt, mid-market 28’ tyres) and Cd = 0.68 at 15 m/s (see ‚CFD ‚analysis of an exceptional cyclist sprinter position‘, Blocken et al.).
-Cd’s value for the unfaired recumbent bike is taken basing on CdA = 0.18 at at 50 km/h (see The Recumbent Bicycle and Human Powered Vehicle Information Center) and Area = 0.2. Cr stays unchanged with respect to the road bike.
-Coefficients for Taurus are set with values similar to its estimated ones. In particular the drag coefficient’s curve shape is reproduced with a different reference value at v=120 km/h.
+For the road bike Cr’s initial value at 0.1 m/s is taken as Cr = 0.005 (relatively smooth asphalt, mid-market 28’ tyres) and Cd = 0.68 at 15 m/s (see ‚CFD ‚analysis of an exceptional cyclist sprinter position‘, Blocken et al.). Slope for Cd is that for the recreational bike mentioned in ‚Bicycle ‚aereodynamics: an experimental evaluation methodology (Chowdhury, H., Alam, F.). Cr is varied according to our own data for a 28‘ tyre.
+Cd’s value for the unfaired recumbent bike is taken basing on CdA = 0.18 at at 50 km/h (see The Recumbent Bicycle and Human Powered Vehicle Information Center) and Area = 0.2. An interpolation of this curve yields values for Cd at speeds different from 50 km/h. Cr stays unchanged with respect to the road bike.
+Coefficients for Taurus are set with values similar to its estimated ones. Shape is maintained, but with respect to a different reference value at v=120 km/h, which is Cd(v=120 km/h) = 0.04. Cr's values are experimental values obtained. 
 
 | Vehicle | Cd@120 km/h | Cr | Frontal Area (m²) |
 | ------ | ------ | ------ | ------ |
-|Road bike | 1.036*Cd(v=120km/h) at 0.1 m/s; 0.9208*Cd(v=120km/h) at 40 m/s | 0.005 at 0,1 m/s; 0.0062 at 40 m/s    | 100 < h <= 165 => 0.34; 165 < h <= 175 => 0.38; 175 < h <= 185 => 0.43; 185 < h <= 200 => 0.48|
+|Road bike | 1.036*Cd(v=120km/h) at 0.1 m/s; slope = - 2.88*10^{-4} , yielding Cd = 1.0933 at 20 m/s   | 0.005 at 0,1 m/s;slope = + 3*10^{-6} every 0.1 m/s, yielding Cr = 0.0056 at 20 m/s    | 100 < h <= 165 => 0.34; 165 < h <= 175 => 0.38; 175 < h <= 185 => 0.43; 185 < h <= 200 => 0.48|
 Unfaired recumbent bike |    same as above | same as above |  100 < h <= 165 => 0.26; 165 < h <= 175 => 0.29; 175 < h <= 185 => 0.32; 185 < h <= 200 => 0.36 |
-Taurus | 1.4843*Cd(v=120km/h) at 0.1 m/s; 1.0691*Cd(v=120km/h) at 40 m/s | 0.0029 at 0.1 m/s;  0.0045 at 40 m/s |0.04 |
+Taurus | 1.4843*0.04 at 0.1 m/s; 1.0691*0.04 at 40 m/s | 0.0029 at 0.1 m/s;  0.0045 at 40 m/s |0.04 |
 
 ![Shape of cx taurus sim](readme_img/cx.jpg)
 *Shape of cx curve of Taurus*
