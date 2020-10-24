@@ -132,11 +132,11 @@
             <input class="slider" id="cx" type="range" step="0.0001" min="0.02" max="1.2" bind:value={cx}>
         </div>
         <hr class="solid">
-        <div class="sliders_div">
-            <label class="group_label">Software settings:</label>
-            <label class="checkbox" for="debug">Debug:  </label>
-            <input class="checkbox" id="debug" type="checkbox" bind:checked={debugMode}>
-        </div>
+<!--        <div class="sliders_div">-->
+<!--            <label class="group_label">Software settings:</label>-->
+<!--            <label class="checkbox" for="debug">Debug:  </label>-->
+<!--            <input class="checkbox" id="debug" type="checkbox" bind:checked={debugMode}>-->
+<!--        </div>-->
         <button on:click={save}>Save</button>
     </nav>
 {/if}

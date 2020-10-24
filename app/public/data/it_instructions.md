@@ -50,11 +50,15 @@ Questa applicazione può usare una connessione bluetooth per connettersi al tuo 
 1. Inserisci l'ANT+ dongle
 1. Avvia l'app e connetti il tuo misuratore di potenza ANT+.
 
+*Se necessiti di una spiegazione più dettagliata puoi leggere il nostro [tutorial con immagini da qui](./ita-windows-driver.html).*
+
 #### Linux/MacOS
 
 1. Scarica l'ultima versione standalone del simulatore [da qui](https://github.com/policumbent/WHPSC-Sim/releases)
 1. Inserisci l'ANT+ dongle
 1. Avvia l'app e connetti il tuo misuratore di potenza ANT+.
+
+**Per qualsiasi domanda o problema contatta [whpsc-simulator@policumbent.it](mailto:whpsc-simulator@policumbent.it).**
 
 ## Iniziare la prova
 

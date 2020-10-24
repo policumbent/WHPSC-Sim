@@ -232,10 +232,13 @@
       count_speed++;
       console.log(sum, '', count_speed);
     }
-    else if (distance>trap_end) {
+    else if (distance>trap_end && distance < trap_end + 1000 ) {
       // without it we can increase suspense, evaluate if write it or not
       // trap_info = `⚡ ${Math.round(sum * 100 / count_speed) / 100} km/h ⚡`;
       trap_info = `Slow down before catching! 😁🎳`;
+    }
+    else if(distance >= trap_end + 1000){
+      trap_info = '';
     }
     else {
       trap_info = "";

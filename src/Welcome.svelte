@@ -12,11 +12,13 @@
   import SearchAntContainer from "./components/SearchAntContainer.svelte";
   import SearchBtContainer from "./components/SearchBtContainer.svelte";
     import InstructionButton from "./components/InstructionButton.svelte";
-    import { Email, Reddit, LinkedIn, Telegram, WhatsApp, Facebook, Twitter } from 'svelte-share-buttons-component';
+    import {Email, Reddit, LinkedIn, Telegram, WhatsApp, Facebook, Twitter} from 'svelte-share-buttons-component';
+    import Countdown from "./components/Countdown.svelte";
 
     const dispatch = createEventDispatcher();
     let sidebar_show = false;
     let chooseBike = false;
+    let countdown = false;
     let showModal = false;
     let searchAnt = false;
   let searchBt = false;
@@ -25,9 +27,17 @@
     const title = 'WHPSC Simulator';
     const desc = 'Try a fast streamliner on Battle Mountain track.';
     const url = 'https://www.policumbent.it/whpsc-sim/'
+    // const startTime = new Date(Date.UTC(2020, 9, 24, 13, 35, 0, 0));
+    const startTime = new Date(Date.UTC(2020, 9, 25, 13, 0, 0, 0))
+
+    function start() {
+        if (Date.now() > startTime)
+            chooseBike = true;
+        else
+            countdown = true;
+    }
 
     function pickBike() {
-        chooseBike = true;
     }
 
     function showResults() {
@@ -61,7 +71,7 @@
             })
   }
 
-    function showSidebar(){
+    function showSidebar() {
         sidebar_show = !sidebar_show;
         sidebar_show ?
             document.getElementById("settings_icon").style.color = "#3399ff" :
@@ -176,8 +186,8 @@
 
 <section>
     <div class="bg_image">
-        <div class="triangle-top-left"></div>
-        <span class="beta">BETA</span>
+<!--        <div class="triangle-top-left"></div>-->
+<!--        <span class="beta">BETA</span>-->
         <h1>WHPSC Simulator</h1>
 
         <div>
@@ -200,6 +210,9 @@
         {#if chooseBike}
             <BikePicker on:message={bikeChosen} />
         {/if}
+        {#if countdown}
+            <Countdown on:message={() => countdown=false} endTime={startTime} />
+        {/if}
         <Modal>
             <ResultsListContainer bind:show={showModal} />
         </Modal>
@@ -221,5 +234,4 @@
   </span>
 <!--    <button class="left survey btn" on:click={() => window.open('https://github.com/policumbent/WHPSC-Sim/releases','_blank')}><Icon data={download}/> Download APP</button>-->
     <button class="right survey btn" on:click={() => window.open('https://github.com/policumbent/WHPSC-Sim/','_blank')}><Icon data={github}/> GitHub</button>
-
 </section>

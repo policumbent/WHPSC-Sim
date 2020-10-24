@@ -113,7 +113,7 @@
     {#if error}
         <h2 class="error">An error has occurred. Retry later.</h2>
     {:else}
-        <h2>Click on a result to expand.</h2>
+        <h2>Click on a result for more info.</h2>
     {/if}
     <div class="scroller">
         {#each results as result}

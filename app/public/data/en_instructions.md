@@ -43,16 +43,20 @@ This application uses a connection to your bluetooth power meter or smart traine
     1. Click on `Options` and then on `List All Devices`
     1. Select `ANT USBStick2`
     1. Select `libusb-win32 (v1.2.6.0)`
-    1. Click on `Reinstall Driver` or `Downgrade Driver`
+    1. Click on `Replace Driver` or `Downgrade Driver`
 1. Download last version of standalone application from [here](https://github.com/policumbent/WHPSC-Sim/releases)
 1. Insert the ANT+ dongle
 1. Start app and connect your ANT+ power meter
+
+*If you need a detailed explanation, you can read [our tutorial with images](./windows-driver.html).*
 
 #### Linux/MacOS
 
 1. Download last version of standalone application from [here](https://github.com/policumbent/WHPSC-Sim/releases)
 1. Insert the ANT+ dongle
 1. Start app and connect your ANT+ power meter
+
+**For any problem or question contact [whpsc-simulator@policumbent.it](mailto:whpsc-simulator@policumbent.it).**
 
 ## Starting a race
 

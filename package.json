@@ -1,7 +1,7 @@
 {
   "name": "whpsc-simulator",
   "productName": "WHPS Simulator",
-  "version": "1.3.1",
+  "version": "1.3.3",
   "description": "WHPSC Bike Simulator",
   "author": "Stefano Loscalzo <stefano.loscalzo@gmail.com>",
   "main": "./app/index.js",
@@ -74,13 +74,13 @@
     "svelte": "^3.0.0",
     "svelte-awesome": "^2.3.0",
     "svelte-check": "^0.1.0",
+    "svelte-flagicon": "^0.2.0",
     "svelte-preprocess": "^4.0.0",
     "svelte-share-buttons-component": "^1.2.0",
     "svelte-simple-modal": "^0.6.0",
     "sveltejs-forms": "^2.1.1",
     "tslib": "^2.0.0",
-    "typescript": "^3.9.3",
-    "svelte-flagicon": "^0.2.0"
+    "typescript": "^3.9.3"
   },
   "dependencies": {
     "ant-plus-ste": "^0.1.25",
