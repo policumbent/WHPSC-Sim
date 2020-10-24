@@ -191,7 +191,7 @@
         <h1>WHPSC Simulator</h1>
 
         <div>
-            <button class="btn" disabled="{!(btPowerMeterPaired || antPowerMeterPaired) && !getDebug()}" on:click={pickBike}>Start</button>
+            <button class="btn" disabled="{!(btPowerMeterPaired || antPowerMeterPaired) && !getDebug()}" on:click={start}>Start</button>
             <button class="btn" on:click={showResults}>Results</button>
         </div>
         <div>
