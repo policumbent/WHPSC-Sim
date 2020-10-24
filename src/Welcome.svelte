@@ -9,19 +9,29 @@
     import Settings from "./components/Settings.svelte";
     import ResultsListContainer from "./ResultsListContainer.svelte";
     import InstructionButton from "./components/InstructionButton.svelte";
-    import { Email, Reddit, LinkedIn, Telegram, WhatsApp, Facebook, Twitter } from 'svelte-share-buttons-component';
+    import {Email, Reddit, LinkedIn, Telegram, WhatsApp, Facebook, Twitter} from 'svelte-share-buttons-component';
+    import Countdown from "./components/Countdown.svelte";
 
     const dispatch = createEventDispatcher();
     let sidebar_show = false;
     let chooseBike = false;
+    let countdown = false;
     let showModal = false;
     let powerMeterPaired = false;
     const title = 'WHPSC Simulator';
     const desc = 'Try a fast streamliner on Battle Mountain track.';
     const url = 'https://www.policumbent.it/whpsc-sim/'
+    // const startTime = new Date(Date.UTC(2020, 9, 24, 13, 35, 0, 0));
+    const startTime = new Date(Date.UTC(2020, 9, 25, 13, 0, 0, 0))
+
+    function start() {
+        if (Date.now() > startTime)
+            chooseBike = true;
+        else
+            countdown = true;
+    }
 
     function pickBike() {
-        chooseBike = true;
     }
 
     function showResults() {
@@ -42,7 +52,7 @@
         startSearch()
             .then(data => powerMeterPaired = data)
             .catch(error => {
-                if(error.code !== 8)
+                if (error.code !== 8)
                     alert('An error has occurred! This functionality is available only in Google Chrome 83+. ' +
                         'If you are already using it on Linux the "chrome://flags/#enable-experimental-web-platform-features" flag must be enabled.' +
                         'For further information read this page https://github.com/WebBluetoothCG/web-bluetooth/blob/gh-pages/implementation-status.md ' +
@@ -52,7 +62,7 @@
             })
     }
 
-    function showSidebar(){
+    function showSidebar() {
         sidebar_show = !sidebar_show;
         sidebar_show ?
             document.getElementById("settings_icon").style.color = "#3399ff" :
@@ -167,23 +177,26 @@
 
 <section>
     <div class="bg_image">
-        <div class="triangle-top-left"></div>
-        <span class="beta">BETA</span>
+<!--        <div class="triangle-top-left"></div>-->
+<!--        <span class="beta">BETA</span>-->
         <h1>WHPSC Simulator</h1>
 
         <div>
-            <button class="btn" disabled="{!powerMeterPaired && !getDebug()}" on:click={pickBike}>Start</button>
+            <button class="btn" disabled="{!powerMeterPaired && !getDebug()}" on:click={start}>Start</button>
             <button class="btn" on:click={showResults}>Results</button>
         </div>
         <div>
             <button class="btn" disabled="{powerMeterPaired}" on:click={btSearch}>BT powermeter</button>
-            <button class="btn" disabled="{powerMeterPaired}" on:click={() => alert('Download standalone version to use ANT+! https://github.com/policumbent/WHPSC-Sim/releases')}>ANT powermeter</button>
+            <button class="btn" disabled="{powerMeterPaired}" on:click={() => alert('Download standalone version to use ANT+! https://github.com/policumbent/WHPSC-Sim/releases/tag/1.3.3')}>ANT powermeter</button>
         </div>
         <Modal>
             <InstructionButton/>
         </Modal>
         {#if chooseBike}
             <BikePicker on:message={bikeChosen} />
+        {/if}
+        {#if countdown}
+            <Countdown on:message={() => countdown=false} endTime={startTime} />
         {/if}
         <Modal>
             <ResultsListContainer bind:show={showModal} />
@@ -204,7 +217,6 @@
             class="top-right-fixed click_t">
     <Icon  class="top-right-fixed" data={gear} scale="2.5" />
   </span>
-    <button class="left survey btn" on:click={() => window.open('https://github.com/policumbent/WHPSC-Sim/releases','_blank')}><Icon data={download}/> Download APP</button>
+    <button class="left survey btn" on:click={() => window.open('https://github.com/policumbent/WHPSC-Sim/releases/tag/1.3.3','_blank')}><Icon data={download}/> Download APP</button>
     <button class="right survey btn" on:click={() => window.open('https://github.com/policumbent/WHPSC-Sim/','_blank')}><Icon data={github}/> GitHub</button>
-
 </section>
