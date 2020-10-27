@@ -1,3 +1,5 @@
+*Clicca [qui](https://youtu.be/N9bM0_JU3bI?t=61) per un video dimostrativo!*
+
 ## Introduzione
 
 Benvenuto al Virtual World Human Speed Challenge. Di solito, quando non c'è una pandemia globale in corso, organiziamo annualmente una gara nel deserto del Nevada. Appena fuori ad un paese chiamato Battle Mountain si trova una delle sezioni di strada più rettilinee al mondo. Su questa strada gareggiano bici, unicamente movimentate da forza umana, e regolarmente viene superato il limite di velocità delle statali del Nevada! (80mph circa 128km/h)
