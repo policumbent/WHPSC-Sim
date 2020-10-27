@@ -1,3 +1,5 @@
+*Click [here](https://youtu.be/N9bM0_JU3bI?t=61) to watch video tutorial!*
+
 ## About
 
 Welcome to the virtual World Human Powered Speed Challenge. Normally, when no world wide pandemic is going on, we organise a yearly race in the desert of Nevada. Just outside the town called Battle Mountain lies one of the straightest sections of road that can be found. There we race with bikes, solely relying on human power, and during the event bikes regularly break the Nevada speed limit!
