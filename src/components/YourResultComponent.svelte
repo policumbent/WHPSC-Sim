@@ -183,11 +183,11 @@
                 </tr>
                 <tr>
                     <th>Rider Height</th>
-                    <td>{result.userSettings.riderHeight}kg</td>
+                    <td>{result.userSettings.riderHeight}cm</td>
                 </tr>
                 <tr>
                     <th>Wheels Inertia</th>
-                    <td>{result.bikeSettings.wheelsInertia} J/s²</td>
+                    <td>{result.bikeSettings.wheelsInertia} Kg*m²</td>
                 </tr>
                 <tr>
                     <th>Wheels Circumference</th>

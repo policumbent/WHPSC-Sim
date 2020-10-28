@@ -49,7 +49,7 @@
   }
 
   onMount(() => {
-    console.log('v1.3.3');
+    console.log('v1.3.4');
     const params = new URLSearchParams(window.location.search);
     // console.log(params.get('res'));
     res = params.get('res');
@@ -63,6 +63,7 @@
 
   function handleResult(event) {
     console.log("HANDLE", bike.settings);
+    console.log("bike", bike);
     console.log(event.detail.text);
     if (event.detail.text !== undefined) exitFullscreen();
     const speed = event.detail.text !== undefined ? event.detail.text.speed : 141.0;
