@@ -1,7 +1,7 @@
 let Ant = require('ant-plus-ste');
 import {addSensorsToList, clearSensorsList, powerValue} from "./store"
 // const dgram = require('dgram');
-let stick = new Ant.GarminStick2;
+let stick = new Ant.GarminStick3;
 let stickStarted = false;
 let searchStarted = false;
 let sensorAttached = false;
@@ -59,10 +59,17 @@ powerSensor.on('powerData',
 
         powerValue.set(Math.round(power));
     });
-if (!stick.open())
-    console.log('Stick not found!');
-else
-    console.log('Stick connected!');
+if (stick.open())
+    console.log('Stick 3 connected!');
+else{
+    console.log('Stick 3 not found!');
+    let stick = new Ant.GarminStick2;
+    if (stick.open())
+        console.log('Stick 2 connected!');
+    else
+        console.log('Stick 2 not found!');
+}
+
 // let interval = setInterval(test, 3000);
 
 // powerSensor.on('hbData',
