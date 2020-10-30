@@ -18,8 +18,8 @@
     "publish": "rollup -c && electron-builder"
   },
   "build": {
-    "appId": "whpsc-simulator-dev",
-    "productName": "WHPSC Simulator Dev",
+    "appId": "whpsc-simulator",
+    "productName": "WHPSC Simulator",
     "directories": {
       "output": "release/"
     },
