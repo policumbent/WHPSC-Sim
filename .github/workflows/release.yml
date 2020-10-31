@@ -1,0 +1,171 @@
+name: Build/release
+
+on:
+  push:
+    tags:
+      - '*'
+      
+jobs:
+  build_win:
+    name: Publish for Windows
+    runs-on: windows-latest
+    steps:
+      - name: Check out Git repository
+        uses: actions/checkout@v1
+      - name: Install Node.js, NPM and Yarn
+        uses: actions/setup-node@v1
+        with:
+          node-version: 14
+      - name: Set up build environment
+        run: npm install 
+      - name: Build
+        run: ./node_modules/.bin/electron-rebuild.cmd
+      - name: Release
+        uses: actions/upload-artifact@v1
+        with:
+            name: whpsc-simulator-{{ github.ref }}.exe
+            path: ./release/WHPSC.Simulator.Setup.${{ github.ref }}.exe
+            
+            
+  build_linux:
+    name: Publish for Linux
+    runs-on: ubuntu-latest           
+    steps:
+      - name: Check out Git repository
+        uses: actions/checkout@v1
+      - name: Install Node.js, NPM and Yarn
+        uses: actions/setup-node@v1
+        with:
+          node-version: 14
+      - name: Set up build environment
+        run: npm install 
+      - name: Build
+        run: ./node_modules/.bin/electron-rebuild
+      - name: Release deb
+        uses: actions/upload-artifact@v1
+        with:
+          name: whpsc-simulator-{{ github.ref }}-amd64.deb
+          path: ./release/whpsc-simulator_${{ github.ref }}_amd64.deb
+      - name: Release AppImage
+        uses: actions/upload-artifact@v1
+        with:
+          name: whpsc-simulator-{{ github.ref }}.AppImage
+          path: ./release/WHPSC.Simulator-${{ github.ref }}.AppImage
+          
+          
+  build_macos:
+    name: Publish for MacOS
+    runs-on: macos-latest           
+    steps:
+      - name: Check out Git repository
+        uses: actions/checkout@v1
+      - name: Install Node.js, NPM and Yarn
+        uses: actions/setup-node@v1
+        with:
+          node-version: 14
+      - name: Set up build environment
+        run: npm install 
+      - name: Build
+        run: ./node_modules/.bin/electron-rebuild
+      - name: Release deb
+        uses: actions/upload-artifact@v1
+        with:
+          name: whpsc-simulator-{{ github.ref }}.dmg
+          path: ./release/WHPSC.Simulator-${{ github.ref }}.dmg
+ 
+  # after the three builds, this job downloads all assets, creates and verifies
+  # SHA256 checksums, and finally creates a release draft and uploads all
+  # assets to it.
+  prepare_release:
+    name: Prepare release draft
+    # Make sure (and wait until) the builds have succeeded
+    needs: [build_win, build_macos, build_linux]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download .exe
+        uses: actions/download-artifact@v1
+        with: 
+          name: whpsc-simulator-{{ github.ref }}.exe
+          path: .
+      - name: Download .deb 
+        uses: actions/download-artifact@v1
+        with: 
+          name: whpsc-simulator-{{ github.ref }}-amd64.deb
+          path: .
+      - name: Download AppImage 
+        uses: actions/download-artifact@v1
+        with: 
+          name: whpsc-simulator-{{ github.ref }}.AppImage
+          path: .
+      - name: Download .dbg
+        uses: actions/download-artifact@v1
+        with: 
+          name: whpsc-simulator-{{ github.ref }}.dbg
+          path: .
+      # Now we are set, we have all five release assets on the VM. It's time to create the
+      # SHA-checksums file and then upload everything!
+      - name: Generate SHA256 checksums
+        run: |
+          sha256sum "whpsc-simulator-{{ github.ref }}.exe" > "SHA256SUMS.txt"
+          sha256sum "whpsc-simulator-{{ github.ref }}-amd64.deb" >> "SHA256SUMS.txt"
+          sha256sum "whpsc-simulator-{{ github.ref }}.AppImage" >> "SHA256SUMS.txt"
+          sha256sum "whpsc-simulator-{{ github.ref }}.dbg" >> "SHA256SUMS.txt"
+      - name: Verify checksums
+        run: sha256sum -c SHA256SUMS.txt
+        
+      # Create a new release draft
+      - name: Create a new release draft
+        id: create_release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: ${{ github.ref }} 
+          release_name: Release ${{ github.ref }} 
+      
+      # And finally, upload that shit
+      - name: Upload .exe
+        uses: actions/upload-release-asset@v1.0.1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with: 
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: ./whpsc-simulator-{{ github.ref }}-amd64.exe
+          asset_name: whpsc-simulator-{{ github.ref }}-amd64.exe
+          asset_content_type: application/x-msdownload
+      - name: Upload .deb
+        uses: actions/upload-release-asset@v1.0.1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with: 
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: ./whpsc-simulator-{{ github.ref }}-amd64.deb
+          asset_name: whpsc-simulator-{{ github.ref }}-amd64.deb
+          asset_content_type: application/octet-stream
+      - name: Upload AppImage
+        uses: actions/upload-release-asset@v1.0.1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with: 
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: ./whpsc-simulator-{{ github.ref }}.AppImage
+          asset_name: whpsc-simulator-{{ github.ref }}.AppImage
+          asset_content_type: application/octet-stream
+      - name: Upload MacOS image
+        uses: actions/upload-release-asset@v1.0.1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with: 
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: ./whpsc-simulator-{{ github.ref }}.dmg
+          asset_name: whpsc-simulator-{{ github.ref }}.dmg
+          asset_content_type: application/octet-stream
+      - name: Upload the checksums
+        uses: actions/upload-release-asset@v1.0.1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: ./SHA256SUMS.txt
+          asset_name: SHA256SUMS.txt
+          asset_content_type: text/plain
