@@ -1,7 +1,8 @@
 <script lang="ts">
     import ResultModel from "../models/Result";
-
+    import {onMount} from "svelte";
     export let result: ResultModel;
+    let background_text = '';
     let minSize = window.innerWidth < 550 ? '150px' : '100px';
     let maxSize = window.innerWidth < 550 ? '430px' : '420px';
     let width = window.innerWidth;
@@ -14,6 +15,24 @@
         height = !result.expanded ? minSize : maxSize;
         // console.log(minSize);
     }
+    function isEventRes() {
+        const event_start = new Date(Date.UTC(2020, 9, 25, 13, 0, 0));
+        const event_end = new Date(Date.UTC(2020, 10, 1, 19, 0, 0));
+        console.log(result.datetime, (result.datetime > event_start && result.datetime < event_end))
+        return (result.datetime > event_start && result.datetime < event_end);
+    }
+    function fillBackground()
+    {
+        let text = '';
+        let v = ['Virtual', 'WHPSC', '2020']
+        for (let k=0; k<100; k++){
+            for(let i=0; i<20; i++)
+                text += v[(i+k)%3] + ' ';
+            text += '<br>'
+        }
+        background_text = text;
+    }
+    onMount( () => fillBackground())
     $: height = !result.expanded ? minSize : maxSize;
     // $: console.log('H:', height);
 
@@ -148,7 +167,11 @@
         cursor: pointer;
         position: relative;
         border: 1px solid black;
+        overflow: hidden;
         background: #1d3040;
+        /*background-image: repeating-linear-gradient(transparent, transparent 50px, purple 50px, purple 53px, transparent 53px, transparent 63px, purple 63px, purple 66px, transparent 66px, transparent 116px, rgba(0,0,0,.5) 116px, rgba(0,0,0,.5) 166px, rgba(255,255,255,.2) 166px, rgba(255,255,255,.2) 169px, rgba(0,0,0,.5) 169px, rgba(0,0,0,.5) 179px, rgba(255,255,255,.2) 179px, rgba(255,255,255,.2) 182px, rgba(0,0,0,.5) 182px, rgba(0,0,0,.5) 232px, transparent 232px),*/
+        /*repeating-linear-gradient(270deg, transparent, transparent 50px, purple 50px, purple 53px, transparent 53px, transparent 63px, purple 63px, purple 66px, transparent 66px, transparent 116px, rgba(0,0,0,.5) 116px, rgba(0,0,0,.5) 166px, rgba(255,255,255,.2) 166px, rgba(255,255,255,.2) 169px, rgba(0,0,0,.5) 169px, rgba(0,0,0,.5) 179px, rgba(255,255,255,.2) 179px, rgba(255,255,255,.2) 182px, rgba(0,0,0,.5) 182px, rgba(0,0,0,.5) 232px, transparent 232px);*/
+
         margin: 10px 2%;
         height: var(--div-height);
         /*padding: 0.5em;*/
@@ -156,12 +179,25 @@
         box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.3);
         transition: 0.3s;
     }
+    .v_whpsc {
+        overflow: hidden;
+        position: absolute;
+        font-size: 0.8em;
+        white-space: nowrap;
+        text-transform: uppercase;
+        font-family: Arial, sans-serif;
+        color: rgba(45, 76, 104, 0.8);
+        text-align: justify;
+    }
 </style>
 
 <div>
     <div class="container"
          on:click
          style="--div-height: {height}">
+        {#if isEventRes()}
+            <div class="v_whpsc">{@html background_text}</div>
+        {/if}
         <div class="left30">
             <div class="middle_top">
                 <span>
