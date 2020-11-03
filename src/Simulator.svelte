@@ -3,7 +3,7 @@
   import { createEventDispatcher } from "svelte";
 
   import type { BikeSettings, UserSettings } from "./models/Settings";
-
+  import Antelope from "./models/Antelope"
   export let bikeSettings: BikeSettings;
   export let userSettings: UserSettings;
   let width: number = 480;
@@ -13,6 +13,7 @@
   let buffering = false;
   let powerCount = 0;
   let powerSum = 0;
+  let antelope_started = false;
   let speed: number = 0;
   let distance: number = 0;
   let time: number = 0;
@@ -34,6 +35,7 @@
   let count_speed = 0;
   let intro_count = 10;
   let intro_message = 'Loading...';
+  let antelope: Antelope = new Antelope(trap_start - 1609, 0.4);
 
   async function start() {
     if (started) return;
@@ -58,12 +60,12 @@
   }
 
   function getWidth() {
-    console.log('Window size');
+    // console.log('Window size');
     if (window.screen.width / 1.666666 > window.screen.height){
-      console.log('1: ', window.screen.height * 1.666666);
+      // console.log('1: ', window.screen.height * 1.666666);
       width = window.screen.height * 1.666666;
     }else {
-      console.log('2: ', window.screen.width);
+      // console.log('2: ', window.screen.width);
       width = window.screen.width;
     }
     document.getElementsByClassName("relative")
@@ -73,6 +75,7 @@
 
   onMount(async () => {
     getWidth();
+    // antelope.random();
     window.onresize = getWidth;
     let res = await fetch("data/" + bikeSettings.coefficientsFile);
     coefficients = await res.json();
@@ -102,6 +105,7 @@
 
   onDestroy(() => {
     clearInterval(interval);
+    clearTimeout(antelope.timeout);
     window.onresize = null;
   });
 
@@ -143,7 +147,7 @@
     const slope = slopeCalculator(speed, 1, distance);
     const powerOrBrake = brakeCalculator(distance, speed, power)
     speed = nextValue(speed, powerOrBrake, 1, slope);
-    console.log(speed);
+    // console.log(speed);
     time++;
     distance += speed / 3.6;
   }
@@ -222,6 +226,7 @@
     if (distance > 1 && distance<trap_end){
       powerCount++;
       powerSum += power;
+      start_antelope()
       // console.log('Average power: ', powerCount !== 0 ? powerSum/powerCount : 0)
     }
     if (distance > trap_start - 1609 && distance < trap_start)
@@ -230,7 +235,7 @@
       trap_info = `Distance to END ${Math.round(trap_end - distance)}m`;
       sum += speed;
       count_speed++;
-      console.log(sum, '', count_speed);
+      // console.log(sum, '', count_speed);
     }
     else if (distance>trap_end && distance < trap_end + 1000 ) {
       // without it we can increase suspense, evaluate if write it or not
@@ -245,6 +250,25 @@
       count_speed = 0;
       sum = 0;
     }
+  }
+
+  function stop_antelope() {
+    antelope.img.style.opacity = "0"
+  }
+
+  function start_antelope() {
+    if (!antelope.is_visible(distance))
+      return;
+    antelope.started = true;
+    // console.log(antelope);
+    // antelope.classList.add('start');
+    antelope.img.style.visibility = "visible"
+    const t = width - 10;
+    antelope.img.style.transform = "translate(" + t + "px, 60px) scale(2.3)"
+    antelope.timeout = setTimeout(stop_antelope, 11000);
+    // antelope.style.right = 0
+    // const move = document.getElementById('antelope');
+
   }
 </script>
 
@@ -335,6 +359,17 @@
     font-size: 8vw;
   }
 
+  .antelope {
+    position: absolute;
+    left: 0;
+    top: 25%;
+    visibility: hidden;
+    /*transform: translateX(-100%);*/
+    transition-timing-function: ease;
+    transition:visibility 3s, transform 10s;
+    transition-delay: 1s;
+
+  }
   /* #video_div {
     position: relative;
   } */
@@ -343,6 +378,7 @@
 <section>
   {#if !ended}
     <div class="relative">
+      <img id="antelope" bind:this={antelope.img} class="antelope" src="img/antelope.png" alt=""/>
       <video
               bind:this={video}
               bind:playbackRate

@@ -49,7 +49,7 @@
   }
 
   onMount(() => {
-    console.log('v1.4.1');
+    console.log('v1.4.2');
     const params = new URLSearchParams(window.location.search);
     // console.log(params.get('res'));
     res = params.get('res');
