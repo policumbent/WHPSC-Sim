@@ -1,6 +1,6 @@
 # Policumbent WHPSC Simulator
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
-[![All Contributors](https://img.shields.io/badge/all_contributors-1-orange.svg?style=flat-square)](#contributors-)
+[![All Contributors](https://img.shields.io/badge/all_contributors-2-orange.svg?style=flat-square)](#contributors-)
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 
 Website of WHPSC Simulator [here](https://www.policumbent.it/whpsc-sim/).
@@ -69,6 +69,7 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
 <table>
   <tr>
     <td align="center"><a href="https://github.com/stelosca96"><img src="https://avatars.githubusercontent.com/u/44433696?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Stefano Loscalzo</b></sub></a><br /><a href="https://github.com/policumbent/WHPSC-Sim/commits?author=stelosca96" title="Code">💻</a> <a href="#ideas-stelosca96" title="Ideas, Planning, & Feedback">🤔</a></td>
+    <td align="center"><a href="https://github.com/FelAcke"><img src="https://avatars.githubusercontent.com/u/57219703?v=4?s=100" width="100px;" alt=""/><br /><sub><b>FelAcke</b></sub></a><br /><a href="https://github.com/policumbent/WHPSC-Sim/commits?author=FelAcke" title="Documentation">📖</a></td>
   </tr>
 </table>
 
