@@ -4,7 +4,7 @@
     import {BikeSettings, UserSettings} from "./models/Settings";
     import ResultComponent from "./components/Result.svelte";
 
-    const url = "https://www.policumbent.it/whpsc_sim_backend/results.php";
+    const url = "https://whpsc-sim-server.policumbent.it/results.php";
     const expand = (result: ResultModel) => {
         const expanded = result.expanded;
         results.forEach((r) => (r.expanded = false));

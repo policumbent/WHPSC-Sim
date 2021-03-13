@@ -6,7 +6,7 @@
 
   const dispatch = createEventDispatcher();
   const uploadUrl =
-          "https://www.policumbent.it/whpsc_sim_backend/upload_result.php";
+          "https://whpsc-sim-server.policumbent.it/upload_result.php";
   export let speed: number;
   export let power: number;
   export let bikeName: string;

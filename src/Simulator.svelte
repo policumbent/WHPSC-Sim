@@ -385,10 +385,10 @@
               {width}
               height={width / 1.666666666}
               muted>
-        <source src="data/bm-13-09-19_no_scritte.mp4" type="video/mp4" />
+        <source src="https://whpsc-sim-server.policumbent.it/bm-13-09-19_no_scritte.mp4" type="video/mp4" />
         Your browser does not support video.
       </video>
-      <audio src="data/audio_run.m4a" bind:this={audio}>
+      <audio src="https://whpsc-sim-server.policumbent.it/audio_run.m4a" bind:this={audio}>
         Il tuo browser non supporta l'elemento <code>audio</code>.
       </audio>
       <div class="overlay bottom_left">

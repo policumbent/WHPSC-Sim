@@ -4,7 +4,7 @@
     import { Email, Reddit, LinkedIn, Telegram, WhatsApp, Facebook, Twitter } from 'svelte-share-buttons-component';
     import {onMount} from "svelte";
     export let resultId;
-    const server_url = "https://www.policumbent.it/whpsc_sim_backend/results.php";
+    const server_url = "https://whpsc-sim-server.policumbent.it/results.php";
     let result: ResultModel = new ResultModel(
         0,
         0,
