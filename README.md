@@ -3,7 +3,7 @@
 [![All Contributors](https://img.shields.io/badge/all_contributors-3-orange.svg?style=flat-square)](#contributors-)
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 
-Website of WHPSC Simulator [here](https://www.policumbent.it/whpsc-sim/).
+Website of WHPSC Simulator [here](https://whpsc-sim.policumbent.it).
 
 ## Technical explanation
 
@@ -37,14 +37,14 @@ Taurus | 1.4843*0.04 at 0.1 m/s; 1.0691*0.04 at 40 m/s | 0.0029 at 0.1 m/s;  0.0
 
 ### Windows/MacOs/Chrome OS/Android
 
-1. Go to [policumbent.it/whpsc-sim](https://www.policumbent.it/whpsc-sim/)
+1. Go to [whpsc-sim.policumbent.it](https://whpsc-sim.policumbent.it)
 2. Connect your bluetooth powermeter. (This functionality is available only in Google Chrome 83+)
 3. Start a new run
 
 ### Linux
 
 1. How you can see [here](https://github.com/WebBluetoothCG/web-bluetooth/blob/gh-pages/implementation-status.md), Linux version of bluettoth API are partially implemented and not supported. So you need to enable `chrome://flags/#enable-experimental-web-platform-features`.
-1. Go to [policumbent.it/whpsc-sim](https://www.policumbent.it/whpsc-sim/)
+1. Go to [whpsc-sim.policumbent.it](https://whpsc-sim.policumbent.it)
 1. Connect your bluetooth powermeter. (This functionality is available only in Google Chrome 83+ and on linux may not work)
 1. Start a new run
 
