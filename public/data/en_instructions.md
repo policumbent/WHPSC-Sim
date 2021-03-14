@@ -11,7 +11,7 @@ This simulator allows you to run on the path of the actual event. Simply connect
 
 The event is held on a section of State Road 305, just outside Battle Mountain, Nevada. During the event the road is closed to traffic. The event starts with a 5 miles (8 km) strip of road to build up speed, followed by exactly 200 meters (0.12 miles) during which your speed is measured. After this section you have around 1 mile (1.6 km) to slow down and at the end of this you will see our catchers teammates.
 
-To learn more about the event click [here](https://www.policumbent.it/en/home-en/#section-2958)
+To learn more about the event click [here](https://www.policumbent.it/en/whpsc/)
 
 ## Connecting
 
@@ -23,14 +23,14 @@ This application uses a connection to your bluetooth power meter or smart traine
 
 #### Windows/MacOS/Android
 
-1. Go to [policumbent.it/whpsc-sim](https://policumbent.it/whpsc-sim)
+1. Go to [whpsc-sim.policumbent.it](https://whpsc-sim.policumbent.it/)
 1. Connect your bluetooth power meter.
 1. Start a new run
 
 #### Linux
 
 1. On the Linux version of Chrome the bluetooth API is partially implemented ([see here](https://github.com/WebBluetoothCG/web-bluetooth/blob/gh-pages/implementation-status.md)). Please enable: `chrome://flags/#enable-experimental-web-platform-features`.
-1. Go to [policumbent.it/whpsc-sim](https://policumbent.it/whpsc-sim)
+1. Go to [whpsc-sim.policumbent.it](https://whpsc-sim.policumbent.it/)
 1. Connect your bluetooth power meter.
 1. Start a new run
 
@@ -58,7 +58,7 @@ This application uses a connection to your bluetooth power meter or smart traine
 1. Insert the ANT+ dongle
 1. Start app and connect your ANT+ power meter
 
-**For any problem or question contact [whpsc-simulator@policumbent.it](mailto:whpsc-simulator@policumbent.it).**
+**For any problem or question contact [softwarer@policumbent.it](mailto:software@policumbent.it).**
 
 ## Starting a race
 

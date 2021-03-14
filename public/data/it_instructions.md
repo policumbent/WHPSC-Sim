@@ -13,7 +13,7 @@ Potrai provare differenti tattiche biciclette e impostazioni, per vedere qual'è
 
 Questo evento si tiene su una sezione della strada statale 305, appena fuori da Battle Mountain, Nevada. Durante l'evento la strada è chiusa al traffico. L'evento inizia con un tratto di strada lungo 5 miglia (8 km) in cui prendere la rincorsa. Dopo le 5 miglia, si trova una sezione di 200 metri esatti (0.12 miglia) in cui la tua velocità sarà misurata. Dopo questa sezione avrai circa un miglio (1.6 km) per rallentare e alla fine il tuo team potrà prenderti al volo.
 
-Per scoprire altro sul funzionamento dell'evento [clicca qui](https://www.policumbent.it/home/#section-2958)
+Per scoprire altro sul funzionamento dell'evento [clicca qui](https://www.policumbent.it/it/whpsc/)
 
 ## Come connettere il powermeter
 
@@ -25,14 +25,14 @@ Questa applicazione può usare una connessione bluetooth per connettersi al tuo 
 
 #### Windows/MacOS/Android
 
-1. Vai su [policumbent.it/whpsc-sim](https://policumbent.it/whpsc-sim)
+1. Vai su [whpsc-sim.policumbent.it](https://whpsc-sim.policumbent.it/)
 1. Connetti il tuo misuratore di potenza bluetooth.
 1. Avvia una nuova run.
 
 #### Linux
 
 1. Sulla versione Linux di Google Chrome l'API bluetooth è solo parzialmente implementata ([vedi qui](https://github.com/WebBluetoothCG/web-bluetooth/blob/gh-pages/implementation-status.md)). Per potere usare l'applicazione devi abilitare: `chrome://flags/#enable-experimental-web-platform-features`.
-2. Vai su [policumbent.it/whpsc-sim](https://policumbent.it/whpsc-sim)
+2. Vai su [whpsc-sim.policumbent.it/](https://whpsc-sim.policumbent.it/)
 3. Connetti il tuo misuratore di potenza bluetooth.
 4. Avvia una nuova run.
 
@@ -60,7 +60,7 @@ Questa applicazione può usare una connessione bluetooth per connettersi al tuo 
 1. Inserisci l'ANT+ dongle
 1. Avvia l'app e connetti il tuo misuratore di potenza ANT+.
 
-**Per qualsiasi domanda o problema contatta [whpsc-simulator@policumbent.it](mailto:whpsc-simulator@policumbent.it).**
+**Per qualsiasi domanda o problema contatta [software@policumbent.it](mailto:software@policumbent.it).**
 
 ## Iniziare la prova
 
