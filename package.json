@@ -33,7 +33,7 @@
     "svelte-simple-modal": "^0.6.0",
     "sveltejs-forms": "^2.1.1",
     "tslib": "^2.0.0",
-    "typescript": "^3.9.3"
+    "typescript": "^4.4.4"
   },
   "dependencies": {
     "easytimer": "^1.1.1"
