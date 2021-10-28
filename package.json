@@ -25,7 +25,7 @@
     "sirv-cli": "^1.0.0",
     "svelte": "^3.0.0",
     "svelte-awesome": "^2.3.0",
-    "svelte-check": "^0.1.0",
+    "svelte-check": "^2.2.7",
     "svelte-countdown": "^1.0.0",
     "svelte-flagicon": "^0.2.0",
     "svelte-preprocess": "^4.0.0",
