@@ -23,7 +23,7 @@
     "rollup-plugin-terser": "^7.0.1",
     "showdown": "^1.9.1",
     "sirv-cli": "^1.0.0",
-    "svelte": "^3.0.0",
+    "svelte": "^3.44.1",
     "svelte-awesome": "^2.4.1",
     "svelte-check": "^2.2.7",
     "svelte-countdown": "^1.0.0",
