@@ -2,6 +2,7 @@
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
 [![All Contributors](https://img.shields.io/badge/all_contributors-3-orange.svg?style=flat-square)](#contributors-)
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
+[![Netlify Status](https://api.netlify.com/api/v1/badges/915d285c-6324-4acd-b821-89fbc4f2a678/deploy-status)](https://app.netlify.com/sites/whpsc-sim/deploys)
 
 Website of WHPSC Simulator [here](https://whpsc-sim.policumbent.it).
 
