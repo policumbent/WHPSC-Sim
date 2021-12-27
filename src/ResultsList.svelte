@@ -3,8 +3,7 @@
     import ResultModel from "./models/Result";
     import {BikeSettings, UserSettings} from "./models/Settings";
     import ResultComponent from "./components/Result.svelte";
-
-    const url = "https://whpsc-sim-server.policumbent.it/results.php";
+    const url = 'SERVER_RESULTS_URL';
     const expand = (result: ResultModel) => {
         const expanded = result.expanded;
         results.forEach((r) => (r.expanded = false));

@@ -12,16 +12,7 @@
     "Your custom settings",
     getSettings()
   );
-  let bikes: Bike[] = [
-    new Bike("Taurus", "img/taurus.svg", "A very fast streamliner",
-            new BikeSettings(30, 0.09, 1.450, 0.96, 0.29, 0.04, 'coefficients4.json')),
-    new Bike("SecretCycle", "img/handbike_c.svg", "A faired handcycle",
-            new BikeSettings(35, 0.09*3/2, 1.450, 0.96, 0.4626, 0.05641, 'coefficients4.json')),
-    new Bike("Coral", "img/recumbent.svg", "A recumbent bike",
-            new BikeSettings(14, 0.091, 1.450, 0.97, 0.32+getAreaCorrection(), 0.57, 'coefficients_normal_bike_4.json')),
-    new Bike("Road Bike", "img/normal.svg", "A road bike",
-            new BikeSettings(7.5, 0.0786, 2.105, 0.98, 0.43+getAreaCorrection()*0.7, 0.67, 'coefficients_normal_bike_4.json'))
-  ];
+  let bikes: Bike[] = [];
 
   function getAreaCorrection() {
     const height = getUserSettings().riderHeight;
@@ -53,14 +44,29 @@
     return copy;
   }
   function bikeChosen(bike: Bike) {
-    // console.log(bike);
+    console.log('B:', bike);
     dispatch("message", { text: bike });
   }
+
+  async function loadBikes() {
+    const resp = await fetch('data/bikes.json');
+    const j = await resp.json();
+    const new_bikes: Bike[] = []
+    console.log(j);
+    j.forEach(e => new_bikes.push(new Bike(e.bikeName, e.imgSrc, e.description,
+                    new BikeSettings(e.settings._bikeWeight, e.settings._wheelsInertia, e.settings._wheelsCircumference,
+                            e.settings._efficiency, e.settings._area, e.settings._cx, e.settings._coefficientsFile))));
+    return new_bikes;
+  }
+
   onMount(async () => {
+    bikes = await loadBikes();
     bikes = shuffle(bikes);
     bikes.push(customBike);
+    console.log('bbb', bikes);
   });
 </script>
+
 
 <style>
 /* 

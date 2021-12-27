@@ -1,0 +1,58 @@
+[
+  {
+    "bikeName":"Taurus",
+    "imgSrc":"img/taurus.svg",
+    "description":"A very fast streamliner",
+    "settings": {
+      "_bikeWeight":30,
+      "_wheelsInertia":0.09,
+      "_wheelsCircumference":1.45,
+      "_efficiency":0.96,
+      "_area":0.29,
+      "_cx":0.04,
+      "_coefficientsFile":"coefficients4.json"
+    }
+  },
+  {
+    "bikeName":"SecretCycle",
+    "imgSrc":"img/handbike_c.svg",
+    "description":"A faired handcycle",
+    "settings": {
+      "_bikeWeight":35,
+      "_wheelsInertia":0.135,
+      "_wheelsCircumference":1.45,
+      "_efficiency":0.96,
+      "_area":0.4626,
+      "_cx":0.05641,
+      "_coefficientsFile":"coefficients4.json"
+    }
+  },
+  {
+    "bikeName":"Coral",
+    "imgSrc":"img/recumbent.svg",
+    "description":"A recumbent bike",
+    "settings": {
+      "_bikeWeight":14,
+      "_wheelsInertia":0.091,
+      "_wheelsCircumference":1.45,
+      "_efficiency":0.97,
+      "_area":0.32,
+      "_cx":0.57,
+      "_coefficientsFile":"coefficients_normal_bike_4.json"
+    }
+  },
+  {
+    "bikeName":"Road Bike",
+    "imgSrc":"img/normal.svg",
+    "description":"A road bike",
+    "settings": {
+      "_bikeWeight":7.5,
+      "_wheelsInertia":0.0786,
+      "_wheelsCircumference":2.105,
+      "_efficiency":0.98,
+      "_area":0.43,
+      "_cx":0.67,
+      "_coefficientsFile":"coefficients_normal_bike_4.json"
+    }
+  }
+]

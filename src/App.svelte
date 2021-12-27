@@ -49,7 +49,8 @@
   }
 
   onMount(() => {
-    console.log('v1.4.3');
+    console.log('v1.5.0');
+    console.log('Private mode:', PRIVATE_MODE)
     const params = new URLSearchParams(window.location.search);
     // console.log(params.get('res'));
     res = params.get('res');

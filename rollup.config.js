@@ -5,6 +5,7 @@ import livereload from 'rollup-plugin-livereload';
 import { terser } from 'rollup-plugin-terser';
 import sveltePreprocess from 'svelte-preprocess';
 import typescript from '@rollup/plugin-typescript';
+import replace from '@rollup/plugin-replace';
 
 const production = !process.env.ROLLUP_WATCH;
 
@@ -57,6 +58,11 @@ export default {
 		resolve({
 			browser: true,
 			dedupe: ['svelte']
+		}),
+		replace({
+			PRIVATE_MODE: true,
+			SERVER_RESULTS_URL: 'https://whpsc-sim-server.policumbent.it/results.php',
+			SERVER_UPLOAD_URL: 'https://whpsc-sim-server.policumbent.it/upload_result.php'
 		}),
 		commonjs(),
 		typescript({ sourceMap: !production }),
