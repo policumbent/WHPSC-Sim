@@ -15,7 +15,7 @@
     "@rollup/plugin-node-resolve": "^13.0.6",
     "@rollup/plugin-replace": "^3.0.0",
     "@rollup/plugin-typescript": "^8.3.0",
-    "@tsconfig/svelte": "^1.0.0",
+    "@tsconfig/svelte": "^3.0.0",
     "countdown": "^2.6.0",
     "dom-to-image": "^2.6.0",
     "rollup": "^2.60.2",
