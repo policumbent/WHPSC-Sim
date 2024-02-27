@@ -5,6 +5,7 @@
     import {createEventDispatcher} from "svelte";
     import {getDebug} from "./store"
     import {startSearch} from "./BleData";
+    import {connectMqtt} from "./MqttData";
     import BikePicker from "./BikePicker.svelte";
     import Settings from "./components/Settings.svelte";
     import ResultsListContainer from "./ResultsListContainer.svelte";
@@ -25,7 +26,7 @@
     const startTime = new Date(Date.UTC(2020, 9, 25, 13, 0, 0, 0))
 
     function start() {
-        if (Date.now() > startTime)
+        if (Date.now() > startTime.getDate())
             chooseBike = true;
         else
             countdown = true;
@@ -60,6 +61,17 @@
                 console.log(error);
                 powerMeterPaired = false;
             })
+    }
+
+    function mqttConnect(){
+        try {
+            connectMqtt('mqtt://192.168.3.17:9001');
+            powerMeterPaired = true;
+        }
+        catch(error) {
+            console.log(error);
+            powerMeterPaired = false;
+        }
     }
 
     function showSidebar() {
@@ -187,7 +199,7 @@
         </div>
         <div>
             <button class="btn" disabled="{powerMeterPaired}" on:click={btSearch}>BT powermeter</button>
-            <button class="btn" disabled="{powerMeterPaired}" on:click={() => alert('Download standalone version to use ANT+! https://github.com/policumbent/WHPSC-Sim/releases/tag/1.3.3')}>ANT powermeter</button>
+            <button class="btn" disabled="{powerMeterPaired}" on:click={mqttConnect}>MQTT powermeter</button>
         </div>
         <Modal>
             <InstructionButton/>

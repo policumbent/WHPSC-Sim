@@ -38,6 +38,7 @@
     "yup": "^0.28.5"
   },
   "dependencies": {
-    "easytimer": "^1.1.1"
+    "easytimer": "^1.1.1",
+    "mqtt": "*"
   }
 }
